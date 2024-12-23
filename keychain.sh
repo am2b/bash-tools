@@ -3,14 +3,31 @@
 #=password
 #@add,update,delete password in keychain
 #@usage:
+#@note:
+#@service_name:网站域名/服务器名称/App名称
+#@account_name:注册时候的用户名/邮件地址
 #@add:
-#@keychain.sh -a --[or ,] item_name account_name 'password'
+#@keychain.sh -a --[or ,] service_name account_name 'password'
 #@update:
-#@keychain.sh -u --[or ,] item_name account_name 'new_password'
+#@keychain.sh -u --[or ,] service_name account_name 'new_password'
 #@delete:
-#@keychain.sh -d --[or ,] item_name account_name
+#@keychain.sh -d --[or ,] service_name account_name
 #@get:
-#@keychain.sh -g --[or ,] item_name account_name
+#@keychain.sh -g --[or ,] service_name account_name
+
+usage() {
+cat << EOF
+usage:
+add:
+keychain.sh -a --[or ,] service_name account_name 'password'
+update:
+keychain.sh -u --[or ,] service_name account_name 'new_password'
+delete:
+keychain.sh -d --[or ,] service_name account_name
+get:
+keychain.sh -g --[or ,] service_name account_name
+EOF
+}
 
 if [[ "$OSTYPE" != "darwin"* ]]; then
     echo "keychain is only available on mac"
@@ -186,7 +203,7 @@ parse_options() {
     done
 }
 
-parse_options "audg" "${@}"
+parse_options "audgh" "${@}"
 set -- "${SCRIPT_ARGUMENTS[@]}"
 shift "${SHIFT_VALUE}"
 
@@ -257,4 +274,6 @@ elif [[ "${OPTIONS[d]}" == "0" ]]; then
     delete
 elif [[ "${OPTIONS[g]}" == "0" ]]; then
     get
+elif [[ "${OPTIONS[h]}" == "0" ]]; then
+    usage
 fi
