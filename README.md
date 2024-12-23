@@ -263,6 +263,11 @@ pack the dir of ~/.local/share/nvim/lazy/ to ~/pack/
 ### [pack_ohmyzsh.sh](pack_ohmyzsh.sh):<br>
 pack the dir of ~/.oh-my-zsh to ~/pack/
 
+### [pack_photo_library.sh](pack_photo_library.sh):<br>
+backup photo library on mac<br>
+usage:<br>
+nohup script.sh > /tmp/photo.log 2>&1 &
+
 ## password:
 ### [2fa.sh](2fa.sh):<br>
 generate a totp verification code
@@ -273,14 +278,17 @@ usage:script.sh "otpauth_url"
 ### [keychain.sh](keychain.sh):<br>
 add,update,delete password in keychain<br>
 usage:<br>
+note:<br>
+service_name:网站域名/服务器名称/App名称<br>
+account_name:注册时候的用户名/邮件地址<br>
 add:<br>
-keychain.sh -a --[or ,] item_name account_name 'password'<br>
+keychain.sh -a --[or ,] service_name account_name 'password'<br>
 update:<br>
-keychain.sh -u --[or ,] item_name account_name 'new_password'<br>
+keychain.sh -u --[or ,] service_name account_name 'new_password'<br>
 delete:<br>
-keychain.sh -d --[or ,] item_name account_name<br>
+keychain.sh -d --[or ,] service_name account_name<br>
 get:<br>
-keychain.sh -g --[or ,] item_name account_name
+keychain.sh -g --[or ,] service_name account_name
 
 ## python:
 ### [pip_clear_installed.sh](pip_clear_installed.sh):<br>
