@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-#=tools
+#=transfer
 #@upload file to transfer.sh and download file from transfer.sh
+#@script.sh -u /localpath/to/file
+#@script.sh -d XXXXXX /localpath/to/file(note:the file name should be same as the remote file)
 
 #shellcheck disable=SC1090
 source "$BASH_FUNCTIONS"

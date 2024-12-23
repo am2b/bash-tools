@@ -509,9 +509,6 @@ usage:bash script_name.sh /path/to/directory
 bring tar gzip zip and 7z together<br>
 usage:tgz.sh -h
 
-### [transfer.sh](transfer.sh):<br>
-upload file to transfer.sh and download file from transfer.sh
-
 ### [update_brew.sh](update_brew.sh):<br>
 更新通过homebrew安装的包,但是除了perl
 
@@ -524,3 +521,8 @@ usage:bash script_name.sh /path/to/directory
 download a file from https by curl<br>
 usage:<br>
 script.sh url [path/local_file]
+
+### [transfer.sh](transfer.sh):<br>
+upload file to transfer.sh and download file from transfer.sh<br>
+script.sh -u /localpath/to/file<br>
+script.sh -d XXXXXX /localpath/to/file(note:the file name should be same as the remote file)
