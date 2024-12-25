@@ -219,6 +219,12 @@ add的逆操作,恢复到add之前的状态
 ### [go_list_installed.sh](go_list_installed.sh):<br>
 列出安装在$GOPATH/bin/的工具
 
+## gpg:
+### [gpg_export_keys.sh](gpg_export_keys.sh):<br>
+export public key and private key<br>
+usage:<br>
+script.sh
+
 ## install:
 ### [install_perl_package.sh](install_perl_package.sh):<br>
 安装perl的常用库
