@@ -220,6 +220,14 @@ add的逆操作,恢复到add之前的状态
 列出安装在$GOPATH/bin/的工具
 
 ## gpg:
+### [gpg_encrypt_decrypt_file.sh](gpg_encrypt_decrypt_file.sh):<br>
+使用gpg加密,解密某个文件<br>
+usage:<br>
+encrypt:<br>
+script.sh -e file<br>
+decrypt:<br>
+script.sh -d file
+
 ### [gpg_export_keys.sh](gpg_export_keys.sh):<br>
 export public key and private key<br>
 usage:<br>
