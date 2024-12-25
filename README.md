@@ -228,6 +228,14 @@ script.sh -e file<br>
 decrypt:<br>
 script.sh -d file
 
+### [gpg_encrypt_decrypt_string.sh](gpg_encrypt_decrypt_string.sh):<br>
+使用gpg对称加密,解密一个字符串<br>
+usage:<br>
+encrypt:<br>
+script.sh -e string<br>
+decrypt:<br>
+script.sh -d string
+
 ### [gpg_export_keys.sh](gpg_export_keys.sh):<br>
 export public key and private key<br>
 usage:<br>
