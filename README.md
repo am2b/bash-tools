@@ -447,6 +447,14 @@ script.sh files
 ### [change_dir_to_marker.sh](change_dir_to_marker.sh):<br>
 cd to marker,which located in ~/.marker_dirs
 
+### [chinese_characters_to_pinyin.sh](chinese_characters_to_pinyin.sh):<br>
+将汉字转换为拼音,或拼音的首字母<br>
+usage:<br>
+转换为拼音:<br>
+script.sh 汉字<br>
+转换为拼音的首字母:<br>
+script.sh -f 汉字
+
 ### [clear_subdirectory.sh](clear_subdirectory.sh):<br>
 快速清空参数所给的子目录
 
