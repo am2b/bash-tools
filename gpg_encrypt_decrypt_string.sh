@@ -54,7 +54,6 @@ do_encrypt() {
     if [[ $? -eq 0 ]]; then
         echo "encrypted text:"
         echo "${ENCRYPTED_STRING}"
-
     else
         echo "error:encryption failed"
         exit 1
