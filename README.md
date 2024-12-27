@@ -291,12 +291,6 @@ usage:<br>
 nohup script.sh > /tmp/photo.log 2>&1 &
 
 ## password:
-### [2fa.sh](2fa.sh):<br>
-generate a totp verification code
-
-### [extract_totp_info.sh](extract_totp_info.sh):<br>
-usage:script.sh "otpauth_url"
-
 ### [keychain.sh](keychain.sh):<br>
 add,update,delete password in keychain<br>
 usage:<br>
@@ -311,6 +305,11 @@ delete:<br>
 keychain.sh -d --[or ,] service_name account_name<br>
 get:<br>
 keychain.sh -g --[or ,] service_name account_name
+
+### [totp.sh](totp.sh):<br>
+generate totp(Time-Based One-Time Password)<br>
+usage:<br>
+totp.sh totp_url
 
 ## python:
 ### [pip_clear_installed.sh](pip_clear_installed.sh):<br>
