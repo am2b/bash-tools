@@ -462,7 +462,7 @@ clear $HOME/tmp
 
 ### [copy_file_names.sh](copy_file_names.sh):<br>
 copy filenames to general pasteboard<br>
-usage:copy_file_names file1.sh file2.py
+usage:script.sh file1.sh file2.py file3.txt ...
 
 ### [count_files.sh](count_files.sh):<br>
 报告当前目录下非隐藏文件,隐藏文件以及总文件数量
