@@ -28,12 +28,6 @@ is_git_tracked() {
 move_to_trash() {
     local item="$1"
 
-    #处理软链接
-    if [[ -L "${item}" ]]; then
-        rm "${item}"
-        return 0
-    fi
-
     # 获取文件所在目录和文件名
     dir_name=$(dirname "$item")
     base_name=$(basename "$item")
@@ -87,8 +81,13 @@ delete_item() {
             ;;
         esac
     else
-        #移动到~/.trash
-        move_to_trash "${item}"
+        #如果是软链接的话
+        if [[ -L "${item}" ]]; then
+            rm "${item}"
+        else
+            #移动到~/.trash
+            move_to_trash "${item}"
+        fi
     fi
 }
 
