@@ -81,6 +81,7 @@ delete_item() {
             ;;
         esac
     else
+        #如果正在删除的文件或目录还为被git管理(还未git add),那么是会走这里的
         #如果是软链接的话
         if [[ -L "${item}" ]]; then
             rm "${item}"
