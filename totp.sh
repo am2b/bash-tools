@@ -3,13 +3,13 @@
 #=password
 #@generate totp(Time-Based One-Time Password)
 #@usage:
-#@totp.sh totp_url
+#@totp.sh "totp_url"
 
 usage() {
     local script
     script=$(basename "$0")
     echo "usage:"
-    echo "$script totp_link"
+    echo "$script \"totp_link\""
     exit 1
 }
 
