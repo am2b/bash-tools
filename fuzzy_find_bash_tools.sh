@@ -39,7 +39,7 @@ main() {
     shift $((OPTIND - 1))
 
     SELF_ABS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-    selected_script=$(find "${SELF_ABS_DIR}" -type f | fzf)
+    selected_script=$(find "${SELF_ABS_DIR}" -path "${SELF_ABS_DIR}"/.git -prune -o -type f -print | sed "s|^$HOME/repos/bash-tools/||" | fzf)
 
     if [[ -n "$selected_script" ]]; then
         selected_script=$(basename "${selected_script}")
