@@ -309,7 +309,7 @@ keychain.sh -g --[or ,] service_name account_name
 ### [totp.sh](totp.sh):<br>
 generate totp(Time-Based One-Time Password)<br>
 usage:<br>
-totp.sh totp_url
+totp.sh "totp_uri"
 
 ## python:
 ### [pip_clear_installed.sh](pip_clear_installed.sh):<br>
@@ -426,10 +426,10 @@ tmux命令集
 
 ## tools:
 ### [bak.sh](bak.sh):<br>
-create a file[.sh].bak from file[.sh],or a file[.sh] from file[.sh].bak<br>
+create a file.bak from file,or create a file from file.bak<br>
 usage:<br>
-bak.sh file.sh -> file.sh.bak<br>
-bak.sh file.sh.bak -> file.sh
+bak.sh file -> file.bak<br>
+bak.sh file.bak -> file
 
 ### [cat_files.sh](cat_files.sh):<br>
 拼接文本文件<br>
@@ -488,6 +488,11 @@ script.sh remote_path_to_dir_or_file
 
 ### [file_is_equal.sh](file_is_equal.sh):<br>
 通过计算两个文件的sha256来判断两个文件是否相同
+
+### [fuzzy_find_bash_tools.sh](fuzzy_find_bash_tools.sh):<br>
+fuzzy find a bash script,and copy the script name to clipboard<br>
+usage:<br>
+fuzzy_find_bash_tools.sh
 
 ### [fuzzy_jump.sh](fuzzy_jump.sh):<br>
 directory jump through fuzzy matching<br>
