@@ -490,9 +490,9 @@ script.sh remote_path_to_dir_or_file
 通过计算两个文件的sha256来判断两个文件是否相同
 
 ### [fuzzy_find_bash_tools.sh](fuzzy_find_bash_tools.sh):<br>
-fuzzy find a bash script,and copy the script name to clipboard<br>
+fuzzy find a bash script<br>
 usage:<br>
-fuzzy_find_bash_tools.sh
+source fuzzy_find_bash_tools.sh
 
 ### [fuzzy_jump.sh](fuzzy_jump.sh):<br>
 directory jump through fuzzy matching<br>
