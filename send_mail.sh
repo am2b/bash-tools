@@ -57,11 +57,33 @@ process_opts() {
 }
 
 do_send() {
+    local subject
+    local body
+    local recipient
     subject=$1
     body=$2
     recipient=$3
 
-    nohup sh -c "printf 'To: %s\nSubject: %s\n\n%s\n' \"$recipient\" \"$subject\" \"$body\" | msmtp \"$recipient\"" >/dev/null 2>&1 &
+    #将subject进行Base64编码
+    local encoded_subject
+    encoded_subject=$(echo -n "$subject" | base64)
+
+    #nohup sh -c "printf 'To: %s\nSubject: =?UTF-8?B?%s?=\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\n\n%s\n' \"$recipient\" \"$encoded_subject\" \"$body\" | msmtp \"$recipient\"" >/dev/null 2>&1 &
+
+    local contents
+    contents=$(
+        cat <<EOF
+To: $recipient
+Subject: =?UTF-8?B?$encoded_subject?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+$body
+EOF
+    )
+
+    nohup sh -c "echo \"$contents\" | msmtp \"$recipient\"" >/dev/null 2>&1 &
 }
 
 main() {
