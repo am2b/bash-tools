@@ -32,10 +32,11 @@ fi
 
 copy_from="/Volumes/T7/Apps/photos"
 copy_to="${HOME}"/DownLoads
-photos="${copy_to}"/photos
+dest_dir_name="photos"
 
-if [[ -d "${photos}" ]]; then
-    echo "error:there is a directory:${photos}"
+absolute_photos="${copy_to}"/"${dest_dir_name}"
+if [[ -d "${absolute_photos}" ]]; then
+    echo "error:there is a directory:${absolute_photos}"
     exit 1
 fi
 
@@ -46,7 +47,7 @@ archive_name="Photos-${TIMESTAMP}"
 archive_name_tar="${archive_name}".tar
 archive_name_7z="${archive_name}".7z
 
-tar --exclude='.DS_Store' -cf "$archive_name_tar" "${photos}"
+tar --exclude='.DS_Store' -cf "$archive_name_tar" -C "${copy_to}" "${dest_dir_name}"
 
 password=$(security find-generic-password -s "Photos-Library" -a "backup" -w)
 if [[ $? -ne 0 ]]; then
