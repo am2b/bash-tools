@@ -5,8 +5,8 @@
 #@usage:
 #@source fuzzy_find_git_tools.sh
 
-dir="${HOME}"/repos/bash-tools
-selected_script=$(find "${dir}" -path "${dir}"/.git -prune -o -name "*git*" -type f -print | sed "s|^$HOME/repos/bash-tools/||" | fzf --preview "bat -n --color=always {}")
+dir="${HOME}/repos/bash-tools"
+selected_script=$(find "${dir}" -path "${dir}/.git" -prune -o -name "*git*" -type f -print | sed "s|^$dir/||" | fzf --preview "bat -n --color=always $dir/{}")
 
 if [[ -n "$selected_script" ]]; then
     selected_script=$(basename "${selected_script}")
