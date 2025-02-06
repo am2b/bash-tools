@@ -31,6 +31,9 @@ done < "${marker_dirs}"
 
 #如果字符串cd_to的长度不为0
 if [[ -n "${cd_to}" ]]; then
+    #把~或者$HOME变量的字符串替换成实际的$HOME值
+    cd_to="${cd_to/#\~/$HOME}"
+    cd_to="${cd_to/\$HOME/$HOME}"
     cd "${cd_to}" || return 1
 else
     #如果没有匹配的marker,那么返回
