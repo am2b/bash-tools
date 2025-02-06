@@ -494,6 +494,11 @@ fuzzy find a bash script<br>
 usage:<br>
 source fuzzy_find_bash_tools.sh
 
+### [fuzzy_find_git_tools.sh](fuzzy_find_git_tools.sh):<br>
+fuzzy find a git script<br>
+usage:<br>
+source fuzzy_find_git_tools.sh
+
 ### [fuzzy_jump.sh](fuzzy_jump.sh):<br>
 directory jump through fuzzy matching<br>
 usage:<br>
@@ -526,7 +531,8 @@ script.sh<br>
 script.sh /directory/to/save/
 
 ### [send_mail.sh](send_mail.sh):<br>
-usage:script.sh "subject" "body" recipient
+usage:<br>
+send_mail.sh "subject" "body" recipient
 
 ### [simulate_command_c.sh](simulate_command_c.sh):<br>
 like command+c(or ctrl+c) for files and dirs
