@@ -78,9 +78,9 @@ main() {
     if [[ ! -d "${dest_dir}" ]]; then mkdir -p "${dest_dir}"; fi
 
     #一天只备份一次
-    if find "${dest_dir}" -type f -name "*$(date +"%Y-%m-%d")*" -print -quit | grep -q .; then
-        exit 0
-    fi
+    #if find "${dest_dir}" -type f -name "*$(date +"%Y-%m-%d")*" -print -quit | grep -q .; then
+    #    exit 0
+    #fi
 
     do_tar
     do_7z
