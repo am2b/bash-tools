@@ -465,6 +465,11 @@ script.sh -f 汉字
 ### [clear_tmp.sh](clear_tmp.sh):<br>
 clear $HOME/tmp
 
+### [compare_dirs.sh](compare_dirs.sh):<br>
+compare two dirs<br>
+usage:<br>
+script.sh dir1 dir2
+
 ### [copy_file_names.sh](copy_file_names.sh):<br>
 copy filenames to general pasteboard<br>
 usage:script.sh file1.sh file2.py file3.txt ...
