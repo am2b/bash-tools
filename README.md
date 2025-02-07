@@ -276,6 +276,11 @@ or:<br>
 4.b:comment out the:source log.sh
 
 ## pack:
+### [pack_local_origin_repository.sh](pack_local_origin_repository.sh):<br>
+backup local origin repository<br>
+usage:<br>
+script.sh
+
 ### [pack_nvim_mason.sh](pack_nvim_mason.sh):<br>
 pack the dir of ~/.local/share/nvim/mason/packages/ to ~/pack/
 
@@ -477,6 +482,11 @@ create layout of swift command line
 
 ### [create_password.sh](create_password.sh):<br>
 合成密码后,存储于~/.password
+
+### [delete_old_files.sh](delete_old_files.sh):<br>
+keep only the latest few files and delete the older ones<br>
+usage:<br>
+script.sh dir keep_num
 
 ### [dropbox_download_from_shared_link.sh](dropbox_download_from_shared_link.sh):<br>
 下载dropbox的共享链接
