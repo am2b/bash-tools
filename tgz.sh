@@ -39,12 +39,10 @@ list:
 tgz.sh -l archive.tar[.tar.gz|.tgz | .zip | .7z | .tar.7z |.t7z]
 
 extract the files to current dir
-tgz.sh -e archive.tar[.tar.gz|.tgz | .zip | .7z | .tar.7z |.t7z]
+tgz.sh -e archive.tar[.tar.gz|.tgz | .zip | .7z | .tar.7z |.t7z] -p "password"
 
 extract the files to the specified dir
-tgz.sh -e archive.tar[.tar.gz|.tgz | .zip | .7z | .tar.7z |.t7z] -d dir
-or
-tgz.sh -d dir -e archive.tar[.tar.gz|.tgz | .zip | .7z | .tar.7z |.t7z]
+tgz.sh -e archive.tar[.tar.gz|.tgz | .zip | .7z | .tar.7z |.t7z] -d dir -p "password"
 EOF
 }
 
