@@ -38,7 +38,7 @@ check_parameters() {
 }
 
 do_tar() {
-    tar --exclude='.DS_Store' -cf "$name_tar" -C "${HOME}" ".${GITHUB_USERNAME}"
+    tar --exclude='.DS_Store' -cf "/tmp/${name_tar}" -C "${HOME}" ".${GITHUB_USERNAME}"
 }
 
 do_7z() {
@@ -47,21 +47,14 @@ do_7z() {
         exit 1
     fi
 
-    7z a -p"${password}" -mhe=on -mx=0 "${name_7z}" "${name_tar}" &>/dev/null
-    rm "${name_tar}"
+    7z a -p"${password}" -mhe=on -mx=0 "/tmp/${name_7z}" "/tmp/${name_tar}" &>/dev/null
+    rm "/tmp/${name_tar}"
 }
 
 do_move() {
-    local from_dir
-    local from_abs_dir
-    local to_abs_dir
+    if [[ ! -d "${dest_dir}" ]]; then mkdir -p "${dest_dir}"; fi
 
-    from_dir=$(dirname "${name_7z}")
-    from_abs_dir=$(realpath "${from_dir}")
-    to_abs_dir=$(realpath "${dest_dir}")
-    if [[ "${from_abs_dir}" != "${to_abs_dir}" ]]; then
-        mv "${name_7z}" "${to_abs_dir}"
-    fi
+    mv "/tmp/${name_7z}" "${dest_dir}"
 }
 
 main() {
@@ -74,8 +67,6 @@ main() {
     TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
     name_tar="origin_repo_${TIMESTAMP}.tar"
     name_7z="origin_repo_${TIMESTAMP}.7z"
-
-    if [[ ! -d "${dest_dir}" ]]; then mkdir -p "${dest_dir}"; fi
 
     #一天只备份一次
     #if find "${dest_dir}" -type f -name "*$(date +"%Y-%m-%d")*" -print -quit | grep -q .; then
