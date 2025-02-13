@@ -219,6 +219,12 @@ add的逆操作,恢复到add之前的状态
 ### [go_list_installed.sh](go_list_installed.sh):<br>
 列出安装在$GOPATH/bin/的工具
 
+### [go_mod_init.sh](go_mod_init.sh):<br>
+go mod init<br>
+usage:<br>
+-l:local<br>
+cd project_root_dir && script.sh [-l]
+
 ## gpg:
 ### [gpg_encrypt_decrypt_file.sh](gpg_encrypt_decrypt_file.sh):<br>
 使用gpg加密,解密某个文件<br>
