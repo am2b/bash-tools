@@ -12,6 +12,10 @@ usage() {
     echo "$script"
     exit 0
 }
+
+#以便于在easy type mode下可以使用别名
+[[ -f /tmp/aliases ]] && source /tmp/aliases && shopt -s expand_aliases
+
 if [[ $# -gt 1 ]] || [[ $# -eq 1 && "$1" != "-h" ]]; then
     usage
 fi
@@ -155,6 +159,8 @@ input_cmd=$(string_replace "${input_cmd}" "'${input_key}'" "${value}")
 input_cmd=$(echo "${input_cmd}" | tr -d "'")
 
 read -r -N 1 -p 'will execute:'"${input_cmd}"' [y/N]' continue_execute
+#消除%
+echo
 case "${continue_execute}" in
     'y' | 'Y')
         #执行
