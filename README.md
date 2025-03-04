@@ -287,6 +287,11 @@ backup local origin repository<br>
 usage:<br>
 script.sh
 
+### [pack_notes_database.sh](pack_notes_database.sh):<br>
+backup notes database on mac<br>
+usage:<br>
+nohup script.sh > /tmp/notes.log 2>&1 &
+
 ### [pack_nvim_mason.sh](pack_nvim_mason.sh):<br>
 pack the dir of ~/.local/share/nvim/mason/packages/ to ~/pack/
 
