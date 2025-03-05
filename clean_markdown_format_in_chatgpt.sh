@@ -49,8 +49,13 @@ temp_file=$(mktemp)
 #|| [[ -n "$line" ]]
 #这部分确保即使最后一行没有换行符(导致read返回非零状态),也会将其正常处理
 while IFS= read -r line || [[ -n "$line" ]]; do
+    #注意这里的continue就是不读取的意思,其结果就是删掉了这些行
     # 检查是否匹配 "```bash"，如果匹配则跳过该行
     if [[ "$line" == '```bash' ]]; then
+        continue
+    fi
+
+    if [[ "$line" == '```lua' ]]; then
         continue
     fi
 
@@ -82,6 +87,16 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 
     #删除"## "
     line="${line/\#\# /}"
+
+    #删除以"-- "开头的行的前3个字符
+    if [[ "$line" == --\ * ]]; then
+        line="${line#-- }"
+    fi
+
+    #删除以"- "开头的行的前2个字符
+    if [[ "$line" == -\ * ]]; then
+        line="${line#- }"
+    fi
 
     #将处理后的行写入临时文件
     echo "$line" >>"$temp_file"
