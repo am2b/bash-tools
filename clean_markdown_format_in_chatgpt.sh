@@ -64,6 +64,14 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         continue
     fi
 
+    if [[ "$line" == 'lua' ]]; then
+        continue
+    fi
+
+    if [[ "$line" == "Copy Code" ]]; then
+        continue
+    fi
+
     #删除变量line 中所有的反引号（`）字符
     #这行代码使用了 Bash 的字符串替换功能。具体语法为：
     #${变量名//模式/替换}
