@@ -6,6 +6,22 @@
 #@script.sh file
 #@pbpaste | script.sh | pbcopy
 
+#required_tools() {
+#    local tools=("sed")
+#    for tool in "${tools[@]}"; do
+#        if ! command -v "$tool" >/dev/null 2>&1; then
+#            echo "$tool未安装,请安装GNU Coreutils"
+#            exit 1
+#        fi
+#        if ! "$tool" --version 2>/dev/null | grep -q "GNU"; then
+#            echo "$tool不是GNU Coreutils版本,请安装正确版本"
+#            exit 1
+#        fi
+#    done
+#}
+
+#required_tools
+
 #如果提供了文件路径,读取文件内容,否则从标准输入读取
 if [[ -n "$1" ]]; then
     input="$1"
@@ -59,8 +75,16 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         continue
     fi
 
+    if [[ "$line" == '        ```lua' ]]; then
+        continue
+    fi
+
     # 检查是否匹配 "```"，如果匹配则跳过该行
     if [[ "$line" == '```' ]]; then
+        continue
+    fi
+
+    if [[ "$line" == '        ```' ]]; then
         continue
     fi
 
@@ -106,9 +130,22 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         line="${line#- }"
     fi
 
+    #删除以"    - "开头的行的前6个字符
+    if [[ "$line" == "    - "* ]]; then
+        line="${line:6}"
+    fi
+
     #将处理后的行写入临时文件
     echo "$line" >>"$temp_file"
 done <"$input"
+
+#删除掉末尾的空行
+#先删除掉空白字符
+#sed -i -e 's/[[:space:]]*$//' "${temp_file}"
+#sed -i -e :a -e '/^\n*$/{$d;N;ba' -e '}' "${temp_file}"
+
+#使用sed合并空行,将连续的空行合并为一个空行
+#sed -i '/^$/N;/^\n$/D' "$temp_file"
 
 if [[ "${source}" -eq 0 ]]; then
     #将临时文件替换为原文件
