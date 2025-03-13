@@ -37,7 +37,7 @@ if [[ ! -d "${copy_to}" ]]; then
 fi
 cp -r "${copy_from}" "${copy_to}"
 
-TIMESTAMP=$(date +"%Y%m%d")
+TIMESTAMP=$(date +"%Y-%m-%d")
 archive_name="Notes-${TIMESTAMP}"
 archive_name_tar="${archive_name}".tar
 archive_name_7z="${archive_name}".7z
