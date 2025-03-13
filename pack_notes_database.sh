@@ -57,3 +57,5 @@ if [[ ! -f "${HOME}"/Downloads/"${archive_name_7z}" ]]; then
 fi
 
 rm "${archive_name_tar}"
+rm -rf "${copy_to}"
+osascript -e 'display notification "打包备忘录的任务已完成" with title "打包备忘录" sound name "Glass"'
