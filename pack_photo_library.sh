@@ -62,3 +62,5 @@ if [[ ! -f "${HOME}"/Downloads/"${archive_name_7z}" ]]; then
 fi
 
 rm "${archive_name_tar}"
+rm -rf "${absolute_photos}"
+osascript -e 'display notification "打包相册的任务已完成" with title "打包相册" sound name "Glass"'
