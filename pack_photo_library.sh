@@ -30,37 +30,15 @@ if (("$#" > 1)); then
     usage
 fi
 
-copy_from="/Volumes/T7/Apps/photos"
-copy_to="${HOME}"/DownLoads
-dest_dir_name="photos"
+src_dir="/Volumes/T7/Apps/photos/"
+src_parent_dir=$(dirname "${src_dir}")
 
-absolute_photos="${copy_to}"/"${dest_dir_name}"
-if [[ -d "${absolute_photos}" ]]; then
-    echo "error:there is a directory:${absolute_photos}"
-    exit 1
-fi
+TIMESTAMP=$(date +"%Y-%m-%d")
+archive="Photos-${TIMESTAMP}.7z"
 
-cp -r "${copy_from}" "${copy_to}"
+password=$(security find-generic-password -s "Photos-Library" -a "backup" -w) || { echo "error:did not get password from keychain"; exit 1; }
 
-TIMESTAMP=$(date +"%Y%m%d")
-archive_name="Photos-${TIMESTAMP}"
-archive_name_tar="${archive_name}".tar
-archive_name_7z="${archive_name}".7z
+cd "${src_parent_dir}" || exit 1
+7z -xr!'.DS_Store' a -p"${password}" -mhe=on -mx=0 ~/Downloads/"${archive}" "${src_dir}" &>/dev/null
 
-tar --exclude='.DS_Store' -cf "$archive_name_tar" -C "${copy_to}" "${dest_dir_name}"
-
-password=$(security find-generic-password -s "Photos-Library" -a "backup" -w)
-if [[ $? -ne 0 ]]; then
-    echo "error:did not get password from keychain"
-    exit 1
-fi
-
-7z -xr!'.DS_Store' a -p"${password}" -mhe=on -mx=0 "${archive_name_7z}" "${archive_name_tar}" &>/dev/null
-
-if [[ ! -f "${HOME}"/Downloads/"${archive_name_7z}" ]]; then
-    mv "${archive_name_7z}" "${HOME}"/DownLoads
-fi
-
-rm "${archive_name_tar}"
-rm -rf "${absolute_photos}"
 osascript -e 'display notification "打包相册的任务已完成" with title "打包相册" sound name "Glass"'
