@@ -71,6 +71,10 @@ while IFS= read -r line || [[ -n "$line" ]]; do
         continue
     fi
 
+    if [[ "$line" == '   ```bash' ]]; then
+        continue
+    fi
+
     if [[ "$line" == '```lua' ]]; then
         continue
     fi
