@@ -442,10 +442,10 @@ tmux命令集
 
 ## tools:
 ### [bak.sh](bak.sh):<br>
-create a file.bak from file,or create a file from file.bak<br>
+create a file/dir.bak from file/dir,or create a file/dir from file/dir.bak<br>
 usage:<br>
-bak.sh file -> file.bak<br>
-bak.sh file.bak -> file
+bak.sh file/dir -> file/dir.bak<br>
+bak.sh file/dir.bak -> file/dir
 
 ### [cat_files.sh](cat_files.sh):<br>
 拼接文本文件<br>
