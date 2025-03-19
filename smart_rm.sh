@@ -39,8 +39,14 @@ move_to_trash() {
     # 检查是否文件已存在于回收站
     if [[ -e "${TRASH_DIR}/${base_name}" ]]; then
         # 生成时间戳并构造新文件名
-        timestamp=$(date +%Y%m%d%H%M%S)
-        new_item="${dir_name}/${file_name}_${timestamp}.${extension}"
+        timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
+        if [[ -f "${item}" ]]; then
+            new_item="${dir_name}/${file_name}_${timestamp}.${extension}"
+        fi
+        if [[ -d "${item}" ]]; then
+            new_item="${dir_name}/${file_name}_${timestamp}"
+        fi
+
         # 重命名文件
         mv "${item}" "${new_item}"
         item="${new_item}"
@@ -81,7 +87,7 @@ delete_item() {
             ;;
         esac
     else
-        #如果正在删除的文件或目录还为被git管理(还未git add),那么是会走这里的
+        #如果正在删除的文件或目录还未被git管理(还未git add),那么是会走这里的
         #如果是软链接的话
         if [[ -L "${item}" ]]; then
             rm "${item}"
