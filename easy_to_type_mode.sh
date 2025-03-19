@@ -34,7 +34,12 @@ done
 shift $((OPTIND - 1))
 
 #当前目录下所有的文件和子目录的名字(不递归)
-mapfile -t all < <(fd --max-depth 1 --hidden .)
+#mapfile -t all < <(fd --max-depth 1 --hidden .)
+#--max-depth1:仅搜索当前目录,不递归
+#--hidden:包括隐藏文件(以.开头的文件)
+#--exclude .DS_Store:排除.DS_Store
+#.:匹配所有文件
+mapfile -t all < <(fd --max-depth 1 --hidden --exclude .DS_Store --exclude .localized .)
 all_size="${#all[@]}"
 #为了下面的[[:space:]]"${key}"[[:space:]]匹配,需要给数组的第一个元素前面加上一个空格,给最后一个元素后面加上一个空格
 all_with_space=(' '"${all[@]:0:1}" "${all[@]:1:((all_size - 2))}" "${all[@]:((all_size - 1)):1}"' ')
