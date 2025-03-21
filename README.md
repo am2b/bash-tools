@@ -382,6 +382,13 @@ sort_python_import.sh .<br>
 其它目录:<br>
 sort_python_import.sh dir
 
+## telegram:
+### [telegram_get_chat_id.sh](telegram_get_chat_id.sh):<br>
+获取用户的chat_id<br>
+usage:<br>
+发送消息给某个bot<br>
+script.sh TOKEN
+
 ## text:
 ### [text_belly.sh](text_belly.sh):<br>
 读取文本文件,然后输出指定的行范围,其中第一个数字表示起始行,第二个数字表示需要显示的行数<br>
