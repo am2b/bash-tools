@@ -41,8 +41,30 @@ main() {
     local name="${1}"
     local token
     local chat_id
-    token=$(security find-generic-password -s "telegram-clipboard-bot" -a "clipboard_bot" -w)
-    chat_id=$(security find-generic-password -s "telegram_chat_id" -a "${name}" -w)
+    local dir_cache
+    local token_cache
+    local chat_id_cache
+    #注意:不要在这里使用XDG_CACHE_HOME,因为hammerspoon里面没有export这个环境变量
+    dir_cache=~/.cache/telegram
+    if [[ ! -d "${dir_cache}" ]]; then
+        mkdir -p "${dir_cache}"
+    fi
+    token_cache="${dir_cache}"/token
+    chat_id_cache="${dir_cache}"/chat_id
+
+    if [[ -f "${token_cache}" ]]; then
+        token=$(cat "${token_cache}")
+    else
+        token=$(security find-generic-password -s "telegram-clipboard-bot" -a "clipboard_bot" -w)
+        echo "${token}" > "${token_cache}"
+    fi
+
+    if [[ -f "${chat_id_cache}" ]]; then
+        chat_id=$(cat "${chat_id_cache}")
+    else
+        chat_id=$(security find-generic-password -s "telegram_chat_id" -a "${name}" -w)
+        echo "${chat_id}" > "${chat_id_cache}"
+    fi
 
     curl -X POST "https://api.telegram.org/bot${token}/sendMessage" \
         -d "chat_id=${chat_id}" \
