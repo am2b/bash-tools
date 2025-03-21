@@ -383,6 +383,11 @@ sort_python_import.sh .<br>
 sort_python_import.sh dir
 
 ## telegram:
+### [send_clipboard_to_telegram.sh](send_clipboard_to_telegram.sh):<br>
+send the text in clipboard to telegram<br>
+usage<br>
+script.sh chat_partner_name
+
 ### [telegram_get_chat_id.sh](telegram_get_chat_id.sh):<br>
 获取用户的chat_id<br>
 usage:<br>
