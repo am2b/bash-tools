@@ -281,6 +281,12 @@ usage:<br>
 or:<br>
 4.b:comment out the:source log.sh
 
+## mac:
+### [mac_sleep.sh](mac_sleep.sh):<br>
+退出音乐和照片App,然后结束Amphetamine的当前会话,然后让mac休眠<br>
+usage:<br>
+script.sh
+
 ## pack:
 ### [pack_local_origin_repository.sh](pack_local_origin_repository.sh):<br>
 backup local origin repository<br>
