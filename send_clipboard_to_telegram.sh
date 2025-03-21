@@ -56,14 +56,14 @@ main() {
         token=$(cat "${token_cache}")
     else
         token=$(security find-generic-password -s "telegram-clipboard-bot" -a "clipboard_bot" -w)
-        echo "${token}" > "${token_cache}"
+        echo "${token}" >"${token_cache}"
     fi
 
     if [[ -f "${chat_id_cache}" ]]; then
         chat_id=$(cat "${chat_id_cache}")
     else
         chat_id=$(security find-generic-password -s "telegram_chat_id" -a "${name}" -w)
-        echo "${chat_id}" > "${chat_id_cache}"
+        echo "${chat_id}" >"${chat_id_cache}"
     fi
 
     curl -X POST "https://api.telegram.org/bot${token}/sendMessage" \
