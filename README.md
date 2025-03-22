@@ -350,7 +350,9 @@ uninstall packages of pip based on package_name.unpip file
 update pip source
 
 ### [poetry_create_envrc.sh](poetry_create_envrc.sh):<br>
-create .envrc in the current directory(created by poetry) for direnv
+create .envrc in the current directory(created by poetry) for direnv<br>
+usage:<br>
+script.sh
 
 ### [pyenv_install_python.sh](pyenv_install_python.sh):<br>
 通过pyenv安装python<br>
