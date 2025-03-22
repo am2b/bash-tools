@@ -3,32 +3,70 @@
 #=python
 #@列出可以通过pyenv安装的python版本
 #@会对版本号进行筛选,可以接收用户输入的目标版本号,默认为3.10.0
+#@usage
+#@script.sh
 
-# 只列出该版本号以后的
-# 可以接收用户输入的目标版本号,默认为3.10.0
-TARGET_VERSION=${1:-3.10.0}
-
-# 提取主版本、次版本和补丁版本
-MAJOR_VERSION=$(echo "$TARGET_VERSION" | cut -d. -f1)
-MINOR_VERSION=$(echo "$TARGET_VERSION" | cut -d. -f2)
-PATCH_VERSION=$(echo "$TARGET_VERSION" | cut -d. -f3)
-
-# 筛选版本
-pyenv install --list | awk -v major="$MAJOR_VERSION" -v minor="$MINOR_VERSION" -v patch="$PATCH_VERSION" '
-{
-    gsub(/^[ \t]+/, "", $0);
-    if ($1 ~ /^[0-9]+\.[0-9]+\.[0-9]+$/) {
-        split($1, version, ".");
-        if (version[1] == major) {
-            if (version[2] > minor || (version[2] == minor && version[3] >= patch)) {
-                print $1;
-            }
-        } else if (version[1] > major) {
-            print $1;
-        }
-    }
+usage() {
+    local script
+    script=$(basename "$0")
+    echo "usage:"
+    echo "$script"
+    exit 1
 }
-'
+
+process_opts() {
+    while getopts ":h" opt; do
+        case $opt in
+        h)
+            usage
+            ;;
+        *)
+            echo "error:unsupported option -$opt"
+            usage
+            ;;
+        esac
+    done
+}
+
+check_parameters() {
+    if (("$#" > 0)); then
+        usage
+    fi
+}
+
+main() {
+    check_parameters "${@}"
+    process_opts "${@}"
+    shift $((OPTIND - 1))
+
+    # 只列出该版本号以后的
+    # 可以接收用户输入的目标版本号,默认为3.10.0
+    TARGET_VERSION=${1:-3.10.0}
+
+    # 提取主版本、次版本和补丁版本
+    MAJOR_VERSION=$(echo "$TARGET_VERSION" | cut -d. -f1)
+    MINOR_VERSION=$(echo "$TARGET_VERSION" | cut -d. -f2)
+    PATCH_VERSION=$(echo "$TARGET_VERSION" | cut -d. -f3)
+
+    # 筛选版本
+    pyenv install --list | awk -v major="$MAJOR_VERSION" -v minor="$MINOR_VERSION" -v patch="$PATCH_VERSION" '
+        {
+            gsub(/^[ \t]+/, "", $0);
+            if ($1 ~ /^[0-9]+\.[0-9]+\.[0-9]+$/) {
+                split($1, version, ".");
+                if (version[1] == major) {
+                    if (version[2] > minor || (version[2] == minor && version[3] >= patch)) {
+                        print $1;
+                    }
+                } else if (version[1] > major) {
+                    print $1;
+                }
+            }
+        }
+        '
+}
+
+main "${@}"
 
 #以下是对命令及其核心逻辑的详细讲解:
 #目的:
@@ -53,7 +91,7 @@ pyenv install --list | awk -v major="$MAJOR_VERSION" -v minor="$MINOR_VERSION" -
 #major="$MAJOR_VERSION":主版本号,例如3
 #minor="$MINOR_VERSION":次版本号,例如10
 #patch="$PATCH_VERSION":补丁版本号,例如0
-#  
+
 #3.gsub(/^[ \t]+/, "", $0);
 #gsub是awk的全局替换函数
 #/^[ \t]+/:正则表达式,匹配行首的所有空格和制表符
@@ -110,8 +148,8 @@ pyenv install --list | awk -v major="$MAJOR_VERSION" -v minor="$MINOR_VERSION" -
 #3.筛选标准格式的版本号
 #4.将版本号分割为主版本,次版本和补丁版本
 #5.依次比较:
-    #如果主版本号较新,直接输出
-    #如果主版本号相同:
-        #比较次版本号
-        #如果次版本号相同,则比较补丁版本号
+#如果主版本号较新,直接输出
+#如果主版本号相同:
+#比较次版本号
+#如果次版本号相同,则比较补丁版本号
 #6.输出符合条件的版本号

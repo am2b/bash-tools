@@ -361,7 +361,9 @@ script.sh 12.2
 
 ### [pyenv_list_available_versions.sh](pyenv_list_available_versions.sh):<br>
 列出可以通过pyenv安装的python版本<br>
-会对版本号进行筛选,可以接收用户输入的目标版本号,默认为3.10.0
+会对版本号进行筛选,可以接收用户输入的目标版本号,默认为3.10.0<br>
+usage<br>
+script.sh
 
 ### [python_create_directory_structure.sh](python_create_directory_structure.sh):<br>
 create .envrc .gitignore and LICENSE<br>
