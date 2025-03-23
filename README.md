@@ -346,9 +346,6 @@ make pip only execute in the virtual environment,and generate uninstall files
 ### [pip_uninstall.sh](pip_uninstall.sh):<br>
 uninstall packages of pip based on package_name.unpip file
 
-### [pip_update_source.sh](pip_update_source.sh):<br>
-update pip source
-
 ### [poetry_create_envrc.sh](poetry_create_envrc.sh):<br>
 create .envrc in the current directory(created by poetry) for direnv<br>
 usage:<br>
