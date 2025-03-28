@@ -283,7 +283,7 @@ or:<br>
 
 ## mac:
 ### [mac_sleep.sh](mac_sleep.sh):<br>
-退出音乐和照片App,然后结束Amphetamine的当前会话,然后让mac休眠<br>
+退出音乐,照片和备忘录App,然后结束Amphetamine的当前会话,然后锁屏准备休眠<br>
 usage:<br>
 script.sh
 

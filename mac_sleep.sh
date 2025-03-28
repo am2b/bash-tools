@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #=mac
-#@退出音乐和照片App,然后结束Amphetamine的当前会话,然后让mac休眠
+#@退出音乐,照片和备忘录App,然后结束Amphetamine的当前会话,然后锁屏准备休眠
 #@usage:
 #@script.sh
 
@@ -45,16 +45,24 @@ main() {
     #退出音乐和照片应用(如果它们正在运行)
     if pgrep -x "Music" >/dev/null; then
         osascript -e 'tell application "Music" to quit'
+        sleep 1
     fi
 
     if pgrep -x "Photos" >/dev/null; then
         osascript -e 'tell application "Photos" to quit'
+        sleep 1
+    fi
+
+    if pgrep -x "Notes" >/dev/null; then
+        osascript -e 'tell application "Notes" to quit'
+        sleep 1
     fi
 
     #取消Amphetamine计时(如果存在)
     if pgrep -x "Amphetamine" >/dev/null; then
         #按下:ctrl + option + cmd + a(自己在Amphetamine里面设置的结束会话的快捷键)
         osascript -e 'tell application "System Events" to key code 0 using {control down, option down, command down}'
+        sleep 1
     fi
 
     #使用osascript触发macOS的锁屏快捷键(ctrl + cmd + q)
