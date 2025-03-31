@@ -351,6 +351,12 @@ create .envrc in the current directory(created by poetry) for direnv<br>
 usage:<br>
 script.sh
 
+### [poetry_modify_python_version.sh](poetry_modify_python_version.sh):<br>
+读取.python-version,然后修改pyproject.toml里面的python版本<br>
+usage:<br>
+在项目根目录运行<br>
+script.sh
+
 ### [pyenv_install_python.sh](pyenv_install_python.sh):<br>
 通过pyenv安装python<br>
 usage:<br>
