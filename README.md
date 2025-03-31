@@ -377,6 +377,10 @@ usage:script.sh project_name
 ### [python_create_envrc.sh](python_create_envrc.sh):<br>
 create .envrc in the current directory for direnv
 
+### [python_create_gitignore.sh](python_create_gitignore.sh):<br>
+usage:<br>
+script.sh
+
 ### [python_jump_to_root_directory.sh](python_jump_to_root_directory.sh):<br>
 从python项目的任意子目录跳转到根目录<br>
 usage:source script.sh
@@ -394,6 +398,11 @@ sort_python_import.sh<br>
 sort_python_import.sh .<br>
 其它目录:<br>
 sort_python_import.sh dir
+
+### [python_start_project.sh](python_start_project.sh):<br>
+在~/repos/目录创建一个被poetry管理的python项目<br>
+usage:<br>
+script.sh project_name python_version
 
 ## telegram:
 ### [send_clipboard_to_telegram.sh](send_clipboard_to_telegram.sh):<br>
