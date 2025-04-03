@@ -30,13 +30,21 @@ if (("$#" > 1)); then
     usage
 fi
 
+if pgrep -x "Photos" >/dev/null; then
+    osascript -e 'tell application "Photos" to quit'
+    sleep 5
+fi
+
 src_dir="/Volumes/T7/Apps/photos/"
 src_parent_dir=$(dirname "${src_dir}")
 
 TIMESTAMP=$(date +"%Y-%m-%d")
 archive="Photos-${TIMESTAMP}.7z"
 
-password=$(security find-generic-password -s "Photos-Library" -a "backup" -w) || { echo "error:did not get password from keychain"; exit 1; }
+password=$(security find-generic-password -s "Photos-Library" -a "backup" -w) || {
+    echo "error:did not get password from keychain"
+    exit 1
+}
 
 cd "${src_parent_dir}" || exit 1
 7z -xr!'.DS_Store' a -p"${password}" -mhe=on -mx=0 ~/Downloads/"${archive}" "${src_dir}" &>/dev/null

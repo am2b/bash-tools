@@ -30,6 +30,11 @@ if (("$#" > 1)); then
     usage
 fi
 
+if pgrep -x "Notes" >/dev/null; then
+    osascript -e 'tell application "Notes" to quit'
+    sleep 3
+fi
+
 copy_from="${HOME}/Library/Group Containers/group.com.apple.notes"
 copy_to="${HOME}"/DownLoads/notes/
 if [[ ! -d "${copy_to}" ]]; then
