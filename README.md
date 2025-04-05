@@ -427,6 +427,11 @@ script.sh text.txt 101 20
 usage:<br>
 script.sh encrypted_text_file
 
+### [text_create_txt_file.sh](text_create_txt_file.sh):<br>
+create txt file<br>
+usage:<br>
+script.sh path
+
 ### [text_delete_blank_lines_at_the_end_of_file.sh](text_delete_blank_lines_at_the_end_of_file.sh):<br>
 删除掉文本文件末尾的一行或多行空行<br>
 usage:<br>
