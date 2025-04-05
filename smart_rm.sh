@@ -33,6 +33,26 @@ check_parameters() {
     fi
 }
 
+check_unsafe_path() {
+    local item="$1"
+    local target_path
+
+    #如果路径中包含~,先替换为$HOME
+    item="${item/#\~/$HOME}"
+
+    #解析为绝对路径(即使路径不存在,也尝试模拟解析)
+    target_path=$(realpath -m -- "$item" 2>/dev/null || echo "$item" | sed "s#^~/#$HOME/#")
+
+    # 检查是否为根目录或家目录
+    if [[ "$target_path" == "/" ]]; then
+        echo "错误:拒绝删除根目录:/"
+        exit 1
+    elif [[ "$target_path" == "$HOME" ]]; then
+        echo "错误:拒绝删除家目录:$HOME"
+        exit 1
+    fi
+}
+
 #检查目标是否在Git的管理之下
 is_git_tracked() {
     #检查是否在Git仓库中
@@ -102,9 +122,15 @@ delete_item() {
     if is_git_tracked "$item"; then
         #如果是目录,使用-r
         if [[ -d "$item" ]]; then
-            git rm -r --cached "$item" >/dev/null 2>&1 || { echo "error:git rm失败"; exit 1;}
+            git rm -r --cached "$item" >/dev/null 2>&1 || {
+                echo "error:git rm失败"
+                exit 1
+            }
         else
-            git rm --cached "$item" >/dev/null 2>&1 || { echo "error:git rm失败"; exit 1;}
+            git rm --cached "$item" >/dev/null 2>&1 || {
+                echo "error:git rm失败"
+                exit 1
+            }
         fi
 
         #询问用户是否从文件系统中删除(因为上面的git rm命令使用了--cached选项)
@@ -157,6 +183,8 @@ main() {
     fi
 
     for item in "$@"; do
+        check_unsafe_path "$item"
+
         delete_item "$item"
     done
 }
