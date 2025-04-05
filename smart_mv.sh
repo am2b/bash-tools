@@ -6,6 +6,34 @@
 #控制是否启用调试信息
 DEBUG_MODE=true
 
+usage() {
+    local script
+    script=$(basename "$0")
+    echo "usage:"
+    echo "$script <source1> <source2> ... <destination>"
+    exit 1
+}
+
+process_opts() {
+    while getopts ":h" opt; do
+        case $opt in
+        h)
+            usage
+            ;;
+        *)
+            echo "error:unsupported option -$opt"
+            usage
+            ;;
+        esac
+    done
+}
+
+check_parameters() {
+    if (("$#" < 2)); then
+        usage
+    fi
+}
+
 debug() {
     if [[ "$DEBUG_MODE" == true ]]; then
         echo "debug:" "$@" >&2
@@ -70,9 +98,9 @@ is_same_git_repo() {
     dest_git_root=$(get_git_root "$2")
 
     if [[ -n "$source_git_root" && "$source_git_root" == "$dest_git_root" ]]; then
-        return 0  #同一个仓库
+        return 0 #同一个仓库
     else
-        return 1  #不同的仓库
+        return 1 #不同的仓库
     fi
 }
 
@@ -146,57 +174,59 @@ move_item() {
     fi
 }
 
-#脚本主逻辑
-#参数数量
-params_count="$#"
+main() {
+    #参数数量
+    local params_count="$#"
 
-#usage:
-if [[ "${params_count}" -lt 2 ]]; then
-    echo "Usage: $0 <source1> <source2> ... <destination>"
-    exit 1
-fi
+    check_parameters "${@}"
+    process_opts "${@}"
+    shift $((OPTIND - 1))
 
-#拆分参数
-#获取命令行参数中的最后一个参数,不涉及数组展开
-dest="${!#}"
-sources=("${@:1:$#-1}")
+    #拆分参数
+    #获取命令行参数中的最后一个参数,不涉及数组展开
+    local dest="${!#}"
+    local sources=("${@:1:$#-1}")
 
-#统计bad source的数量
-bad_sources_count=0
-for source in "${sources[@]}"; do
-    if [[ ! -e "${source}" ]]; then
-        ((bad_sources_count++))
+    #统计bad source的数量
+    local bad_sources_count=0
+    for source in "${sources[@]}"; do
+        if [[ ! -e "${source}" ]]; then
+            ((bad_sources_count++))
+        fi
+    done
+    #如果所有的source参数都不存在的话
+    if [[ "${bad_sources_count}" -eq "${#sources[@]}" ]]; then
+        echo "Error:all sources do not exist."
+        exit 1
     fi
-done
-#如果所有的source参数都不存在的话
-if [[ "${bad_sources_count}" -eq "${#sources[@]}" ]]; then
-    echo "Error:all sources do not exist."
-    exit 1
-fi
 
-#如果dest看起来像是一个目录的话
-looks_like_dir "${dest}" && create_dir "${dest}"
+    #如果dest看起来像是一个目录的话
+    looks_like_dir "${dest}" && create_dir "${dest}"
 
-#如果有多个source的话,那么dest肯定是一个目录
-if [[ "${params_count}" -gt 2 ]]; then create_dir "${dest}"; fi
+    #如果有多个source的话,那么dest肯定是一个目录
+    if [[ "${params_count}" -gt 2 ]]; then create_dir "${dest}"; fi
 
-#如果只有一个source,并且dest后面没有/,并且dest也不存在,那么确保dest的父目录存在
-if [[ "${params_count}" -eq 2 ]]; then
-    if ! looks_like_dir "${dest}"; then
-        if [[ ! -e "${dest}" ]]; then
-            dest_parent=$(dirname "${dest}")
-            create_dir "${dest_parent}"
+    #如果只有一个source,并且dest后面没有/,并且dest也不存在,那么确保dest的父目录存在
+    if [[ "${params_count}" -eq 2 ]]; then
+        if ! looks_like_dir "${dest}"; then
+            if [[ ! -e "${dest}" ]]; then
+                local dest_parent
+                dest_parent=$(dirname "${dest}")
+                create_dir "${dest_parent}"
+            fi
         fi
     fi
-fi
 
-#逐个move文件或目录
-for source in "${sources[@]}"; do
-    #如果某一个source不存在的话
-    if [[ ! -e "${source}" ]]; then
-        echo "Error:" "${source}" "does not exist."
-        continue
-    fi
+    #逐个move文件或目录
+    for source in "${sources[@]}"; do
+        #如果某一个source不存在的话
+        if [[ ! -e "${source}" ]]; then
+            echo "Error:" "${source}" "does not exist."
+            continue
+        fi
 
-    move_item "$source" "$dest"
-done
+        move_item "$source" "$dest"
+    done
+}
+
+main "${@}"
