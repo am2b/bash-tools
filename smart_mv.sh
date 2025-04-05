@@ -3,7 +3,7 @@
 #=tools
 #@smart mv
 
-# 控制是否启用调试信息
+#控制是否启用调试信息
 DEBUG_MODE=true
 
 debug() {
@@ -13,42 +13,42 @@ debug() {
 }
 
 #git ls-files:
-#这是 Git 的一个命令，用于列出当前 Git 仓库中被跟踪的文件。
-#它会返回所有已添加到索引中的文件，并且可以使用不同的选项进行过滤和格式化输出。
+#这是Git的一个命令,用于列出当前Git仓库中被跟踪的文件
+#它会返回所有已添加到索引中的文件,并且可以使用不同的选项进行过滤和格式化输出
 
 #--error-unmatch "$1":
-#--error-unmatch 选项用于检测特定文件是否在 Git 的版本控制中
-#"$1" 是一个位置参数，通常是传递给脚本或函数的第一个参数。在这个上下文中，它代表你想要检查的文件名或路径
-#如果该文件或目录没有被跟踪，git ls-files --error-unmatch "$1" 会返回一个错误，返回值为 1（非零表示错误）。否则就返回0
+#--error-unmatch 选项用于检测特定文件是否在Git的版本控制中
+#"$1"是一个位置参数,通常是传递给脚本或函数的第一个参数。在这个上下文中,它代表你想要检查的文件名或路径
+#如果该文件或目录没有被跟踪,git ls-files --error-unmatch "$1" 会返回一个错误,返回值为1(非零表示错误),否则就返回0
 
 #>/dev/null:
-#这是将标准输出重定向到 /dev/null，即丢弃标准输出
+#这是将标准输出重定向到/dev/null,即丢弃标准输出
 #2>&1:
-#这部分将标准错误（文件描述符 2）重定向到标准输出（文件描述符 1）
-#由于标准输出已经被重定向到 /dev/null，这将意味着所有的错误信息也会被丢弃
-#这样，执行命令后，用户不会看到任何错误信息
+#这部分将标准错误(文件描述符2)重定向到标准输出(文件描述符1)
+#由于标准输出已经被重定向到/dev/null,这将意味着所有的错误信息也会被丢弃
+#这样,执行命令后,用户不会看到任何错误信息
 
-# 检查文件或目录是否在 Git 仓库管理下
-# 参数:文件或目录
+#检查文件或目录是否在Git仓库管理下
+#参数:文件或目录
 is_git_tracked() {
     git ls-files --error-unmatch "$1" >/dev/null 2>&1
     return $?
 }
 
 #git -C "$dir":
-#-C 用于在执行命令之前切换到指定的目录,这个选项可以让你在不改变当前工作目录的情况下，在指定目录执行 Git 命令
-#git -C 选项期望的是一个目录，而不是一个文件名。要获取某个文件所属的 Git 仓库的根目录，你需要给 git -C 提供文件所在的目录，而不是文件本身。具体来说，git -C 应该指向文件的父目录。
-#"$dir" 是你传递的一个目录，表示你想要在这个目录下运行后续的 Git 命令。
-#"$dir" 可能是绝对路径或相对路径。
+#-C 用于在执行命令之前切换到指定的目录,这个选项可以让你在不改变当前工作目录的情况下,在指定目录执行Git命令
+#git -C选项期望的是一个目录,而不是一个文件名,要获取某个文件所属的Git仓库的根目录,你需要给git -C提供文件所在的目录,而不是文件本身,具体来说,git -C应该指向文件的父目录
+#"$dir" 是你传递的一个目录,表示你想要在这个目录下运行后续的Git命令
+#"$dir" 可能是绝对路径或相对路径
 
 #rev-parse --show-toplevel:
-#rev-parse 是一个 Git 命令，用于解析 Git 的内部对象（如分支、提交哈希等），也可以用于检索一些 Git 仓库相关的信息
-#--show-toplevel 是 rev-parse 的一个选项，专门用于显示当前 Git 仓库的顶级目录（也就是 .git 文件夹所在的目录）
+#rev-parse 是一个Git命令,用于解析Git的内部对象(如分支、提交哈希等),也可以用于检索一些Git仓库相关的信息
+#--show-toplevel是rev-parse的一个选项,专门用于显示当前Git仓库的顶级目录(也就是.git文件夹所在的目录)
 
-#当你在一个 Git 仓库中的任意子目录下执行 git rev-parse --show-toplevel，Git 会向上查找，直到找到 .git 目录，这个路径即为仓库的根目录
-#如果指定目录（$dir）不在一个 Git 仓库内，git rev-parse --show-toplevel 会返回一个错误消息，比如 fatal: not a git repository。但由于我们将错误输出重定向到了 /dev/null，这些错误信息不会显示在终端中
+#当你在一个Git仓库中的任意子目录下执行git rev-parse --show-toplevel,Git会向上查找,直到找到.git目录,这个路径即为仓库的根目录
+#如果指定目录($dir)不在一个Git仓库内,git rev-parse --show-toplevel会返回一个错误消息,比如fatal:not a git repository,但由于我们将错误输出重定向到了/dev/null,这些错误信息不会显示在终端中
 
-# 获取source/dest所属的 Git 仓库的根目录,返回根目录路径；如果路径不在 Git 仓库内，返回空字符串
+#获取source/dest所属的Git仓库的根目录,返回根目录路径；如果路径不在Git仓库内,返回空字符串
 get_git_root() {
     local dir
 
@@ -61,7 +61,7 @@ get_git_root() {
     git -C "$dir" rev-parse --show-toplevel 2>/dev/null
 }
 
-# 要判断 source 和 dest 是否在同一个 Git 仓库内，可以通过检查它们各自的 Git 根目录是否相同
+#要判断source和dest是否在同一个Git仓库内,可以通过检查它们各自的Git根目录是否相同
 is_same_git_repo() {
     local source_git_root
     local dest_git_root
@@ -70,9 +70,9 @@ is_same_git_repo() {
     dest_git_root=$(get_git_root "$2")
 
     if [[ -n "$source_git_root" && "$source_git_root" == "$dest_git_root" ]]; then
-        return 0  # 同一个仓库
+        return 0  #同一个仓库
     else
-        return 1  # 不同的仓库
+        return 1  #不同的仓库
     fi
 }
 
@@ -124,16 +124,16 @@ is_dir() {
     fi
 }
 
-# 处理文件或目录移动
+#处理文件或目录移动
 move_item() {
     local source="$1"
     local dest="$2"
 
-    # 如果source是在 Git 管理下
+    #如果source是在Git管理下
     if is_git_tracked "$source"; then
-        # 判断 source 和 dest 是否属于同一个 Git 仓库
+        #判断source和dest是否属于同一个Git仓库
         if is_same_git_repo "$source" "$dest"; then
-            # 同一个 Git 仓库，使用 git mv
+            #同一个Git仓库,使用git mv
             git mv "$source" "$dest"
         else
             #dest不是source所在的Git仓库
@@ -141,12 +141,12 @@ move_item() {
             git rm -r "$source" >/dev/null
         fi
     else
-        # 如果source是在一个普通目录
+        #如果source是在一个普通目录
         mv "$source" "$dest"
     fi
 }
 
-# 脚本主逻辑
+#脚本主逻辑
 #参数数量
 params_count="$#"
 
@@ -157,7 +157,7 @@ if [[ "${params_count}" -lt 2 ]]; then
 fi
 
 #拆分参数
-#获取命令行参数中的最后一个参数，不涉及数组展开
+#获取命令行参数中的最后一个参数,不涉及数组展开
 dest="${!#}"
 sources=("${@:1:$#-1}")
 
@@ -177,10 +177,10 @@ fi
 #如果dest看起来像是一个目录的话
 looks_like_dir "${dest}" && create_dir "${dest}"
 
-#如果有多个source的话，那么dest肯定是一个目录
+#如果有多个source的话,那么dest肯定是一个目录
 if [[ "${params_count}" -gt 2 ]]; then create_dir "${dest}"; fi
 
-#如果只有一个source，并且dest后面没有/，并且dest也不存在，那么确保dest的父目录存在
+#如果只有一个source,并且dest后面没有/,并且dest也不存在,那么确保dest的父目录存在
 if [[ "${params_count}" -eq 2 ]]; then
     if ! looks_like_dir "${dest}"; then
         if [[ ! -e "${dest}" ]]; then
@@ -190,7 +190,7 @@ if [[ "${params_count}" -eq 2 ]]; then
     fi
 fi
 
-# 逐个move文件或目录
+#逐个move文件或目录
 for source in "${sources[@]}"; do
     #如果某一个source不存在的话
     if [[ ! -e "${source}" ]]; then
