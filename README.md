@@ -543,6 +543,11 @@ keep only the latest few files and delete the older ones<br>
 usage:<br>
 script.sh dir keep_num
 
+### [dir_is_equal.sh](dir_is_equal.sh):<br>
+判断两个目录是否相同<br>
+usage:<br>
+script.sh dir_1 dir2
+
 ### [dropbox_download_from_shared_link.sh](dropbox_download_from_shared_link.sh):<br>
 下载dropbox的共享链接
 
