@@ -59,12 +59,24 @@ main() {
     TMP2=$(mktemp)
     DIFF_FILE=$(mktemp)
 
+    #忽略的文件和目录数组
+    IGNORE_FILES=(
+        '.DS_Store'
+        #'Thumbs.db'
+        #'.git'
+    )
+
+    local exclude_args=()
+    for ignore in "${IGNORE_FILES[@]}"; do
+        exclude_args+=(! -name "$ignore")
+    done
+
     pushd "$DIR1" >/dev/null || exit 1
-    find . -type f | sort >"$TMP1"
+    find . -type f "${exclude_args[@]}" | sort >"$TMP1"
     popd >/dev/null || exit 1
 
     pushd "$DIR2" >/dev/null || exit 1
-    find . -type f | sort >"$TMP2"
+    find . -type f "${exclude_args[@]}" | sort >"$TMP2"
     popd >/dev/null || exit 1
 
     #1.处理只存在于$DIR1中的文件
