@@ -586,6 +586,11 @@ pick a mail address
 ### [print_env_path.sh](print_env_path.sh):<br>
 print $PATH
 
+### [ps_cpu.sh](ps_cpu.sh):<br>
+列出占用CPU最高的几个进程<br>
+usage:<br>
+script.sh
+
 ### [remove_suffix.sh](remove_suffix.sh):<br>
 移除文件的后缀名
 
