@@ -65,8 +65,6 @@ main() {
     poetry_modify_python_version.sh
     #创建虚拟环境
     poetry env use python
-    #删除.python-version文件
-    rm .python-version
     #创建.envrc文件
     poetry_create_envrc.sh
     direnv allow
