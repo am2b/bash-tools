@@ -54,13 +54,20 @@ main() {
         exit 1
     fi
 
+    #创建目录结构,以及pyproject.toml文件(不过还没有创建poetry.lock文件,需要等到poetry add package_name的时候才会创建poetry.lock文件)
     poetry new "${project_name}"
 
     cd "${project_name}" || exit 1
-    pyenv local "${python_version}"
-    poetry_modify_python_version.sh
-    poetry env use python
 
+    #生成.python-version文件
+    pyenv local "${python_version}"
+    #读取.python-version,然后修改pyproject.toml里面的python版本
+    poetry_modify_python_version.sh
+    #创建虚拟环境
+    poetry env use python
+    #删除.python-version文件
+    rm .python-version
+    #创建.envrc文件
     poetry_create_envrc.sh
     direnv allow
 
