@@ -59,6 +59,9 @@ main() {
 
     cd "${project_name}" || exit 1
 
+    #合并pyproject.toml中连续的空行
+    sed -i '/^$/N;/^\n$/D' pyproject.toml
+
     #生成.python-version文件
     pyenv local "${python_version}"
     #读取.python-version,然后修改pyproject.toml里面的python版本
