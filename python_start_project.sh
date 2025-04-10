@@ -66,7 +66,7 @@ main() {
     pyenv local "${python_version}"
     #读取.python-version,然后修改pyproject.toml里面的python版本
     poetry_modify_python_version.sh
-    #创建虚拟环境
+    #指定python解释权,同时也会创建虚拟环境
     poetry env use python
     #创建.envrc文件
     poetry_create_envrc.sh
