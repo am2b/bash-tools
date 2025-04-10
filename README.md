@@ -153,14 +153,14 @@ script.sh "some_string"
 在本地新建了一个仓库,添加了一些提交,然后把这些提交给push到远程的非空仓库
 
 ## git-reset:
-### [git_reset_HEAD.sh](git_reset_HEAD.sh):<br>
-重置本地的HEAD到某个提交(回退到git commit之前,git add之后)
+### [git_reset_HEAD_and_index_and_workingtree.sh](git_reset_HEAD_and_index_and_workingtree.sh):<br>
+重置本地的HEAD到某个提交,然后用该提交来填充index和working tree(回退到工作区被修改之前,注意:工作区所做的修改全部被丢弃了,如果有创建目录,那么目录还在但是被清空了)
 
 ### [git_reset_HEAD_and_index.sh](git_reset_HEAD_and_index.sh):<br>
 重置本地的HEAD到某个提交,然后用该提交来填充index(回退到git add之前,工作区被修改之后)
 
-### [git_reset_HEAD_and_index_and_workingtree.sh](git_reset_HEAD_and_index_and_workingtree.sh):<br>
-重置本地的HEAD到某个提交,然后用该提交来填充index和working tree(回退到工作区被修改之前,注意:工作区所做的修改全部被丢弃了,如果有创建目录,那么目录还在但是被清空了)
+### [git_reset_HEAD.sh](git_reset_HEAD.sh):<br>
+重置本地的HEAD到某个提交(回退到git commit之前,git add之后)
 
 ## git-stash:
 ### [git_stash_apply.sh](git_stash_apply.sh):<br>
@@ -175,11 +175,11 @@ script.sh "some_string"
 ### [git_stash_pop.sh](git_stash_pop.sh):<br>
 应用stash,然后删除栈上的条目
 
-### [git_stash_workingtree_and_index.sh](git_stash_workingtree_and_index.sh):<br>
-stash工作区的修改,和index的修改
-
 ### [git_stash_workingtree_and_index_and_untracked.sh](git_stash_workingtree_and_index_and_untracked.sh):<br>
 stash工作区的修改,index的修改和未被跟踪的修改,但是没有stash被ignore的文件
+
+### [git_stash_workingtree_and_index.sh](git_stash_workingtree_and_index.sh):<br>
+stash工作区的修改,和index的修改
 
 ## git-tag:
 ### [git_delete_tags.sh](git_delete_tags.sh):<br>
@@ -527,13 +527,13 @@ usage:script.sh file1.sh file2.py file3.txt ...
 ### [count_files.sh](count_files.sh):<br>
 报告当前目录下非隐藏文件,隐藏文件以及总文件数量
 
+### [create_layout_of_swift.sh](create_layout_of_swift.sh):<br>
+create layout of swift command line
+
 ### [create_LICENSE_MIT.sh](create_LICENSE_MIT.sh):<br>
 create a MIT license<br>
 usage:<br>
 script.sh github_name
-
-### [create_layout_of_swift.sh](create_layout_of_swift.sh):<br>
-create layout of swift command line
 
 ### [create_password.sh](create_password.sh):<br>
 合成密码后,存储于~/.password
@@ -627,6 +627,11 @@ smart rm
 ### [tar_gzip_folder_exclude_git.sh](tar_gzip_folder_exclude_git.sh):<br>
 tgz a folder but exclude .git and .DS_Store<br>
 usage:bash script_name.sh /path/to/directory
+
+### [test_connect_to_google.sh](test_connect_to_google.sh):<br>
+在命令行测试,是否可以连接到google<br>
+usage:<br>
+script.sh
 
 ### [tgz.sh](tgz.sh):<br>
 bring tar gzip zip and 7z together<br>
