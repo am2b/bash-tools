@@ -72,6 +72,18 @@ insert_enter_point() {
     mv "$temp_file" "$file"
 }
 
+touch_main() {
+    project_name="${1}"
+
+cat << EOF > "src/${project_name}/main.py"
+def run():
+    pass
+
+if __name__ == "__main__":
+    run()
+EOF
+}
+
 main() {
     check_parameters "${@}"
     process_opts "${@}"
@@ -116,6 +128,8 @@ main() {
 
     python_create_gitignore.sh
     create_LICENSE_MIT.sh am2b
+
+    touch_main "${project_name}"
 }
 
 main "${@}"
