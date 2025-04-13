@@ -33,6 +33,45 @@ check_parameters() {
     fi
 }
 
+insert_enter_point() {
+    local name="${1}"
+    local file="pyproject.toml"
+    local temp_file=$(mktemp)
+
+    #标记是否找到[tool.poetry]
+    local found_poetry=false
+
+    #标记是否插入了[tool.poetry.scripts]
+    local inserted_scripts=false
+
+    #逐行读取pyproject.toml并修改
+    while IFS= read -r line; do
+        if [[ $line == "[tool.poetry]" ]]; then
+            #若当前行是[tool.poetry],就把found_poetry标记设为true,同时将该行写入临时文件
+            found_poetry=true
+            echo "$line" >>"$temp_file"
+        elif $found_poetry && [[ -z $line ]] && ! $inserted_scripts; then
+            #当已经找到[tool.poetry],当前行是空行,并且还未插入[tool.poetry.scripts]时,执行以下操作:
+            #写入一个空行
+            #写入[tool.poetry.scripts]
+            #写入cli = "name_value.main:run",这里的name_value是之前读取到的name值
+            #再写入一个空行
+            #把inserted_scripts标记设为true
+            echo "" >>"$temp_file"
+            echo "[tool.poetry.scripts]" >>"$temp_file"
+            echo "cli = \"$name.main:run\"" >>"$temp_file"
+            echo "" >>"$temp_file"
+            inserted_scripts=true
+        else
+            #若不满足上述条件,就将当前行直接写入临时文件
+            echo "$line" >>"$temp_file"
+        fi
+    done <"$file"
+
+    # 将临时文件内容覆盖原文件
+    mv "$temp_file" "$file"
+}
+
 main() {
     check_parameters "${@}"
     process_opts "${@}"
@@ -58,6 +97,9 @@ main() {
     poetry new "${project_name}"
 
     cd "${project_name}" || exit 1
+
+    #插入命令行入口
+    insert_enter_point "${project_name}"
 
     #合并pyproject.toml中连续的空行
     sed -i '/^$/N;/^\n$/D' pyproject.toml
