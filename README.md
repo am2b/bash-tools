@@ -334,6 +334,11 @@ usage:<br>
 totp.sh "totp_uri"
 
 ## python:
+### [create_shell_for_python_tool.sh](create_shell_for_python_tool.sh):<br>
+为python命令行程序创建一个外壳bash脚本,来以便捷的方式运行python工具<br>
+usage:<br>
+script.sh python_project_name
+
 ### [pip_clear_installed.sh](pip_clear_installed.sh):<br>
 uninstall python packages,but do not delete requirements.txt
 
