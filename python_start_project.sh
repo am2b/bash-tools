@@ -72,10 +72,19 @@ insert_enter_point() {
     mv "$temp_file" "$file"
 }
 
+insert_custom_info() {
+    local file="pyproject.toml"
+    local info="${1}"
+
+    echo >> "${file}"
+    echo "[custom-info]" >> "${file}"
+    echo "${info}" >> "${file}"
+}
+
 touch_main() {
     project_name="${1}"
 
-cat << EOF > "src/${project_name}/main.py"
+    cat <<EOF >"src/${project_name}/main.py"
 def run():
     pass
 
@@ -112,6 +121,9 @@ main() {
 
     #插入命令行入口
     insert_enter_point "${project_name}"
+
+    #插入个性化信息
+    insert_custom_info 'how_to_run = "bash script"'
 
     #合并pyproject.toml中连续的空行
     sed -i '/^$/N;/^\n$/D' pyproject.toml
