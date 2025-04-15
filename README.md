@@ -398,6 +398,7 @@ usage:source script.sh
 ### [python_sort_imports.sh](python_sort_imports.sh):<br>
 sort import statements of python<br>
 usage:<br>
+注意:没有递归<br>
 一个脚本文件:<br>
 sort_python_import.sh source.py<br>
 多个脚本文件:<br>
