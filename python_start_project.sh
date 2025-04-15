@@ -139,7 +139,7 @@ main() {
     direnv allow
 
     #安装autopep8,pycodestyle
-    poetry add autopep8
+    poetry add --dev autopep8
 
     python_create_gitignore.sh
     create_LICENSE_MIT.sh am2b
