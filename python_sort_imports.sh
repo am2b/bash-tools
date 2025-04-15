@@ -69,14 +69,16 @@ main() {
             fi
         elif [ -d "${arg}" ]; then
             files_in_dir=()
+            #使用fd命令来查找该目录下的所有python文件(--extension py),并将找到的文件添加到files数组中
+            #--exact-depth 1:没有递归目录
             #注意:这里不要用双引号把${recursive},${extension}给括起来
-            #--exact-depth:没有递归目录
             mapfile -t files_in_dir < <(fd --exact-depth 1 --type f --extension py --glob '*' "${arg}")
             files+=("${files_in_dir[@]}")
         fi
     done
 
     for file in "${files[@]}"; do
+        #isort是一个python文件的导入排序工具,--only-modified表示只格式化修改过的部分
         isort --only-modified --quiet "${file}"
 
         #s/^\s+$//:将只包含空白字符的行替换为空
