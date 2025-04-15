@@ -339,6 +339,11 @@ totp.sh "totp_uri"
 usage:<br>
 script.sh python_project_name
 
+### [create_shells_for_python_tools.sh](create_shells_for_python_tools.sh):<br>
+为python命令行程序批量创建可执行的外壳bash脚本<br>
+usage:<br>
+script.sh
+
 ### [pip_clear_installed.sh](pip_clear_installed.sh):<br>
 uninstall python packages,but do not delete requirements.txt
 
@@ -504,7 +509,9 @@ script.sh files
 附近:在附近(向上至\~或者/,向下受fd命令的--max-results选项限制,以及每个祖先的兄弟目录)跳转:
 
 ### [change_dir_to_marker.sh](change_dir_to_marker.sh):<br>
-cd to marker,which located in ~/.marker_dirs
+cd to marker,which located in ~/.marker_dirs<br>
+usage:<br>
+source script.sh marker
 
 ### [chinese_characters_to_pinyin.sh](chinese_characters_to_pinyin.sh):<br>
 将汉字转换为拼音,或拼音的首字母<br>
