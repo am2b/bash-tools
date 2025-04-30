@@ -2,17 +2,18 @@
 
 #=libs
 #@解析命令行参数
-#@"ab.c:d;"
+#@'ab.c:d;'
 #@a后没有符号,那么a为bool选项
 #@b后跟一个点号,那么b有零个或一个参数值
 #@c后跟一个冒号,那么b有一个参数值
 #@d后跟一个分号,那么d有一个或多个参数值
 #@usage:
-#@parse_options "option string" "${@}"
+#@parse_options 'option string' "${@}"
 #@set -- "${SCRIPT_ARGUMENTS[@]}"
 #@shift "${SHIFT_VALUE}"
 #@选项参数:OPTIONS[opt]
 #@位置参数:"${@}"
+
 parse_options() {
     if [[ "$#" -lt 2 ]]; then
         echo "usage:parse_options option_string -options option_values --[or ,] position_values"
