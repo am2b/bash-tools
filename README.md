@@ -587,9 +587,6 @@ list the top three apps that take up the most memory
 ### [new_script.sh](new_script.sh):<br>
 create a new script
 
-### [pick_mail.sh](pick_mail.sh):<br>
-pick a mail address
-
 ### [print_env_path.sh](print_env_path.sh):<br>
 print $PATH
 
