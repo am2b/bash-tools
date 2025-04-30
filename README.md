@@ -15,9 +15,6 @@ find aliases for a command<br>
 usage:<br>
 script.sh command_name or alias_name
 
-### [open_perl_doc_with_nvim.sh](open_perl_doc_with_nvim.sh):<br>
-open perl doc with nvim -R
-
 ### [print_os_info.sh](print_os_info.sh):<br>
 print os info
 
@@ -248,9 +245,6 @@ usage:<br>
 script.sh
 
 ## install:
-### [install_perl_package.sh](install_perl_package.sh):<br>
-安装perl的常用库
-
 ## libs:
 ### [getoptions.sh](getoptions.sh):<br>
 解析命令行参数<br>
