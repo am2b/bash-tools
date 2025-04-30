@@ -39,10 +39,10 @@ list:
 tgz.sh -l archive.tar[.tar.gz|.tgz | .zip | .7z | .tar.7z |.t7z]
 
 extract the files to current dir
-tgz.sh -e archive.tar[.tar.gz|.tgz | .zip | .7z | .tar.7z |.t7z] -p "password"
+tgz.sh -e archive.tar[.tar.gz|.tgz | .zip | .7z | .tar.7z |.t7z] -p 'password'
 
 extract the files to the specified dir
-tgz.sh -e archive.tar[.tar.gz|.tgz | .zip | .7z | .tar.7z |.t7z] -d dir -p "password"
+tgz.sh -e archive.tar[.tar.gz|.tgz | .zip | .7z | .tar.7z |.t7z] -d dir -p 'password'
 EOF
 }
 
@@ -110,14 +110,15 @@ parse_options() {
         p="${p// /${SPACE_REPLACEMENT}}"
         parameters+=("$p")
     done
+    #这里注释的原因:密码可能包含,
     #确保,和--周围有且仅有一个空格
-    local parameters_string="${parameters[*]}"
-    if [[ "${parameters_string}" =~ "--" ]] || [[ "${parameters_string}" =~ "," ]]; then
-        parameters_string=$(echo "$parameters_string" | sed -E 's/ *, */ , /g; s/ *-- */ -- /g')
-    fi
+    #local parameters_string="${parameters[*]}"
+    #if [[ "${parameters_string}" =~ "--" ]] || [[ "${parameters_string}" =~ "," ]]; then
+    #    parameters_string=$(echo "$parameters_string" | sed -E 's/ *, */ , /g; s/ *-- */ -- /g')
+    #fi
     #把字符串转换为普通数组
-    IFS=' ' read -r -a parameters <<<"$parameters_string"
-    unset IFS
+    #IFS=' ' read -r -a parameters <<<"$parameters_string"
+    #unset IFS
     #再把SPACE_REPLACEMENT替换为相应数量的空格
     for p in "${parameters[@]}"; do
         if [[ "$p" == *"${SPACE_REPLACEMENT}"* ]]; then
@@ -232,7 +233,7 @@ parse_options() {
     done
 }
 
-parse_options "c:p:l;e;d:vh" "${@}"
+parse_options 'c:p:l;e;d:vh' "${@}"
 set -- "${SCRIPT_ARGUMENTS[@]}"
 shift "${SHIFT_VALUE}"
 
@@ -385,17 +386,16 @@ function extract() {
         fi
     elif [[ "$ext" == "${ext_7z}" ]]; then
         local output
-        output=$(7z x -p"${password}" "$archive_name" 2>&1)
+        if [[ -n "${dir}" ]]; then
+            output=$(7z x -p"${password}" -o"${dir}" "$archive_name" 2>&1)
+        else
+            output=$(7z x -p"${password}" "$archive_name" 2>&1)
+        fi
+
         if echo "$output" | grep -iq "wrong password"; then
             #打印包含"wrong password"的行
             echo "$output" | grep -i "wrong password"
             exit 1
-        fi
-
-        if [[ -n "${dir}" ]]; then
-            7z x -p"${password}" -o"${dir}" "$archive_name" &>/dev/null
-        else
-            7z x -p"${password}" "$archive_name" &>/dev/null
         fi
     elif [[ "$ext" == "${ext_tar_7z}" ]] || [[ "$ext" == "${ext_t7z}" ]]; then
         local output
