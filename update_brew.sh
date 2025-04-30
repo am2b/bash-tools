@@ -1,25 +1,60 @@
 #!/usr/bin/env bash
 
 #=tools
-#@更新通过homebrew安装的包,但是除了perl
+#@更新通过homebrew安装的包,包括Cask软件包
+#@usage:
+#@script.sh
 
-#update all package definitions and homebrew itself:
-brew update
+usage() {
+    local script
+    script=$(basename "$0")
+    echo "usage:"
+    echo "$script"
+    exit 1
+}
 
-echo
+process_opts() {
+    while getopts ":h" opt; do
+        case $opt in
+        h)
+            usage
+            ;;
+        *)
+            echo "error:unsupported option -$opt"
+            usage
+            ;;
+        esac
+    done
+}
 
-#在/tmp生成一个临时文件,用于存放outdated的包名字,每行一个包名字
-outdated_file=$(mktemp -t outdated.XXXXXX)
-#填充该文件
-brew outdated > "${outdated_file}"
+check_parameters() {
+    if (("$#" > 0)); then
+        usage
+    fi
+}
 
-#读取该文件
-mapfile -t outdated_array < "${outdated_file}"
-for package_name in "${outdated_array[@]}"; do
-    #不更新perl
-    if [[ "${package_name}" == 'perl' ]]; then
-        continue
+main() {
+    check_parameters "${@}"
+    process_opts "${@}"
+    shift $((OPTIND - 1))
+
+    brew update
+
+    #更新普通包
+    echo "----------------------------------------"
+    brew upgrade
+
+    #更新Cask软件包
+    #管道符|仅捕获stdout内容
+    outdated_casks=$(brew outdated --cask --verbose | awk '{print $1}')
+    if [[ -n "${outdated_casks}" ]]; then
+        echo "----------------------------------------"
+        for app in ${outdated_casks}; do
+            brew upgrade --cask "${app}"
+        done
     fi
 
-    brew upgrade "${package_name}"
-done
+    brew cleanup
+}
+
+main "${@}"

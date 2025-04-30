@@ -645,7 +645,9 @@ bring tar gzip zip and 7z together<br>
 usage:tgz.sh -h
 
 ### [update_brew.sh](update_brew.sh):<br>
-更新通过homebrew安装的包,但是除了perl
+更新通过homebrew安装的包,包括Cask软件包<br>
+usage:<br>
+script.sh
 
 ### [zip_folder_exclude_git.sh](zip_folder_exclude_git.sh):<br>
 zip a folder but exclude .git and .DS_Store<br>
