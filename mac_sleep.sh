@@ -65,6 +65,8 @@ main() {
         sleep 1
     fi
 
+    sleep 2
+
     #使用osascript触发macOS的锁屏快捷键(ctrl + cmd + q)
     #osascript -e 'tell application "System Events" to key code 12 using {control down, command down}'
 
