@@ -581,6 +581,14 @@ directory jump through fuzzy matching<br>
 usage:<br>
 fuzzy_jump.sh pattern1 pattern2 ...
 
+### [generate_a_random_filename.sh](generate_a_random_filename.sh):<br>
+生成一个随机的文件名,包含:小写字母,数字,_和-<br>
+开头的第一个字符仅为字母,最后一个字符仅为字母或数字<br>
+默认长度为10,也可以通过参数指定<br>
+usage:<br>
+script.sh<br>
+script.sh len
+
 ### [iina_rename_screenshots.sh](iina_rename_screenshots.sh):<br>
 如果iina的截图文件名称存在不连续的"坑洞"的话,重新命名,并且保证顺序性<br>
 请确保iina的截图目录下仅存在"一集"的截图,无法适配同时存在"多集"截图的情况<br>
