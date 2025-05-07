@@ -248,13 +248,13 @@ script.sh
 ## libs:
 ### [getoptions.sh](getoptions.sh):<br>
 解析命令行参数<br>
-"ab.c:d;"<br>
+'ab.c:d;'<br>
 a后没有符号,那么a为bool选项<br>
 b后跟一个点号,那么b有零个或一个参数值<br>
 c后跟一个冒号,那么b有一个参数值<br>
 d后跟一个分号,那么d有一个或多个参数值<br>
 usage:<br>
-parse_options "option string" "${@}"<br>
+parse_options 'option string' "${@}"<br>
 set -- "${SCRIPT_ARGUMENTS[@]}"<br>
 shift "${SHIFT_VALUE}"<br>
 选项参数:OPTIONS[opt]<br>
@@ -580,6 +580,15 @@ source fuzzy_find_git_tools.sh
 directory jump through fuzzy matching<br>
 usage:<br>
 fuzzy_jump.sh pattern1 pattern2 ...
+
+### [iina_rename_screenshots.sh](iina_rename_screenshots.sh):<br>
+如果iina的截图文件名称存在不连续的"坑洞"的话,重新命名,并且保证顺序性<br>
+请确保iina的截图目录下仅存在"一集"的截图,无法适配同时存在"多集"截图的情况<br>
+默认处理png格式的截图(iina截图默认)<br>
+确保文件名中至少包含一个'-'符号(iina截图默认)<br>
+最后一个'-'后的部分必须是纯数字(允许前导零)(iina截图默认)<br>
+usage:<br>
+script.sh
 
 ### [list_most_memory_apps.sh](list_most_memory_apps.sh):<br>
 list the top three apps that take up the most memory
