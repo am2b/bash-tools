@@ -306,6 +306,25 @@ backup photo library on mac<br>
 usage:<br>
 nohup script.sh > /tmp/photo.log 2>&1 &
 
+### [pack_sisters.sh](pack_sisters.sh):<br>
+分别打包给定目录下的每个视频文件<br>
+如果有字幕文件的话,会把字幕和视频打包到一个包里面<br>
+打包后的文件和源文件在同一个目录下<br>
+无法将video-01.mp4和video-02.mp4打包到同一个包里面,所以遇到这种情况请手动打包<br>
+usage:<br>
+script.sh dir
+
+### [sisters.sh](sisters.sh):<br>
+把pack_sisters.sh和unpack_sisters.sh这两个脚本连接起来<br>
+usage:<br>
+script.sh dir<br>
+run_in_background script.sh dir
+
+### [unpack_sisters.sh](unpack_sisters.sh):<br>
+解压给定目录下的每个7z文件到参数所指定的目录<br>
+usage:<br>
+script.sh dir_from dir_to
+
 ## password:
 ### [keychain.sh](keychain.sh):<br>
 add,update,delete password in keychain<br>
