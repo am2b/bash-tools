@@ -56,6 +56,10 @@ main() {
     process_opts "${@}"
     shift $((OPTIND - 1))
 
+    #如果source_count大于1,那么就说明最后一个参数肯定是是一个目录
+    #注意:计算的时候留空格,这是bash原生整数计算方式(可以避免子shell)
+    source_count=$(( $# - 1 ))
+
     #提取目标
     dest="${@: -1}"
 
@@ -63,7 +67,7 @@ main() {
     last_char="${dest: -1}"
 
     #判断最后一个字符是否为"/"
-    if [[ "$last_char" == "/" ]]; then
+    if [[ "$last_char" == "/" ]] || (( "${source_count}" > 1 )); then
         if [[ ! -d "${dest}" ]]; then
             mkdir -p "$dest" || {
                 echo "创建目标路径失败"
