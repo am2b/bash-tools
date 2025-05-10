@@ -108,10 +108,6 @@ main() {
 
     echo "验证完毕,完全一致"
 
-    #清空解压后的文件
-    cd ..
-    #rm -rf "${dir_to}"
-
     #发送通知
     osascript -e 'display notification "验证完毕,完全一致" with title "解压完成" sound name "Glass"'
 }

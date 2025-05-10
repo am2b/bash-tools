@@ -196,10 +196,17 @@ main() {
 
     #最后存储7z文件的目录
     local storage_dir
-    storage_dir="${sisters_dir}-"$(generate_random_name)
+    local random_name
+    random_name=$(generate_random_name)
+    storage_dir="${sisters_dir}-${random_name}"
     mkdir -p "${storage_dir}"
     mv ./*.7z "${storage_dir}"
-    mv "${record_file}" "${storage_dir}"
+    #让txt文件也包含目录的random_name
+    local record_file_basename
+    local new_record_file_name
+    record_file_basename="${record_file%.*}"
+    new_record_file_name="${record_file_basename}-${random_name}.txt"
+    mv "${record_file}" "${storage_dir}/${new_record_file_name}"
 
     #将storage_dir存储起来,以便于可以在打包完成后自动解压,验证
     local pack_sisters_data_dir="${XDG_DATA_HOME:-$HOME/.local/share}/pack_sisters"
