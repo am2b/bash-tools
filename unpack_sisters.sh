@@ -57,7 +57,14 @@ main() {
     #解压到的目录
     local dir_to
     dir_to=$(realpath "${2:-/Volumes/T7/解压后}")
-    mkdir -p "${dir_to}"
+    if [[ ! -d "${dir_to}" ]]; then
+        mkdir -p "${dir_to}"
+    fi
+    #如果目录非空,则清空
+    if [ -n "$(find "$dir_to" -mindepth 1 -print -quit)" ]; then
+        #使用find命令安全删除所有内容(包括隐藏文件和子目录)
+        find "$dir_to" -mindepth 1 -exec rm -rf {} +
+    fi
 
     #密码
     local password
