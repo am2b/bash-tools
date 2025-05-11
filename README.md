@@ -649,6 +649,11 @@ script.sh /directory/to/save/
 usage:<br>
 send_mail.sh "subject" "body" recipient
 
+### [sha256.sh](sha256.sh):<br>
+计算参数所指定的文件的sha256值<br>
+usage:<br>
+script.sh file
+
 ### [simulate_command_c.sh](simulate_command_c.sh):<br>
 like command+c(or ctrl+c) for files and dirs
 
