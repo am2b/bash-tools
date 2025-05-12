@@ -282,6 +282,13 @@ usage:<br>
 script.sh
 
 ## pack:
+### [my7z.sh](my7z.sh):<br>
+对7z打包操作的一个包装<br>
+注意:密码文件为./password[.txt]或./pass[.txt]或./pd[.txt]<br>
+注意:没有解包功能,解包命令:7z x pack.7z或者x pack.7z<br>
+usage:<br>
+script.sh files... dirs...
+
 ### [mytar.sh](mytar.sh):<br>
 对tar打包操作的一个包装<br>
 注意:没有解包功能,解包命令:tar -xvf pack.tar或者x pack.tar<br>
