@@ -282,6 +282,12 @@ usage:<br>
 script.sh
 
 ## pack:
+### [mytar.sh](mytar.sh):<br>
+对tar打包操作的一个包装<br>
+注意:没有解包功能,解包命令:tar -xvf pack.tar或者x pack.tar<br>
+usage:<br>
+script.sh files... dirs...
+
 ### [pack_local_origin_repository.sh](pack_local_origin_repository.sh):<br>
 backup local origin repository<br>
 usage:<br>
