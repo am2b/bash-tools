@@ -294,6 +294,12 @@ script.sh files... dirs...
 usage:<br>
 script.sh files... dirs...
 
+### [myzip.sh](myzip.sh):<br>
+对zip打包操作的一个包装<br>
+注意:没有解包功能,解包命令:unzip pack.zip或者x pack.zip<br>
+usage:<br>
+script.sh files... dirs...
+
 ### [pack_local_origin_repository.sh](pack_local_origin_repository.sh):<br>
 backup local origin repository<br>
 usage:<br>
