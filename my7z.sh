@@ -88,7 +88,7 @@ main() {
         password_file="$line"
         break
     done < <(find . -maxdepth 1 -type f \( -name "password" -o -name "password.txt" -o -name "pass" -o -name "pass.txt" -o -name "pd" -o -name "pd.txt" \))
-    if [[ -n "$password_file" ]]; then
+    if [[ -f "$password_file" ]]; then
         chmod 600 "${password_file}"
         password=$(<"${password_file}")
     fi
@@ -118,6 +118,16 @@ main() {
     if [[ "${script_current_dir}" != "${cmd_line_dir}" ]]; then
         mv "${pack_name}" "${cmd_line_dir}"
     fi
+
+    if [[ -f "$password_file" ]]; then
+        read -r -n 1 -p "是否要删除 '$password_file'？y/N " answer
+        echo
+        #使用${answer^^}将输入转换为大写,统一处理大小写差异
+        if [[ "${answer^^}" == 'Y' ]]; then
+            rm "${password_file}"
+        fi
+    fi
+
 }
 
 main "${@}"
