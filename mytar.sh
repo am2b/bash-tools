@@ -91,7 +91,7 @@ main() {
 
     echo "正在打包:${pack_name}"
     #这里不能直接用$@,而应该用其basename
-    tar -cvf "${pack_name}" "${basenames[@]}"
+    tar --exclude='.DS_Store' --exclude='.git' -cvf "${pack_name}" "${basenames[@]}"
 
     #脚本内部的路径
     local script_current_dir
