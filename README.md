@@ -288,6 +288,12 @@ script.sh
 usage:<br>
 script.sh files... dirs...
 
+### [mytgz.sh](mytgz.sh):<br>
+对tar,gzip打包操作的一个包装<br>
+注意:没有解包功能,解包命令:tar -xzvf pack.tar.gz或者x pack.tar.gz<br>
+usage:<br>
+script.sh files... dirs...
+
 ### [pack_local_origin_repository.sh](pack_local_origin_repository.sh):<br>
 backup local origin repository<br>
 usage:<br>
