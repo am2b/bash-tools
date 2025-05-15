@@ -656,6 +656,11 @@ script.sh
 ### [list_most_memory_apps.sh](list_most_memory_apps.sh):<br>
 list the top three apps that take up the most memory
 
+### [mac_clean.sh](mac_clean.sh):<br>
+清理mac的系统数据<br>
+usage:<br>
+script.sh
+
 ### [new_script.sh](new_script.sh):<br>
 create a new script
 
