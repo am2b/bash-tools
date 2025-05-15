@@ -594,6 +594,12 @@ script.sh github_name
 ### [create_password.sh](create_password.sh):<br>
 合成密码后,存储于~/.password
 
+### [date_calculator.sh](date_calculator.sh):<br>
+计算相对于基准日期(默认为当天)的过去/未来日期<br>
+usage:<br>
+script.sh [+]/-天数<br>
+script.sh [+]/-天数 基准日期(YYYY-MM-DD)
+
 ### [delete_old_files.sh](delete_old_files.sh):<br>
 keep only the latest few files and delete the older ones<br>
 usage:<br>
