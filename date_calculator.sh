@@ -21,14 +21,38 @@ check_parameters() {
     fi
 }
 
+is_gnu_command() {
+    local cmd="$1"
+    local path
+
+    if ! path=$(command -v "$cmd"); then
+        echo "Command not found:$cmd" >&2
+        return 2
+    fi
+
+    if "$path" --version 2>/dev/null | grep -q "GNU"; then
+        echo "GNU"
+        return 0
+    fi
+
+    if command -v strings >/dev/null; then
+        if strings "$path" 2>/dev/null | grep -qi "GNU"; then
+            echo "GNU"
+            return 0
+        fi
+    fi
+
+    echo "BSD"
+    return 1
+}
+
 calculate_date() {
     local days=$1
     #默认使用当天
     local base_date=${2:-$(date +%F)}
 
-    #GNU date会输出版本信息(退出状态0),BSD date会报错(非0状态)
     #GNU date
-    if date --version &>/dev/null; then
+    if is_gnu_command date >/dev/null; then
         #-d:指定输入日期字符串
         #+%F:%Y-%m-%d
         date -d "$base_date $days days" +%F
