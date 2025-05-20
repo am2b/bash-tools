@@ -39,7 +39,13 @@ main() {
     process_opts "${@}"
     shift $((OPTIND - 1))
 
-    rm -rf "$HOME/Library/Caches/*"
+    #~/Library/Caches/tealdeer
+    #rm -rf "$HOME/Library/Caches/*"
+
+    local PASTEBOARD_ARCHIVES_DIR="$HOME/Library/Group Containers/group.com.apple.coreservices.useractivityd/shared-pasteboard/archives"
+
+    cd "${PASTEBOARD_ARCHIVES_DIR}" || { echo "error:cd ${PASTEBOARD_ARCHIVES_DIR} failed"; exit 1; }
+    rm -rf ./*
 }
 
 main "${@}"
