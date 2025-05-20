@@ -565,6 +565,11 @@ script.sh 汉字<br>
 转换为拼音的首字母:<br>
 script.sh -f 汉字
 
+### [clear_clipboard.sh](clear_clipboard.sh):<br>
+clear pbcopy<br>
+usage:<br>
+script.sh
+
 ### [clear_subdirectory.sh](clear_subdirectory.sh):<br>
 快速清空参数所给的子目录
 
