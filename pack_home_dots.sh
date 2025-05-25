@@ -40,7 +40,6 @@ main() {
     shift $((OPTIND - 1))
 
     #保存的位置
-    #TIMESTAMP=$(date +"%Y-%m-%d")
     TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
     local save_dir="${HOME}/save-home-dots-${TIMESTAMP}"
     mkdir -p "${save_dir}"
@@ -61,13 +60,19 @@ main() {
 
     #分别打包每个目录
     for dir in "${dirs[@]}"; do
+        #如果目录不存在
+        if ! [ -d "${dir}" ]; then
+            continue
+        fi
+
         #如果目录是空的
         #-mindepth 1:忽略自身
         #-print -quit:一旦找到一个内容就退出(高效)
         #-z:如果find没有输出,则说明目录是空的
-        if [[ -d "$dir" && -z $(find "$dir" -mindepth 1 -print -quit) ]]; then
+        if [[ -z $(find "$dir" -mindepth 1 -print -quit) ]]; then
             continue
         fi
+
         pack_name="${dir#.}.tar.gz"
         #排除socket和.lock文件
         #--null:告诉tar以null字符分隔读取文件名
@@ -79,7 +84,15 @@ main() {
 
     #整体打包所有的文件
     pack_name=files.tar.gz
-    tar -czf "${pack_name}" "${files[@]}"
+    #以防止有的文件不存在了
+    declare -a real_files
+    for file in "${files[@]}"; do
+        if ! [ -f "${file}" ]; then
+            continue
+        fi
+        real_files+=("${file}")
+    done
+    tar -czf "${pack_name}" "${real_files[@]}"
     mv "${pack_name}" "${save_dir}"
 
     #密码
