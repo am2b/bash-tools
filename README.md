@@ -287,6 +287,11 @@ create .nvmrc and .envrc in the current dir<br>
 usage:<br>
 script.sh 23.11.1
 
+### [update_nvm.sh](update_nvm.sh):<br>
+update nvm<br>
+usage:<br>
+script.sh
+
 ## pack:
 ### [my7z.sh](my7z.sh):<br>
 对7z打包操作的一个包装<br>
