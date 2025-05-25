@@ -321,7 +321,7 @@ script.sh files... dirs...
 ### [pack_home_dots.sh](pack_home_dots.sh):<br>
 打包HOME目录下的一些隐藏文件<br>
 usage:<br>
-script.sh
+nohup script.sh > /tmp/pack_home_dots.log 2>&1 &
 
 ### [pack_local_origin_repository.sh](pack_local_origin_repository.sh):<br>
 backup local origin repository<br>
