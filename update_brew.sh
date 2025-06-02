@@ -69,6 +69,15 @@ main() {
     else
         echo "$output"
     fi
+
+    #更新oh my zsh
+    echo "----------------------------------------"
+    output=$(omz update)
+    if echo "$output" | grep -q "error"; then
+        echo "${output}"
+    else
+        echo "Oh My Zsh has been updated"
+    fi
 }
 
 main "${@}"
