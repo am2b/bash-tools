@@ -57,9 +57,18 @@ main() {
     echo "----------------------------------------"
     brew cleanup
 
+    #更新nvm
+    echo "----------------------------------------"
+    update_nvm.sh
+
     #更新rust
     echo "----------------------------------------"
-    rustup update
+    output=$(rustup update)
+    if echo "$output" | grep -q "unchanged"; then
+        echo "rust已是最新版本,无需更新"
+    else
+        echo "$output"
+    fi
 }
 
 main "${@}"
