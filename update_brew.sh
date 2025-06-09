@@ -72,11 +72,16 @@ main() {
 
     #更新oh my zsh
     echo "----------------------------------------"
-    output=$(omz update)
-    if echo "$output" | grep -q "error"; then
-        echo "${output}"
+    if [ -f "$HOME/.oh-my-zsh/tools/upgrade.sh" ]; then
+        output=$(zsh "$HOME/.oh-my-zsh/tools/upgrade.sh" 2>&1)
+
+        if echo "$output" | grep -q "error"; then
+            echo "${output}"
+        else
+            echo "Oh My Zsh has been updated"
+        fi
     else
-        echo "Oh My Zsh has been updated"
+        echo "Oh My Zsh未安装或路径不正确"
     fi
 }
 
