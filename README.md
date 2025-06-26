@@ -660,6 +660,11 @@ usage:<br>
 script.sh<br>
 script.sh len
 
+### [get_app_name.sh](get_app_name.sh):<br>
+获取当前app的名字<br>
+usage:<br>
+script.sh
+
 ### [iina_rename_screenshots.sh](iina_rename_screenshots.sh):<br>
 如果iina的截图文件名称存在不连续的"坑洞"的话,重新命名,并且保证顺序性<br>
 请确保iina的截图目录下仅存在"一集"的截图,无法适配同时存在"多集"截图的情况<br>
