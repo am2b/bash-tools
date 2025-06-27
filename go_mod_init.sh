@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #=go
-#@go mod init
+#@go mod init(仅生成go.mod文件,没有创建目录结构)
 #@usage:
 #@-l:local
 #@cd project_root_dir && script.sh [-l]

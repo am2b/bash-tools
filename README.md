@@ -217,7 +217,7 @@ add的逆操作,恢复到add之前的状态
 列出安装在$GOPATH/bin/的工具
 
 ### [go_mod_init.sh](go_mod_init.sh):<br>
-go mod init<br>
+go mod init(仅生成go.mod文件,没有创建目录结构)<br>
 usage:<br>
 -l:local<br>
 cd project_root_dir && script.sh [-l]
