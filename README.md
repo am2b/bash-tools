@@ -587,6 +587,11 @@ script.sh
 ### [clear_tmp.sh](clear_tmp.sh):<br>
 clear $HOME/tmp
 
+### [collect_files_in_subdirectories.sh](collect_files_in_subdirectories.sh):<br>
+移动子目录里面的所有文件到参数所指定的目录,然后删除空的子目录<br>
+usage:<br>
+script.sh dir
+
 ### [compare_dirs.sh](compare_dirs.sh):<br>
 compare two dirs<br>
 usage:<br>
