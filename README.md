@@ -328,6 +328,11 @@ backup local origin repository<br>
 usage:<br>
 script.sh
 
+### [pack_music_library.sh](pack_music_library.sh):<br>
+backup music library on mac<br>
+usage:<br>
+nohup script.sh > /tmp/music.log 2>&1 &
+
 ### [pack_notes_database.sh](pack_notes_database.sh):<br>
 backup notes database on mac<br>
 usage:<br>
