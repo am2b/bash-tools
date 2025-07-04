@@ -47,4 +47,4 @@ fi
 
 # 删除本地分支
 #echo "deleting local branch '$branch'"
-git branch --delete "$branch" || { echo "error:failed to delete local branch '$branch'.it might be unmerged"; exit 1; }
+git branch --delete "$branch" || exit 1
