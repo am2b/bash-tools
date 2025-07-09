@@ -213,6 +213,11 @@ add.sh:添加文件到git仓库<br>
 add的逆操作,恢复到add之前的状态
 
 ## go:
+### [go_add_new_tool.sh](go_add_new_tool.sh):<br>
+在~/repos/go-tools/tools/目录下新建一个工具<br>
+usage:<br>
+script.sh tool_name
+
 ### [go_list_installed_command_line_tools.sh](go_list_installed_command_line_tools.sh):<br>
 列出安装在$GOPATH/bin/的工具
 
