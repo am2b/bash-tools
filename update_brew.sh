@@ -83,6 +83,15 @@ main() {
     else
         echo "Oh My Zsh未安装或路径不正确"
     fi
+
+    #更新tldr
+    echo "----------------------------------------"
+    output=$(tldr --update)
+    if echo "${output}" | grep -iq "successfully"; then
+        echo "tldr已更新"
+    else
+        echo "${output}"
+    fi
 }
 
 main "${@}"
