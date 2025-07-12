@@ -159,6 +159,16 @@ script.sh "some_string"
 ### [git_reset_HEAD.sh](git_reset_HEAD.sh):<br>
 重置本地的HEAD到某个提交(回退到git commit之前,git add之后)
 
+## git-revert:
+### [git_revert.sh](git_revert.sh):<br>
+反转指定提交的更改(适用于本地和远程)<br>
+当提交已经被push到远程仓库后,又不想要某个提交了<br>
+usage:<br>
+script.sh HEAD(撤销刚才的提交)<br>
+script.sh commit/HEAD~2(上上次提交)<br>
+如果存在冲突,那么解决完冲突后:git revert --continue<br>
+如果中途要放弃:git revert --abort
+
 ## git-stash:
 ### [git_stash_apply.sh](git_stash_apply.sh):<br>
 应用stash，但是不删除栈上的条目
