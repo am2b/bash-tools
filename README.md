@@ -702,6 +702,16 @@ script.sh
 ### [list_most_memory_apps.sh](list_most_memory_apps.sh):<br>
 list the top three apps that take up the most memory
 
+### [list_symlink.sh](list_symlink.sh):<br>
+list symbolic link<br>
+usage:<br>
+list all symbolic link:<br>
+script.sh [--all] [path]<br>
+list non-hidden symbolic link:<br>
+script.sh --non-hidden [path]<br>
+list hidden symbolic link:<br>
+script.sh --hidden [path]
+
 ### [mac_clean.sh](mac_clean.sh):<br>
 清理mac的系统数据<br>
 usage:<br>
