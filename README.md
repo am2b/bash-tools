@@ -237,6 +237,12 @@ usage:<br>
 -l:local<br>
 cd project_root_dir && script.sh [-l]
 
+### [go_run_build.sh](go_run_build.sh):<br>
+在go项目的任意目录run/build,支持多个'package main'<br>
+usage:<br>
+script.sh -h<br>
+script.sh [--select] [run|build] [Go选项...] [--] [程序参数...]"
+
 ## gpg:
 ### [gpg_encrypt_decrypt_file.sh](gpg_encrypt_decrypt_file.sh):<br>
 使用gpg加密,解密某个文件<br>
