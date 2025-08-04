@@ -86,11 +86,15 @@ main() {
 
     #更新tldr
     echo "----------------------------------------"
-    output=$(tldr --update)
-    if echo "${output}" | grep -iq "successfully"; then
-        echo "tldr已更新"
+    echo "正在更新tldr..."
+    output=$(tldr --update 2>&1)
+    exit_code=$?
+
+    if [ $exit_code -eq 0 ] && echo "${output}" | grep -iq "successfully"; then
+        echo "tldr已成功更新"
     else
-        echo "${output}"
+        echo "tldr更新失败"
+        echo "错误信息: ${output}"
     fi
 }
 
