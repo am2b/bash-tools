@@ -265,6 +265,14 @@ export public key and private key<br>
 usage:<br>
 script.sh
 
+## hammerspoon:
+### [right_mouse_button_simulates_space.sh](right_mouse_button_simulates_space.sh):<br>
+单击鼠标右键来模拟空格键<br>
+在约定的目录下创建一个约定好名字的文件来激活hammerspoon中的映射<br>
+usage:<br>
+script.sh on/off<br>
+script.sh status
+
 ## install:
 ## libs:
 ### [getoptions.sh](getoptions.sh):<br>
