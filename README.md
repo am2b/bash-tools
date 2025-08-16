@@ -8,7 +8,7 @@ pbpaste | script.sh | pbcopy
 ### [clean_markdown_format_in_gemini.sh](clean_markdown_format_in_gemini.sh):<br>
 clean up the markdown format in google gemini<br>
 usage:<br>
-pbpaste | script.sh | pbcopy
+script.sh
 
 ### [easy_to_type_mode.sh](easy_to_type_mode.sh):<br>
 enter easy to type mode for typing like chinese<br>

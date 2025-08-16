@@ -5,7 +5,7 @@
 #=convenient
 #@clean up the markdown format in google gemini
 #@usage:
-#@pbpaste | script.sh | pbcopy
+#@script.sh
 
 gawk '
 BEGIN { in_code=0; blank=0 }
