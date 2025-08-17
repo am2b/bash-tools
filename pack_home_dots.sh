@@ -52,6 +52,16 @@ main() {
     local -a dirs=(.am2b .config .gnupg .key-ring .local .private .tag .tube-top)
     local -a files=(.bashrc .msmtprc .password .one_key_move)
 
+    #要排除的文件或目录
+    excludes=(
+        '*.lock'
+        .local/share/containers
+    )
+    exclude_args=()
+    for item in "${excludes[@]}"; do
+        exclude_args+=(--exclude="${item}")
+    done
+
     #进入~
     cd ~ || exit 1
 
@@ -74,11 +84,7 @@ main() {
         fi
 
         pack_name="${dir#.}.tar.gz"
-        #排除socket和.lock文件
-        #--null:告诉tar以null字符分隔读取文件名
-        #--no-recursion:禁用默认递归
-        #-T -:告诉tar从标准输入读取文件列表
-        find "${dir}" ! -type s ! -name '*.lock' -print0 | tar --null -czf "${pack_name}" --no-recursion -T -
+        find "${dir}" ! -type s -print0 | tar --null -czf "${pack_name}" --no-recursion -T - "${exclude_args[@]}"
         mv "${pack_name}" "${save_dir}"
     done
 
