@@ -627,7 +627,7 @@ script.sh
 clear $HOME/tmp
 
 ### [collect_files_in_subdirectories.sh](collect_files_in_subdirectories.sh):<br>
-移动子目录里面的所有文件到参数所指定的目录,然后删除空的子目录<br>
+移动参数目录下的子目录里面的所有文件到参数目录,然后删除空的子目录<br>
 usage:<br>
 script.sh dir
 
