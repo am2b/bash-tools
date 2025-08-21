@@ -20,9 +20,6 @@ find aliases for a command<br>
 usage:<br>
 script.sh command_name or alias_name
 
-### [print_os_info.sh](print_os_info.sh):<br>
-print os info
-
 ## git-branch:
 ### [git_backup_master_with_upstream.sh](git_backup_master_with_upstream.sh):<br>
 备份master分支为master-backup,master-backup分支是跟踪分支
@@ -741,6 +738,13 @@ create a new script
 
 ### [print_env_path.sh](print_env_path.sh):<br>
 print $PATH
+
+### [print_os_info.sh](print_os_info.sh):<br>
+portable system information script(纯POSIX sh)<br>
+兼容macOS,Arch,Debian,Ubuntu,Fedora,Kali,openSUSE,Rocky,Alpine<br>
+usage:<br>
+script.sh<br>
+script.sh --json
 
 ### [ps_cpu.sh](ps_cpu.sh):<br>
 列出占用CPU最高的几个进程<br>
