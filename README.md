@@ -268,6 +268,15 @@ usage:<br>
 script.sh
 
 ## hammerspoon:
+### [browse_pictures.sh](browse_pictures.sh):<br>
+在约定的目录下创建一个约定好名字的文件来激活hammerspoon中的映射<br>
+在访达中选中一个图片文件,按下空格键,在预览的过程中按下left/right来copy图片到配置文件所指定的目录<br>
+也可以仅在访达中选中文件然后按下left/right来copy<br>
+配置文件:"${XDG_CONFIG_HOME}"/hammerspoon-modules/browse_pictures<br>
+usage:<br>
+script.sh on/off<br>
+script.sh status
+
 ### [right_mouse_button_simulates_space.sh](right_mouse_button_simulates_space.sh):<br>
 单击鼠标右键来模拟空格键<br>
 在约定的目录下创建一个约定好名字的文件来激活hammerspoon中的映射<br>
