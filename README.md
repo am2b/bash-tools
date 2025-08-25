@@ -742,6 +742,11 @@ script.sh --hidden [path]
 usage:<br>
 script.sh
 
+### [mann.sh](mann.sh):<br>
+man command | col -bx > command.txt<br>
+usage:<br>
+script.sh command
+
 ### [new_script.sh](new_script.sh):<br>
 create a new script
 
