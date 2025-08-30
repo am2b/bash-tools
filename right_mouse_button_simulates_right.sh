@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 #=hammerspoon
-#@单击鼠标右键来模拟空格键
-#@用于在终端重复执行上一个命令
+#@单击鼠标右键来模拟right键
+#@用于在IINA快进
 #@在约定的目录下创建一个约定好名字的文件来激活hammerspoon中的映射
 #@usage:
 #@script.sh on/off
@@ -59,16 +59,16 @@ main() {
     shift $((OPTIND - 1))
 
     mkdir -p "${XDG_DATA_HOME}"/hammerspoon
-    FLAG_FILE="${XDG_DATA_HOME}/hammerspoon/right_mouse_button_simulates_space"
+    FLAG_FILE="${XDG_DATA_HOME}/hammerspoon/right_mouse_button_simulates_right"
 
     case "$1" in
     on)
         touch "$FLAG_FILE"
-        echo "Mouse right click -> Space key mapping ENABLED"
+        echo "Mouse right click -> Right key mapping ENABLED"
         ;;
     off)
         rm -f "$FLAG_FILE"
-        echo "Mouse right click -> Space key mapping DISABLED"
+        echo "Mouse right click -> Right key mapping DISABLED"
         ;;
     status)
         if [ -f "$FLAG_FILE" ]; then

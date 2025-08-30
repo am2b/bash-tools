@@ -277,8 +277,17 @@ usage:<br>
 script.sh on/off<br>
 script.sh status
 
+### [right_mouse_button_simulates_right.sh](right_mouse_button_simulates_right.sh):<br>
+单击鼠标右键来模拟right键<br>
+用于在IINA快进<br>
+在约定的目录下创建一个约定好名字的文件来激活hammerspoon中的映射<br>
+usage:<br>
+script.sh on/off<br>
+script.sh status
+
 ### [right_mouse_button_simulates_space.sh](right_mouse_button_simulates_space.sh):<br>
 单击鼠标右键来模拟空格键<br>
+用于在终端重复执行上一个命令<br>
 在约定的目录下创建一个约定好名字的文件来激活hammerspoon中的映射<br>
 usage:<br>
 script.sh on/off<br>
