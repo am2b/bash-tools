@@ -293,7 +293,6 @@ usage:<br>
 script.sh on/off<br>
 script.sh status
 
-## install:
 ## libs:
 ### [getoptions.sh](getoptions.sh):<br>
 解析命令行参数<br>
