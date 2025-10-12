@@ -63,5 +63,7 @@ done
 
 #最终文件的最后一行如果是空行的话,则删除空行
 sed -i -e :a -e '/^\n*$/{$d;N;ba' -e '}' "${output_file}"
+#将Windows换行符转换为Linux换行符
+sed -i 's/\r//' "$output_file"
 
 echo "文件已成功拼接至:$output_file"
