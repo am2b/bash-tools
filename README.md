@@ -415,6 +415,7 @@ script.sh dir<br>
 run_in_background script.sh dir
 
 ### [unpack_sisters.sh](unpack_sisters.sh):<br>
+这个脚本具有局限性,不能用于通用环境,不过可以作为参考<br>
 解压给定目录下的每个7z文件到参数所指定的目录<br>
 usage:<br>
 script.sh dir_from dir_to

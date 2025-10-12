@@ -4,6 +4,7 @@
 export LC_ALL=en_US.UTF-8
 
 #=pack
+#@这个脚本具有局限性,不能用于通用环境,不过可以作为参考
 #@解压给定目录下的每个7z文件到参数所指定的目录
 #@usage:
 #@script.sh dir_from dir_to
