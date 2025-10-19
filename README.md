@@ -20,6 +20,31 @@ find aliases for a command<br>
 usage:<br>
 script.sh command_name or alias_name
 
+## ffmpeg:
+### [check_audio_subtitle_from_info_file.sh](check_audio_subtitle_from_info_file.sh):<br>
+检查info文件中是否包含参数所指定语言的audio和subtitle流<br>
+该脚本主要是被其它脚本调用<br>
+usage:<br>
+script.sh info_file [language]<br>
+info_file:脚本gen_video_info.sh所生成的文件<br>
+language:默认为eng
+
+### [check_audio_subtitle_of_dir.sh](check_audio_subtitle_of_dir.sh):<br>
+检查一个目录中的视频文件是否有参数所指定语言的audio和subtitle流<br>
+usage:<br>
+script.sh dir [eng]
+
+### [check_audio_subtitle_of_file.sh](check_audio_subtitle_of_file.sh):<br>
+检查一个视频文件是否有参数所指定语言的audio和subtitle流<br>
+usage:<br>
+script.sh video_file [eng]
+
+### [gen_video_info.sh](gen_video_info.sh):<br>
+使用ffprobe命令来生成一个视频文件的流信息,并将信息存储到一个info文件中<br>
+该脚本主要是被其它脚本调用<br>
+usage:<br>
+script.sh video_file
+
 ## git-branch:
 ### [git_backup_master_with_upstream.sh](git_backup_master_with_upstream.sh):<br>
 备份master分支为master-backup,master-backup分支是跟踪分支
