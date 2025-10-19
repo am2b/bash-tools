@@ -721,6 +721,19 @@ script.sh remote_path_to_dir_or_file
 ### [file_is_equal.sh](file_is_equal.sh):<br>
 通过计算两个文件的sha256来判断两个文件是否相同
 
+### [find_files_in_a_dir.sh](find_files_in_a_dir.sh):<br>
+查找文件<br>
+包含隐藏文件,不区分大小写<br>
+可以指定后缀名,关键字<br>
+可以指定忽略项(用逗号分割,逗号两边不能有空格)<br>
+支持递归<br>
+usage:<br>
+script.sh -h<br>
+在其它脚本中调用该脚本的方法:<br>
+while IFS= read -r file; do<br>
+    echo "${file}"<br>
+done < <(script.sh -d dir)
+
 ### [fuzzy_find_bash_tools.sh](fuzzy_find_bash_tools.sh):<br>
 fuzzy find a bash script<br>
 usage:<br>
