@@ -21,12 +21,12 @@ usage:<br>
 script.sh command_name or alias_name
 
 ## ffmpeg:
-### [check_audio_subtitle_from_info_file.sh](check_audio_subtitle_from_info_file.sh):<br>
-检查info文件中是否包含参数所指定语言的audio和subtitle流<br>
+### [check_audio_from_info_file.sh](check_audio_from_info_file.sh):<br>
+检查info文件中是否包含参数所指定语言的audio流,并且该语言的audio流是否只有一个<br>
 该脚本主要是被其它脚本调用<br>
 usage:<br>
 script.sh info_file [language]<br>
-info_file:脚本gen_video_info.sh所生成的文件<br>
+info_file:脚本gen_video_audio_info.sh所生成的文件<br>
 language:默认为eng
 
 ### [check_audio_subtitle_of_dir.sh](check_audio_subtitle_of_dir.sh):<br>
@@ -39,8 +39,22 @@ script.sh dir [eng]
 usage:<br>
 script.sh video_file [eng]
 
-### [gen_video_info.sh](gen_video_info.sh):<br>
-使用ffprobe命令来生成一个视频文件的流信息,并将信息存储到一个info文件中<br>
+### [check_subtitle_from_info_file.sh](check_subtitle_from_info_file.sh):<br>
+检查info文件中是否包含参数所指定语言的subtitle流,并且该语言的subtitle流是否只有一个<br>
+该脚本主要是被其它脚本调用<br>
+usage:<br>
+script.sh info_file [language]<br>
+info_file:脚本gen_video_subtitle_info.sh所生成的文件<br>
+language:默认为eng
+
+### [gen_video_audio_info.sh](gen_video_audio_info.sh):<br>
+使用ffprobe命令来生成一个视频文件的音频流信息,并将信息存储到一个info文件中<br>
+该脚本主要是被其它脚本调用<br>
+usage:<br>
+script.sh video_file
+
+### [gen_video_subtitle_info.sh](gen_video_subtitle_info.sh):<br>
+使用ffprobe命令来生成一个视频文件的字幕流信息,并将信息存储到一个info文件中<br>
 该脚本主要是被其它脚本调用<br>
 usage:<br>
 script.sh video_file
