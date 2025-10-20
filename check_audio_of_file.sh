@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #=ffmpeg
-#@检查一个视频文件是否有参数所指定语言的audio和subtitle流
+#@检查一个视频文件是否有参数所指定语言的audio流
 #@usage:
 #@script.sh video_file [eng]
 
@@ -87,10 +87,10 @@ main() {
     video_file_basename_without_ext="${video_file_basename%.*}"
 
     local info_file
-    info_file="${VIDEO_INFOS_DIR}/${video_file_basename_without_ext}"
+    info_file="${VIDEO_INFOS_DIR}/${video_file_basename_without_ext}_audio"
 
-    gen_video_info.sh "${video_file}"
-    check_audio_subtitle_from_info_file.sh "${info_file}" "${lang}"
+    gen_video_audio_info.sh "${video_file}"
+    check_audio_from_info_file.sh "${info_file}" "${lang}"
 }
 
 main "${@}"
