@@ -29,15 +29,15 @@ script.sh info_file [language]<br>
 info_file:脚本gen_video_audio_info.sh所生成的文件<br>
 language:默认为eng
 
+### [check_audio_of_dir.sh](check_audio_of_dir.sh):<br>
+检查一个目录中的视频文件是否有参数所指定语言的audio流<br>
+usage:<br>
+script.sh dir [eng]
+
 ### [check_audio_of_file.sh](check_audio_of_file.sh):<br>
 检查一个视频文件是否有参数所指定语言的audio流<br>
 usage:<br>
 script.sh video_file [eng]
-
-### [check_audio_subtitle_of_dir.sh](check_audio_subtitle_of_dir.sh):<br>
-检查一个目录中的视频文件是否有参数所指定语言的audio和subtitle流<br>
-usage:<br>
-script.sh dir [eng]
 
 ### [check_subtitle_from_info_file.sh](check_subtitle_from_info_file.sh):<br>
 检查info文件中是否包含参数所指定语言的subtitle流,并且该语言的subtitle流是否只有一个<br>
@@ -46,6 +46,11 @@ usage:<br>
 script.sh info_file [language]<br>
 info_file:脚本gen_video_subtitle_info.sh所生成的文件<br>
 language:默认为eng
+
+### [check_subtitle_of_dir.sh](check_subtitle_of_dir.sh):<br>
+检查一个目录中的视频文件是否有参数所指定语言的subtitle流<br>
+usage:<br>
+script.sh dir [eng]
 
 ### [check_subtitle_of_file.sh](check_subtitle_of_file.sh):<br>
 检查一个视频文件是否有参数所指定语言的subtitle流<br>

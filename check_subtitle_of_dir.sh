@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #=ffmpeg
-#@检查一个目录中的视频文件是否有参数所指定语言的audio和subtitle流
+#@检查一个目录中的视频文件是否有参数所指定语言的subtitle流
 #@usage:
 #@script.sh dir [eng]
 
@@ -87,7 +87,7 @@ main() {
     fi
 
     while IFS= read -r -d '' video_file; do
-        check_audio_subtitle_of_file.sh "${video_file}" "${lang}"
+        check_subtitle_of_file.sh "${video_file}" "${lang}"
         echo
     done < <(find "${dir}" -path './.git' -prune -o \( -type f ! -name '.DS_Store' -print0 \) | sort -z)
 
