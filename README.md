@@ -69,6 +69,16 @@ script.sh video_file
 usage:<br>
 script.sh video_file
 
+### [keep_only_one_audio_and_one_subtitle_of_dir.sh](keep_only_one_audio_and_one_subtitle_of_dir.sh):<br>
+删除指定目录下所有视频文件的其它的音轨和字幕,仅保留参数所指定语言的音轨和字幕,默认为eng<br>
+usage:<br>
+script.sh dir [language]
+
+### [keep_only_one_audio_and_one_subtitle_of_file.sh](keep_only_one_audio_and_one_subtitle_of_file.sh):<br>
+删除视频文件的其它的音轨和字幕,仅保留参数所指定语言的音轨和字幕,默认为eng<br>
+usage:<br>
+script.sh video_file [language]
+
 ## git-branch:
 ### [git_backup_master_with_upstream.sh](git_backup_master_with_upstream.sh):<br>
 备份master分支为master-backup,master-backup分支是跟踪分支
