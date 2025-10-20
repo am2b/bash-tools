@@ -91,6 +91,11 @@ main() {
         echo
     done < <(find "${dir}" -path './.git' -prune -o \( -type f ! -name '.DS_Store' -print0 \) | sort -z)
 
+    local not_found_file="${VIDEO_INFOS_DIR}"/check_not_found_audio
+    local duplicate_file="${VIDEO_INFOS_DIR}"/check_duplicate_audio
+    if [ ! -e "${not_found_file}" ] && [ ! -e "${duplicate_file}" ]; then
+        echo "音频流-All Good!"
+    fi
 }
 
 main "${@}"
