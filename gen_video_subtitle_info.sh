@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #=ffmpeg
-#@使用ffprobe命令来生成一个视频文件的流信息,并将信息存储到一个info文件中
+#@使用ffprobe命令来生成一个视频文件的字幕流信息,并将信息存储到一个info文件中
 #@该脚本主要是被其它脚本调用
 #@usage:
 #@script.sh video_file
@@ -82,16 +82,14 @@ main() {
 
     local info_file
     mkdir -p "${VIDEO_INFOS_DIR}"
-    info_file="${VIDEO_INFOS_DIR}/${video_file_basename_without_ext}"
+    info_file="${VIDEO_INFOS_DIR}/${video_file_basename_without_ext}_subtitle"
 
     if [ ! -f "${video_file}" ]; then
         echo "error:${video_file} does not exist"
         exit 1
     fi
 
-    ffprobe -v error -select_streams a -show_entries stream=index,codec_name,codec_long_name,codec_type,disposition:stream_tags=language,title -of default=noprint_wrappers=0:nokey=0 "${video_file}" > "${info_file}"
-
-    ffprobe -v error -select_streams s -show_entries stream=index,codec_name,codec_long_name,codec_type,disposition:stream_tags=language,title -of default=noprint_wrappers=0:nokey=0 "${video_file}" >> "${info_file}"
+    ffprobe -v error -select_streams s -show_entries stream=index,codec_name,codec_long_name,codec_type,disposition:stream_tags=language,title -of default=noprint_wrappers=0:nokey=0 "${video_file}" > "${info_file}"
 }
 
 main "${@}"
