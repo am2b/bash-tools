@@ -89,7 +89,7 @@ main() {
         exit 1
     fi
 
-    ffprobe -v error -select_streams a -show_entries stream=index,codec_name,codec_long_name,codec_type,disposition:stream_tags=language,title -of default=noprint_wrappers=0:nokey=0 "${video_file}" > "${info_file}"
+    ffprobe -v error -select_streams a -show_entries stream=index,codec_type,codec_name,codec_long_name,bit_rate,disposition:stream_tags=language,title -of default=noprint_wrappers=0:nokey=0 "${video_file}" > "${info_file}"
 }
 
 main "${@}"
