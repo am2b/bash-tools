@@ -82,8 +82,8 @@ main() {
     #在awk语法中,缩进(空格或制表符)对语义没有影响
     #$0 ~ ("TAG:language=" lang)
     #~是正则匹配运算符,这行的意思是:
-    #"TAG:language=" lang是字符串拼接,awk会自动把"TAG:language="与变量lang连接起来
     #如果当前行中包含TAG:language=语言变量的值,则匹配成功
+    #"TAG:language=" lang是字符串拼接,awk会自动把"TAG:language="与变量lang连接起来
 
     #检查是否存在该语言的音频,并统计数量
     read -r has_audio audio_count < <(
