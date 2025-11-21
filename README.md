@@ -902,6 +902,11 @@ usage:tgz.sh -h
 usage:<br>
 script.sh
 
+### [video_downloader_after_sign_in.sh](video_downloader_after_sign_in.sh):<br>
+视频下载器:下载单个视频(会使用cookies先进行登录)<br>
+usage:<br>
+script.sh url
+
 ### [video_downloader_from_urls_file.sh](video_downloader_from_urls_file.sh):<br>
 视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频<br>
 usage:<br>
