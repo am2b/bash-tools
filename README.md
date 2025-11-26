@@ -938,26 +938,6 @@ usage:tgz.sh -h
 usage:<br>
 script.sh
 
-### [video_downloader_after_sign_in.sh](video_downloader_after_sign_in.sh):<br>
-视频下载器:下载单个视频(会使用cookies先进行登录)<br>
-usage:<br>
-script.sh url
-
-### [video_downloader_from_urls_file.sh](video_downloader_from_urls_file.sh):<br>
-视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频<br>
-usage:<br>
-script.sh urls_file
-
-### [video_downloader_list.sh](video_downloader_list.sh):<br>
-视频下载器:下载整个播放列表<br>
-usage:<br>
-script.sh list_url
-
-### [video_downloader.sh](video_downloader.sh):<br>
-视频下载器:下载单个视频<br>
-usage:<br>
-script.sh url
-
 ### [zip_folder_exclude_git.sh](zip_folder_exclude_git.sh):<br>
 zip a folder but exclude .git and .DS_Store<br>
 usage:bash script_name.sh /path/to/directory
@@ -972,3 +952,24 @@ script.sh url [path/local_file]
 upload file to transfer.sh and download file from transfer.sh<br>
 script.sh -u /localpath/to/file<br>
 script.sh -d XXXXXX /localpath/to/file(note:the file name should be same as the remote file)
+
+## youtube:
+### [youtube_downloader_after_sign_in.sh](youtube_downloader_after_sign_in.sh):<br>
+视频下载器:下载单个视频(会使用cookies先进行登录)<br>
+usage:<br>
+script.sh url
+
+### [youtube_downloader_from_urls_file.sh](youtube_downloader_from_urls_file.sh):<br>
+视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频<br>
+usage:<br>
+script.sh urls_file
+
+### [youtube_downloader_list.sh](youtube_downloader_list.sh):<br>
+视频下载器:下载整个播放列表<br>
+usage:<br>
+script.sh list_url
+
+### [youtube_downloader.sh](youtube_downloader.sh):<br>
+视频下载器:下载单个视频<br>
+usage:<br>
+script.sh url

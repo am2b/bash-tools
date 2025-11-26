@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#=tools
+#=youtube
 #@视频下载器:下载单个视频(会使用cookies先进行登录)
 #@usage:
 #@script.sh url

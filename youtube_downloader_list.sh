@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#=tools
+#=youtube
 #@视频下载器:下载整个播放列表
 #@usage:
 #@script.sh list_url
