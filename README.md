@@ -582,6 +582,42 @@ sort_python_import.sh dir
 usage:<br>
 script.sh project_name python_version
 
+## rednote:
+### [rednote_clean_urls_file.sh](rednote_clean_urls_file.sh):<br>
+从小红书获取到的视频链接包含非url内容,该脚本会提取urls到一个输出文件:file.urls<br>
+usage:<br>
+script.sh origin_urls_file
+
+### [rednote_downloader_after_sign_in.sh](rednote_downloader_after_sign_in.sh):<br>
+下载单个小红书视频<br>
+注意:如果下载多个小红书视频的话,需要使用cookies信息(--cookies-from-browser chrome)<br>
+usage:<br>
+下载原始视频:<br>
+script.sh url<br>
+下载压缩后的视频(参数为ID):<br>
+script.sh url 0/1/2...
+
+### [rednote_downloader_both_from_urls_file.sh](rednote_downloader_both_from_urls_file.sh):<br>
+小红书视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频的两种版本:ID:0,ID:direct<br>
+usage:<br>
+script.sh urls_file
+
+### [rednote_downloader_from_urls_file.sh](rednote_downloader_from_urls_file.sh):<br>
+小红书视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频<br>
+usage:<br>
+下载原始视频:<br>
+script.sh urls_file<br>
+下载压缩后的视频(参数为ID):<br>
+script.sh urls_file 0/1/2...
+
+### [rednote_downloader.sh](rednote_downloader.sh):<br>
+下载单个小红书视频<br>
+usage:<br>
+下载原始视频:<br>
+script.sh url<br>
+下载压缩后的视频(参数为ID):<br>
+script.sh url 0/1/2...
+
 ## telegram:
 ### [send_clipboard_to_telegram.sh](send_clipboard_to_telegram.sh):<br>
 send the text in clipboard to telegram<br>
