@@ -98,6 +98,7 @@ main() {
 
     #处理my_file
     while IFS= read -r line || [[ -n "${line}" ]]; do
+        #这里的+yes只是惯用写法,上面已经明确设置value为1了,所以不可能存在value为""的情况
         if [[ -n "${seen[$line]+yes}" ]]; then
             echo "$line"
             ((deleted_count++))
