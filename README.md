@@ -631,6 +631,12 @@ usage:<br>
 script.sh TOKEN
 
 ## text:
+### [remove_duplicate_lines_based_on_another_text_file.sh](remove_duplicate_lines_based_on_another_text_file.sh):<br>
+功能:<br>
+检查my_text_file的每一行,如果某行完全等于参考文件ref_text_file里面的某一行的话,就将其从my_text_file里面移除,并且报告<br>
+usage:<br>
+script.sh my_text_file ref_text_file
+
 ### [text_belly.sh](text_belly.sh):<br>
 读取文本文件,然后输出指定的行范围,其中第一个数字表示起始行,第二个数字表示需要显示的行数<br>
 usage:<br>
