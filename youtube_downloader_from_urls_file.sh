@@ -102,7 +102,7 @@ main() {
         [[ $trimmed == \#* ]] && continue
 
         echo "==================================="
-        video_downloader.sh "${line}"
+        youtube_downloader.sh "${line}"
         #生成30到60之间的随机数(包含30和60)
         local sleep_seconds=$((RANDOM % 31 + 30))
         echo "sleep ${sleep_seconds} seconds ..."
