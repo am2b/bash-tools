@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #=youtube
-#@视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频
+#@视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频(未登录)
 #@usage:
 #@script.sh urls_file
 

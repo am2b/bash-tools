@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #=rednote
-#@下载单个小红书视频
+#@下载单个小红书视频(未登录)
 #@usage:
 #@下载原始视频:
 #@script.sh url

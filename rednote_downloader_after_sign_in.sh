@@ -2,7 +2,7 @@
 
 #=rednote
 #@下载单个小红书视频
-#@注意:如果下载多个小红书视频的话,需要使用cookies信息(--cookies-from-browser chrome)
+#@注意:如果下载多个小红书视频的话,需要使用cookies信息(--cookies-from-browser chrome)(登录后)
 #@usage:
 #@下载原始视频:
 #@script.sh url

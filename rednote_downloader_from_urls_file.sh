@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #=rednote
-#@小红书视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频
+#@小红书视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频(登录后)
 #@usage:
 #@下载原始视频:
 #@script.sh urls_file

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #=youtube
-#@视频下载器:下载整个播放列表
+#@视频下载器:下载整个播放列表(未登录)
 #@usage:
 #@script.sh list_url
 
