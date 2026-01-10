@@ -79,6 +79,11 @@ script.sh dir [language]
 usage:<br>
 script.sh video_file [language]
 
+### [modify_audio_metadata_title.sh](modify_audio_metadata_title.sh):<br>
+修改音频文件的元数据:title<br>
+usage:<br>
+script.sh -t title input_audio output_audio
+
 ## git-branch:
 ### [git_backup_master_with_upstream.sh](git_backup_master_with_upstream.sh):<br>
 备份master分支为master-backup,master-backup分支是跟踪分支
@@ -473,6 +478,13 @@ usage:<br>
 script.sh dir<br>
 run_in_background script.sh dir
 
+### [unpack_one.sh](unpack_one.sh):<br>
+解压一个包,或者目录下的所有包,这些包的密码都在保险箱one里面<br>
+默认解压到包所在的目录,可以通过选项-o指定输出目录<br>
+usage:<br>
+script.sh file/dir<br>
+script.sh -o output_dir file/dir
+
 ### [unpack_sisters.sh](unpack_sisters.sh):<br>
 这个脚本具有局限性,不能用于通用环境,不过可以作为参考<br>
 解压给定目录下的每个7z文件到参数所指定的目录<br>
@@ -590,7 +602,7 @@ script.sh origin_urls_file
 
 ### [rednote_downloader_after_sign_in.sh](rednote_downloader_after_sign_in.sh):<br>
 下载单个小红书视频<br>
-注意:如果下载多个小红书视频的话,需要使用cookies信息(--cookies-from-browser chrome)<br>
+注意:如果下载多个小红书视频的话,需要使用cookies信息(--cookies-from-browser chrome)(登录后)<br>
 usage:<br>
 下载原始视频:<br>
 script.sh url<br>
@@ -598,12 +610,12 @@ script.sh url<br>
 script.sh url 0/1/2...
 
 ### [rednote_downloader_both_from_urls_file.sh](rednote_downloader_both_from_urls_file.sh):<br>
-小红书视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频的两种版本:ID:0,ID:direct<br>
+小红书视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频的两种版本:ID:0,ID:direct(登录后)<br>
 usage:<br>
 script.sh urls_file
 
 ### [rednote_downloader_from_urls_file.sh](rednote_downloader_from_urls_file.sh):<br>
-小红书视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频<br>
+小红书视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频(登录后)<br>
 usage:<br>
 下载原始视频:<br>
 script.sh urls_file<br>
@@ -611,7 +623,7 @@ script.sh urls_file<br>
 script.sh urls_file 0/1/2...
 
 ### [rednote_downloader.sh](rednote_downloader.sh):<br>
-下载单个小红书视频<br>
+下载单个小红书视频(未登录)<br>
 usage:<br>
 下载原始视频:<br>
 script.sh url<br>
@@ -631,12 +643,6 @@ usage:<br>
 script.sh TOKEN
 
 ## text:
-### [remove_duplicate_lines_based_on_another_text_file.sh](remove_duplicate_lines_based_on_another_text_file.sh):<br>
-功能:<br>
-检查my_text_file的每一行,如果某行完全等于参考文件ref_text_file里面的某一行的话,就将其从my_text_file里面移除,并且报告<br>
-usage:<br>
-script.sh my_text_file ref_text_file
-
 ### [text_belly.sh](text_belly.sh):<br>
 读取文本文件,然后输出指定的行范围,其中第一个数字表示起始行,第二个数字表示需要显示的行数<br>
 usage:<br>
@@ -673,6 +679,17 @@ parse csv file
 parse key value pairs<br>
 usage:<br>
 script.sh key_value_file[.txt]
+
+### [text_remove_duplicate_lines_based_on_another_text_file.sh](text_remove_duplicate_lines_based_on_another_text_file.sh):<br>
+功能:<br>
+检查my_text_file的每一行,如果某行完全等于参考文件ref_text_file里面的某一行的话,就将其从my_text_file里面移除,并且报告<br>
+usage:<br>
+script.sh my_text_file ref_text_file
+
+### [text_remove_duplicate_lines.sh](text_remove_duplicate_lines.sh):<br>
+移除文本文件中重复的行,且具有排序效果<br>
+usage:<br>
+script.sh input_file output_file
 
 ### [text_replace_chinese_punctuation_marks.sh](text_replace_chinese_punctuation_marks.sh):<br>
 replace chinese punctuation marks<br>
@@ -755,6 +772,14 @@ script.sh dir1 dir2
 ### [copy_file_names.sh](copy_file_names.sh):<br>
 copy filenames to general pasteboard<br>
 usage:script.sh file1.sh file2.py file3.txt ...
+
+### [count_files_in_a_dir.sh](count_files_in_a_dir.sh):<br>
+计算给定目录下文件的数量,包含隐藏文件<br>
+可以指定后缀名,关键字<br>
+可以指定忽略项(用逗号分割,逗号两边不能有空格)<br>
+支持递归<br>
+usage:<br>
+script.sh -h
 
 ### [count_files.sh](count_files.sh):<br>
 报告当前目录下非隐藏文件,隐藏文件以及总文件数量
@@ -906,6 +931,28 @@ script.sh /directory/to/save/
 usage:<br>
 send_mail.sh "subject" "body" recipient
 
+### [sha1.sh](sha1.sh):<br>
+计算参数所指定的文件的sha1值<br>
+usage:<br>
+script.sh file
+
+### [sha256_check_dir.sh](sha256_check_dir.sh):<br>
+计算参数所指定的dir下的所有文件的sha256值<br>
+然后与参数所指定的sha256.txt进行比较,如果有文件没有完全匹配,则报错<br>
+如果没有指定sha256.txt,那么默认使用dir目录下的dir_sha256.txt文件<br>
+会递归遍历子目录<br>
+会忽略.DS_Store<br>
+usage:<br>
+script.sh dir [sha256.txt]
+
+### [sha256_dir.sh](sha256_dir.sh):<br>
+计算参数所指定的dir下的所有文件的sha256值<br>
+会在dir下生成一个dir同名的文本文件,该文本文件中的每一行就代表一个文件的sha256值<br>
+会递归遍历子目录<br>
+会忽略.DS_Store<br>
+usage:<br>
+script.sh dir
+
 ### [sha256.sh](sha256.sh):<br>
 计算参数所指定的文件的sha256值<br>
 usage:<br>
@@ -966,16 +1013,16 @@ usage:<br>
 script.sh url
 
 ### [youtube_downloader_from_urls_file.sh](youtube_downloader_from_urls_file.sh):<br>
-视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频<br>
+视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频(未登录)<br>
 usage:<br>
 script.sh urls_file
 
 ### [youtube_downloader_list.sh](youtube_downloader_list.sh):<br>
-视频下载器:下载整个播放列表<br>
+视频下载器:下载整个播放列表(未登录)<br>
 usage:<br>
 script.sh list_url
 
 ### [youtube_downloader.sh](youtube_downloader.sh):<br>
-视频下载器:下载单个视频<br>
+视频下载器:下载单个视频(未登录)<br>
 usage:<br>
 script.sh url
