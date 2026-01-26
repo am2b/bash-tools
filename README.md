@@ -670,7 +670,11 @@ script.sh 1 "插入第一行的内容"<br>
 script.sh $ "插入最后一行的内容"
 
 ### [text_merge_empty_lines.sh](text_merge_empty_lines.sh):<br>
-合并连续的空行,参数可以是一个/多个文件,一个/多个目录,或者文件与目录
+合并连续的空行,参数可以是一个/多个文件,一个/多个目录,或者文件与目录<br>
+usage:<br>
+script.sh file[s]<br>
+script.sh dir[s]<br>
+script.sh file[s] dir[s]
 
 ### [text_parse_csv.sh](text_parse_csv.sh):<br>
 parse csv file
