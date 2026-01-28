@@ -1021,10 +1021,31 @@ script.sh url
 usage:<br>
 script.sh urls_file
 
+### [youtube_downloader_list_batch.sh](youtube_downloader_list_batch.sh):<br>
+视频下载器:<br>
+专用于下载长list<br>
+不是一次性把list全部下载完,而是分批次来下载<br>
+可以登录后下载,也可以不登录下载<br>
+usage:<br>
+未登录:<br>
+script.sh list_url [batch_size]<br>
+登录后:<br>
+script.sh -c list_url [batch_size]
+
 ### [youtube_downloader_list.sh](youtube_downloader_list.sh):<br>
 视频下载器:下载整个播放列表(未登录)<br>
 usage:<br>
 script.sh list_url
+
+### [youtube_downloader_pick_one_from_list.sh](youtube_downloader_pick_one_from_list.sh):<br>
+视频下载器:<br>
+专用于从一个list里面,挑选一个来下载<br>
+可以登录后下载,也可以不登录下载<br>
+usage:<br>
+未登录:<br>
+script.sh list_url index<br>
+登录后:<br>
+script.sh -c list_url index
 
 ### [youtube_downloader.sh](youtube_downloader.sh):<br>
 视频下载器:下载单个视频(未登录)<br>
