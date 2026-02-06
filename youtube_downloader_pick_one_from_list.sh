@@ -16,8 +16,6 @@ playlist_url=""
 index=0
 #是否使用cookies(默认为false)
 use_cookies=false
-#播放列表中视频的数量
-total_videos=0
 
 usage() {
     local script
@@ -59,7 +57,7 @@ check_envs() {
 }
 
 check_parameters() {
-    if (("$#" < 2)); then
+    if (("$#" != 2)); then
         usage
     fi
 }
@@ -86,10 +84,10 @@ main() {
     check_dependent_tools "${REQUIRED_TOOLS[@]}"
     REQUIRED_ENVS=()
     check_envs "${REQUIRED_ENVS[@]}" || exit 1
-    check_parameters "${@}"
     OPTIND=1
     process_opts "${@}"
     shift $((OPTIND - 1))
+    check_parameters "${@}"
 
     playlist_url="${1}"
     index="${2}"
