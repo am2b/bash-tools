@@ -1,42 +1,106 @@
 #!/usr/bin/env bash
 
-#=python
+#=tools
+#@create a .gitignore
 #@usage:
-#@script.sh
+#@script.sh language
 
 usage() {
     local script
     script=$(basename "$0")
-    echo "usage:"
-    echo "$script"
-    exit 1
+    echo "usage:" >&2
+    echo "$script language" >&2
+    exit "${1:-1}"
 }
 
-process_opts() {
-    while getopts ":h" opt; do
-        case $opt in
-        h)
-            usage
-            ;;
-        *)
-            echo "error:unsupported option -$opt"
-            usage
-            ;;
-        esac
+check_dependent_tools() {
+    local missing=()
+    for tool in "${@}"; do
+        if ! command -v "${tool}" &> /dev/null; then
+            missing+=("$tool")
+        fi
     done
+
+    if ((${#missing[@]})); then
+        echo "error:missing required tool(s):${missing[*]}" >&2
+        exit 1
+    fi
+}
+
+check_envs() {
+    if (("$#" == 0)); then
+        return 0
+    fi
+
+    for var in "$@"; do
+        #如果变量未导出或值为空
+        if [ -z "$(printenv "$var" 2> /dev/null)" ]; then
+            echo "error:this script uses unexported environment variables:${var}"
+            return 1
+        fi
+    done
+
+    return 0
 }
 
 check_parameters() {
-    if (("$#" > 0)); then
+    if (("$#" != 1)); then
         usage
     fi
 }
 
-main() {
-    check_parameters "${@}"
-    process_opts "${@}"
-    shift $((OPTIND - 1))
+process_opts() {
+    while getopts ":h" opt; do
+        case "$opt" in
+            h)
+                usage 0
+                ;;
+            *)
+                echo "error:unsupported option -$opt" >&2
+                usage
+                ;;
+        esac
+    done
+}
 
+for_go() {
+    cat << 'EOF' > .gitignore
+# If you prefer the allow list template instead of the deny list, see community template:
+# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+#
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Code coverage profiles and other test artifacts
+*.out
+coverage.*
+*.coverprofile
+profile.cov
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# env file
+.env
+
+# Editor/IDE
+# .idea/
+# .vscode/
+EOF
+}
+
+for_python() {
     cat <<'EOL' >.gitignore
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -204,6 +268,31 @@ cython_debug/
 # direnv
 .envrc
 EOL
+}
+
+main() {
+    REQUIRED_TOOLS=()
+    check_dependent_tools "${REQUIRED_TOOLS[@]}"
+    REQUIRED_ENVS=()
+    check_envs "${REQUIRED_ENVS[@]}" || exit 1
+    process_opts "${@}"
+    shift $((OPTIND - 1))
+    check_parameters "${@}"
+
+    local lan
+    lan=$(echo "${1}" | tr '[:upper:]' '[:lower:]')
+
+    case "${lan}" in
+        go)
+            for_go
+            ;;
+        python)
+            for_python
+            ;;
+        *)
+            echo "不支持该语言"
+            ;;
+    esac
 }
 
 main "${@}"

@@ -566,10 +566,6 @@ usage:script.sh project_name
 ### [python_create_envrc.sh](python_create_envrc.sh):<br>
 create .envrc in the current directory for direnv
 
-### [python_create_gitignore.sh](python_create_gitignore.sh):<br>
-usage:<br>
-script.sh
-
 ### [python_jump_to_root_directory.sh](python_jump_to_root_directory.sh):<br>
 从python项目的任意子目录跳转到根目录<br>
 usage:source script.sh
@@ -787,6 +783,11 @@ script.sh -h
 
 ### [count_files.sh](count_files.sh):<br>
 报告当前目录下非隐藏文件,隐藏文件以及总文件数量
+
+### [create_gitignore.sh](create_gitignore.sh):<br>
+create a .gitignore<br>
+usage:<br>
+script.sh language
 
 ### [create_layout_of_swift.sh](create_layout_of_swift.sh):<br>
 create layout of swift command line
