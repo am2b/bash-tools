@@ -716,6 +716,11 @@ usage:script.sh session_name
 ### [tmux_commands.sh](tmux_commands.sh):<br>
 tmux命令集
 
+### [tmux_start.sh](tmux_start.sh):<br>
+根据toml配置文件来创建tmux会话,窗口,pane<br>
+usage:<br>
+script.sh config.toml
+
 ## tools:
 ### [bak.sh](bak.sh):<br>
 create a file/dir.bak from file/dir,or create a file/dir from file/dir.bak<br>
