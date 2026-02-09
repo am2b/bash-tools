@@ -797,7 +797,9 @@ usage:<br>
 script.sh -h
 
 ### [count_files.sh](count_files.sh):<br>
-报告当前目录下非隐藏文件,隐藏文件以及总文件数量
+报告当前目录下非隐藏文件,隐藏文件以及总文件数量(非递归)<br>
+usage:<br>
+script.sh
 
 ### [create_gitignore.sh](create_gitignore.sh):<br>
 create a .gitignore<br>
