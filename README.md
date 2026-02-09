@@ -412,6 +412,14 @@ script.sh
 usage:<br>
 script.sh files... dirs...
 
+### [my7z2.sh](my7z2.sh):<br>
+用7z加密打包2次<br>
+注意:密码文件为./password[.txt]或./pass[.txt]或./pd[.txt]<br>
+注意:2次的密码分别在密码文件的第一行和第二行,第一行为内层密码,第二行为外层密码<br>
+注意:没有解包功能,解包命令:7z x pack.7z或者x pack.7z<br>
+usage:<br>
+script.sh files... dirs...
+
 ### [mytar.sh](mytar.sh):<br>
 对tar打包操作的一个包装<br>
 注意:没有解包功能,解包命令:tar -xvf pack.tar或者x pack.tar<br>

@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 #=pack
-#@对7z打包操作的一个包装
+#@用7z加密打包2次
 #@注意:密码文件为./password[.txt]或./pass[.txt]或./pd[.txt]
+#@注意:2次的密码分别在密码文件的第一行和第二行,第一行为内层密码,第二行为外层密码
 #@注意:没有解包功能,解包命令:7z x pack.7z或者x pack.7z
 #@usage:
 #@script.sh files... dirs...
@@ -11,22 +12,38 @@ usage() {
     local script
     script=$(basename "$0")
     echo "usage:" >&2
-    echo "$script files or dirs" >&2
+    echo "$script file[s]/dir[s]" >&2
     exit "${1:-1}"
 }
 
-process_opts() {
-    while getopts ":h" opt; do
-        case $opt in
-        h)
-            usage 0
-            ;;
-        *)
-            echo "error:unsupported option -$opt" >&2
-            usage
-            ;;
-        esac
+check_dependent_tools() {
+    local missing=()
+    for tool in "${@}"; do
+        if ! command -v "${tool}" &> /dev/null; then
+            missing+=("$tool")
+        fi
     done
+
+    if ((${#missing[@]})); then
+        echo "error:missing required tool(s):${missing[*]}" >&2
+        exit 1
+    fi
+}
+
+check_envs() {
+    if (("$#" == 0)); then
+        return 0
+    fi
+
+    for var in "$@"; do
+        #如果变量未导出或值为空
+        if [ -z "$(printenv "$var" 2> /dev/null)" ]; then
+            echo "error:this script uses unexported environment variables:${var}"
+            return 1
+        fi
+    done
+
+    return 0
 }
 
 check_parameters() {
@@ -35,11 +52,28 @@ check_parameters() {
     fi
 }
 
+process_opts() {
+    while getopts ":h" opt; do
+        case "$opt" in
+            h)
+                usage 0
+                ;;
+            *)
+                echo "error:unsupported option -$opt" >&2
+                usage
+                ;;
+        esac
+    done
+}
+
 main() {
-    check_parameters "${@}"
-    OPTIND=1
+    REQUIRED_TOOLS=(7z)
+    check_dependent_tools "${REQUIRED_TOOLS[@]}"
+    REQUIRED_ENVS=()
+    check_envs "${REQUIRED_ENVS[@]}" || exit 1
     process_opts "${@}"
     shift $((OPTIND - 1))
+    check_parameters "${@}"
 
     #执行脚本时命令行的路径
     local cmd_line_dir
@@ -78,23 +112,38 @@ main() {
             pack_name="${base_name%.*}"
         fi
     fi
-    pack_name="${pack_name}.7z"
+    pack_name_1="${pack_name}_1.7z"
+    pack_name_2="${pack_name}.7z"
 
     #密码
-    local password
     local password_file
     #在执行脚本时命令行的路径下寻找密码文件password[.txt]或pass[.txt]或pd[.txt]
     while IFS= read -r line; do
         password_file="$line"
         break
     done < <(find . -maxdepth 1 -type f \( -name "password" -o -name "password.txt" -o -name "pass" -o -name "pass.txt" -o -name "pd" -o -name "pd.txt" \))
+    if [[ ! -f "${password_file}" ]]; then
+        echo "密码文件不存在"
+        exit 1
+    fi
+
+    local password_1
+    local password_2
     if [[ -f "$password_file" ]]; then
         chmod 600 "${password_file}"
-        password=$(<"${password_file}")
+        password_1=$(sed -n "1p" "${password_file}")
+        password_2=$(sed -n "2p" "${password_file}")
+    fi
+
+    if [[ -z "${password_1}" ]] || [[ -z "${password_2}" ]]; then
+        echo "有一个密码为空"
+        exit 1
     fi
 
     #进入目录
     cd "${first_dir}" || exit 1
+    echo "${first_dir}"
+    echo
 
     #收集参数的basename
     local -a basenames=()
@@ -102,13 +151,12 @@ main() {
         basenames+=("$(basename "$path")")
     done
 
-    if [[ -n "${password}" ]]; then
-        echo "正在加密打包:${pack_name}"
-        7z a -t7z "${pack_name}" "${basenames[@]}" -mhe=on -mx=0 -p"${password}" -xr'!.DS_Store' -xr'!.git'
-    else
-        echo "正在打包:${pack_name}"
-        7z a -t7z "${pack_name}" "${basenames[@]}" -mhe=on -mx=0 -xr'!.DS_Store' -xr'!.git'
-    fi
+    echo "第1次加密打包:${pack_name_1}"
+    7z a -t7z "${pack_name_1}" "${basenames[@]}" -mhe=on -mx=0 -p"${password_1}" -xr'!.DS_Store' -xr'!.git'
+    echo "------------------------------"
+    echo "第2次加密打包:${pack_name_2}"
+    7z a -t7z "${pack_name_2}" "${pack_name_1}" -mhe=on -mx=0 -p"${password_2}"
+    rm -rf "${pack_name_1}"
 
     #脚本内部的路径
     local script_current_dir
