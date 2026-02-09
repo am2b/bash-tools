@@ -437,6 +437,8 @@ nohup script.sh > /tmp/pack_home_dots.log 2>&1 &
 
 ### [pack_local_origin_repository.sh](pack_local_origin_repository.sh):<br>
 backup local origin repository<br>
+该脚本是被本地的"远程"仓库的hooks/post-receive来调用的<br>
+该脚本会打包仓库至iCloud,然后hooks/post-receive会处理留存于iCloud上面的压缩包的数量<br>
 usage:<br>
 script.sh
 

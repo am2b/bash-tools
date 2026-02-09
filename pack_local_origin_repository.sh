@@ -2,6 +2,8 @@
 
 #=pack
 #@backup local origin repository
+#@该脚本是被本地的"远程"仓库的hooks/post-receive来调用的
+#@该脚本会打包仓库至iCloud,然后hooks/post-receive会处理留存于iCloud上面的压缩包的数量
 #@usage:
 #@script.sh
 
