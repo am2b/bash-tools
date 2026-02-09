@@ -954,7 +954,7 @@ usage:<br>
 send_mail.sh "subject" "body" recipient
 
 ### [sha1.sh](sha1.sh):<br>
-计算参数所指定的文件的sha1值<br>
+计算参数所指定的文件的sha1值,打印并且复制到剪贴板<br>
 usage:<br>
 script.sh file
 
@@ -976,7 +976,7 @@ usage:<br>
 script.sh dir
 
 ### [sha256.sh](sha256.sh):<br>
-计算参数所指定的文件的sha256值<br>
+计算参数所指定的文件的sha256值,打印并且复制到剪贴板<br>
 usage:<br>
 script.sh file
 

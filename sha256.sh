@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #=tools
-#@计算参数所指定的文件的sha256值
+#@计算参数所指定的文件的sha256值,打印并且复制到剪贴板
 #@usage:
 #@script.sh file
 
@@ -48,7 +48,7 @@ main() {
     local ret
     ret=$(sha256sum "$file" | awk '{print $1}')
 
-    echo "${ret}"
+    echo "${ret}" | tee /dev/tty | pbcopy
 }
 
 main "${@}"
