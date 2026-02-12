@@ -263,7 +263,7 @@ stash工作区的修改,和index的修改
 usage: script.sh tag_name
 
 ### [git_tag.sh](git_tag.sh):<br>
-打标签<br>
+打标签,并push标签<br>
 usage: script.sh tag_name
 
 ## git-tools:
