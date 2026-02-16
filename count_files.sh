@@ -8,6 +8,7 @@
 usage() {
     local script
     script=$(basename "$0")
+    echo "报告当前目录下非隐藏文件,隐藏文件以及总文件数量(非递归)"
     echo "usage:" >&2
     echo "$script" >&2
     exit "${1:-1}"
