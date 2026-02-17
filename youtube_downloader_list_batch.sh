@@ -13,8 +13,8 @@
 
 #播放列表URL
 playlist_url=""
-#默认每次下载10个视频
-batch_size=10
+#默认每次下载5个视频
+batch_size=5
 #是否使用cookies(默认为false)
 use_cookies=false
 #播放列表中视频的数量
