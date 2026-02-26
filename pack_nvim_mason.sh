@@ -2,6 +2,7 @@
 
 #=pack
 #@pack the dir of ~/.local/share/nvim/mason/packages/ to ~/pack/
+#@现在没有使用mason
 
 cd ~/.local/share/nvim/mason/ || exit 1
 
