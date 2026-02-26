@@ -461,7 +461,8 @@ usage:<br>
 nohup script.sh > /tmp/notes.log 2>&1 &
 
 ### [pack_nvim_mason.sh](pack_nvim_mason.sh):<br>
-pack the dir of ~/.local/share/nvim/mason/packages/ to ~/pack/
+pack the dir of ~/.local/share/nvim/mason/packages/ to ~/pack/<br>
+现在没有使用mason
 
 ### [pack_nvim_plugins.sh](pack_nvim_plugins.sh):<br>
 pack the dir of ~/.local/share/nvim/lazy/ to ~/pack/
