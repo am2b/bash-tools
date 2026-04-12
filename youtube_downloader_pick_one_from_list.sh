@@ -99,28 +99,45 @@ main() {
     fi
 
     #获取要下载的视频的名字
-    name=$(yt-dlp --no-warnings --get-filename -o "%(playlist_index)03d-%(title)s.%(ext)s" --playlist-start "$index" --playlist-end "$index" "$playlist_url")
+    local name
+    if [[ "$use_cookies" == true ]]; then
+        name=$(yt-dlp --cookies-from-browser chrome --no-warnings --get-filename -o "%(playlist_index)03d-%(title)s.%(ext)s" --playlist-start "$index" --playlist-end "$index" "$playlist_url")
+    else
+        name=$(yt-dlp --no-warnings --get-filename -o "%(playlist_index)03d-%(title)s.%(ext)s" --playlist-start "$index" --playlist-end "$index" "$playlist_url")
+    fi
+
     read -r -n 1 -p "下载:${name}? [Y/n]" answer
     echo
     case "${answer}" in
-    'y' | 'Y' | '')
-        down_flag=1
-        ;;
-    *)
-        down_flag=0
-        ;;
+        'y' | 'Y' | '')
+            down_flag=1
+            ;;
+        *)
+            down_flag=0
+            ;;
     esac
 
     if (("${down_flag}" == 0)); then exit 1; fi
 
-    opts=(
-        --format "bestvideo+bestaudio/best"
-        --merge-output-format mp4
-        -o "%(playlist_index)03d-%(title)s.%(ext)s"
-    )
-    [[ "$use_cookies" == true ]] && opts+=(--cookies-from-browser chrome)
+    if [[ "$use_cookies" == true ]]; then
+        #yt-dlp \
+        #    --cookies-from-browser chrome \
+        #    --format "bestvideo+bestaudio/best" \
+        #    --merge-output-format mp4 \
+        #    -o "%(playlist_index)03d-%(title)s.%(ext)s" \
+        #    --playlist-start "$index" --playlist-end "$index" "$playlist_url"
+        #另外一种方法
+        yt-dlp --cookies-from-browser chrome -f "bestvideo+bestaudio" --merge-output-format mp4 --concurrent-fragments 10 -o "%(playlist_index)03d-%(title)s.%(ext)s" --playlist-items "$index" "$playlist_url"
+    else
+        #yt-dlp \
+        #    --format "bestvideo+bestaudio/best" \
+        #    --merge-output-format mp4 \
+        #    -o "%(playlist_index)03d-%(title)s.%(ext)s" \
+        #    --playlist-start "$index" --playlist-end "$index" "$playlist_url"
+        #另外一种方法
+        yt-dlp -f "bestvideo+bestaudio" --merge-output-format mp4 --concurrent-fragments 10 -o "%(playlist_index)03d-%(title)s.%(ext)s" --playlist-items "$index" "$playlist_url"
+    fi
 
-    yt-dlp "${opts[@]}" --playlist-start "$index" --playlist-end "$index" "$playlist_url"
     STATUS=$?
     if (("${STATUS}" != 0)); then
         echo "============================="
