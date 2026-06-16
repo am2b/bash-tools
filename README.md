@@ -508,6 +508,12 @@ script.sh -o output_dir file/dir
 usage:<br>
 script.sh dir_from dir_to
 
+### [unpack_videos.sh](unpack_videos.sh):<br>
+这个脚本具有局限性,不能用于通用环境,不过可以作为参考<br>
+解压给定目录下的每个7z文件到参数所指定的目录<br>
+usage:<br>
+script.sh dir_from dir_to
+
 ## password:
 ### [keychain.sh](keychain.sh):<br>
 add,update,delete password in keychain<br>
