@@ -73,8 +73,8 @@ main() {
     check_parameters "${@}"
 
     local config="${1}"
-    echo "${config}"
-    exit 0
+    #echo "${config}"
+    #exit 0
     if [[ ! -f "${config}" ]]; then
         echo "error:配置文件错误"
         exit 1
