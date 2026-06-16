@@ -514,6 +514,12 @@ script.sh dir_from dir_to
 usage:<br>
 script.sh dir_from dir_to
 
+### [videos.sh](videos.sh):<br>
+把pack_videos.sh和unpack_videos.sh这两个脚本连接起来<br>
+usage:<br>
+script.sh dir<br>
+run_in_background script.sh dir
+
 ## password:
 ### [keychain.sh](keychain.sh):<br>
 add,update,delete password in keychain<br>
