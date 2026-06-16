@@ -5,9 +5,8 @@ export LC_ALL=en_US.UTF-8
 
 #=pack
 #@分别打包给定目录下的每个视频文件
-#@如果有字幕文件的话,会把字幕和视频打包到一个包里面
-#@打包后的文件和源文件在同一个目录下
-#@无法将video-01.mp4和video-02.mp4打包到同一个包里面,所以遇到这种情况请手动打包
+#@如果有字幕文件的话,会把字幕和视频打包到一个包里面,所以要求视频文件和字幕文件的名称中不要包含无谓的"."字符,比如不要这样:tit.le.mp4或者subt.itle.en.srt等,但是这样的名称是OK的:title.mp4或者subtitle.en.srt等
+#@打包结束后,打包后的文件夹会和原始的文件夹处于并列的位置,并且包含一个打包明细的txt文件
 #@usage:
 #@script.sh dir
 
@@ -90,8 +89,8 @@ generate_random_name() {
 
 normalize_basename() {
     local filename=$(basename -- "$1")
-    #去除最后一个后缀
-    local basename=${filename%.*}
+    #去除最长的后缀
+    local basename="${filename%%.*}"
 
     #英文字母统一小写,其他字符保持原样
     echo "$basename" | tr '[:upper:]' '[:lower:]'
