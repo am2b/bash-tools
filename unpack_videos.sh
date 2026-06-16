@@ -70,9 +70,9 @@ main() {
 
     #密码
     local password
-    local password_file=/tmp/7z-choice
+    local password_file=/tmp/7z-115-videos
     if [[ ! -f "${password_file}" ]]; then
-        if ! password=$(security find-generic-password -s "7z" -a "choice" -w 2>/dev/null); then
+        if ! password=$(security find-generic-password -s "7z" -a "115-videos" -w 2>/dev/null); then
             echo "error: failed to retrieve password from keychain" >&2
             exit 1
         fi
