@@ -62,13 +62,13 @@ main() {
     update_nvm.sh
 
     #更新rust
-    echo "----------------------------------------"
-    output=$(rustup update)
-    if echo "$output" | grep -q "unchanged"; then
-        echo "rust已是最新版本,无需更新"
-    else
-        echo "$output"
-    fi
+    #echo "----------------------------------------"
+    #output=$(rustup update)
+    #if echo "$output" | grep -q "unchanged"; then
+        #echo "rust已是最新版本,无需更新"
+    #else
+        #echo "$output"
+    #fi
 
     #更新oh my zsh
     echo "----------------------------------------"
