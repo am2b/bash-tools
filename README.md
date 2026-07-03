@@ -97,6 +97,11 @@ script.sh -t title input_audio output_audio
 ### [git_branch_status.sh](git_branch_status.sh):<br>
 按类别打印分支的状态
 
+### [git_create_branch_based_on_hash.sh](git_create_branch_based_on_hash.sh):<br>
+基于本地仓库的某个哈希值,在本地创建一个新的分支并切换到该分支<br>
+usage:<br>
+script.sh hash new_branch
+
 ### [git_create_branch_based_on_local_branch.sh](git_create_branch_based_on_local_branch.sh):<br>
 基于本地仓库的某个分支,在本地创建一个新的分支并切换到该分支<br>
 usage:<br>
