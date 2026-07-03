@@ -134,6 +134,9 @@ script.sh branch<br>
 当master包含了branch分支里面的所有提交,并且master还具有branch分支里面所没有的提交,这时候就可以根据master来更新branch分支
 
 ## git-clone:
+### [git_clone_depth.sh](git_clone_depth.sh):<br>
+在当前目录clone远程仓库,但是只拉取指定数字的深度
+
 ### [git_clone.sh](git_clone.sh):<br>
 在当前目录clone远程仓库
 
