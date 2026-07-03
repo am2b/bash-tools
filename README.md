@@ -15,11 +15,6 @@ enter easy to type mode for typing like chinese<br>
 usage:<br>
 script.sh
 
-### [find_alias.sh](find_alias.sh):<br>
-find aliases for a command<br>
-usage:<br>
-script.sh command_name or alias_name
-
 ## ffmpeg:
 ### [check_audio_from_info_file.sh](check_audio_from_info_file.sh):<br>
 检查info文件中是否包含参数所指定语言的audio流,并且该语言的audio流是否只有一个<br>
