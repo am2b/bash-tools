@@ -441,6 +441,13 @@ script.sh files... dirs...
 usage:<br>
 script.sh files... dirs...
 
+### [pack_dir.sh](pack_dir.sh):<br>
+分别打包给定目录下的每个文件,包含隐藏文件,但是不包含.DS_Store,不递归子目录<br>
+打包后的文件名格式:file.mkv -> file.7z,file.tar.gz -> file.7z,所以文件名中尽量不要包含无谓的'.'<br>
+打包结束后,打包后的文件夹会和原始的文件夹处于并列的位置<br>
+usage:<br>
+script.sh dir
+
 ### [pack_home_dots.sh](pack_home_dots.sh):<br>
 打包HOME目录下的一些隐藏文件<br>
 usage:<br>
