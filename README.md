@@ -448,6 +448,13 @@ script.sh files... dirs...
 usage:<br>
 script.sh dir
 
+### [pack_files.sh](pack_files.sh):<br>
+该脚本是对pack_dir.sh的补充,因为通过pack_dir.sh将给定目录下的文件分别单独打包后,以后可能又会给这个目录下新增文件,那么继续单独打包新增的文件就是pack_files.sh这个脚本的用处了<br>
+打包后的文件名格式:file.mkv -> file.7z,file.tar.gz -> file.7z,所以文件名中尽量不要包含无谓的'.'<br>
+打包后的文件会和原始的文件处于同一目录下<br>
+usage:<br>
+script.sh file1.mp4 file2.mkv ...
+
 ### [pack_home_dots.sh](pack_home_dots.sh):<br>
 打包HOME目录下的一些隐藏文件<br>
 usage:<br>
@@ -1037,8 +1044,13 @@ script.sh
 bring tar gzip zip and 7z together<br>
 usage:tgz.sh -h
 
+### [update_brew_cask.sh](update_brew_cask.sh):<br>
+仅更新通过homebrew安装的cask包<br>
+usage:<br>
+script.sh
+
 ### [update_brew.sh](update_brew.sh):<br>
-更新通过homebrew安装的包,包括Cask软件包<br>
+更新通过homebrew安装的包,不包括cask软件包<br>
 usage:<br>
 script.sh
 
