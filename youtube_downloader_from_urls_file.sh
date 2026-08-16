@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
 
 #=youtube
-#@视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频(未登录)
+#@视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频
+#@可以不登陆下载,也可以登陆后下载:-c
 #@usage:
 #@script.sh urls_file
+#@script.sh -c urls_file
+
+#是否使用cookies(默认为false)
+use_cookies=false
 
 usage() {
     local script
     script=$(basename "$0")
     echo "usage:" >&2
     echo "$script urls_file" >&2
+    echo "$script -c urls_file" >&2
     exit "${1:-1}"
 }
 
@@ -44,16 +50,19 @@ check_envs() {
 }
 
 check_parameters() {
-    if (("$#" != 1)); then
+    if (("$#" == 0)); then
         usage
     fi
 }
 
 process_opts() {
-    while getopts ":h" opt; do
+    while getopts ":hc" opt; do
         case $opt in
             h)
                 usage 0
+                ;;
+            c)
+                use_cookies=true
                 ;;
             *)
                 echo "error:unsupported option -$opt" >&2
@@ -102,7 +111,12 @@ main() {
         [[ $trimmed == \#* ]] && continue
 
         echo "==================================="
-        youtube_downloader.sh "${line}"
+        if [[ "${use_cookies}" == true ]]; then
+            youtube_downloader_after_sign_in.sh "${line}"
+        else
+            youtube_downloader.sh "${line}"
+        fi
+
         #生成30到60之间的随机数(包含30和60)
         local sleep_seconds=$((RANDOM % 31 + 30))
         echo "sleep ${sleep_seconds} seconds ..."
