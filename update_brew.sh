@@ -40,9 +40,9 @@ main() {
 
     brew update
 
-    #更新普通包
+    #仅更新普通包
     echo "----------------------------------------"
-    brew upgrade
+    brew upgrade --formula -y --yes
 
     echo "----------------------------------------"
     brew cleanup
