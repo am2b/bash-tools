@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #=tools
-#@更新通过homebrew安装的包,包括Cask软件包
+#@更新通过homebrew安装的包,不包括cask软件包
 #@usage:
 #@script.sh
 
@@ -44,58 +44,8 @@ main() {
     echo "----------------------------------------"
     brew upgrade
 
-    #更新Cask软件包
-    #管道符|仅捕获stdout内容
-    outdated_casks=$(brew outdated --cask --verbose | awk '{print $1}')
-    if [[ -n "${outdated_casks}" ]]; then
-        echo "----------------------------------------"
-        for app in ${outdated_casks}; do
-            brew upgrade --cask "${app}"
-        done
-    fi
-
     echo "----------------------------------------"
     brew cleanup
-
-    #更新nvm
-    echo "----------------------------------------"
-    update_nvm.sh
-
-    #更新rust
-    #echo "----------------------------------------"
-    #output=$(rustup update)
-    #if echo "$output" | grep -q "unchanged"; then
-        #echo "rust已是最新版本,无需更新"
-    #else
-        #echo "$output"
-    #fi
-
-    #更新oh my zsh
-    echo "----------------------------------------"
-    if [ -f "$HOME/.oh-my-zsh/tools/upgrade.sh" ]; then
-        output=$(zsh "$HOME/.oh-my-zsh/tools/upgrade.sh" 2>&1)
-
-        if echo "$output" | grep -q "error"; then
-            echo "${output}"
-        else
-            echo "Oh My Zsh has been updated"
-        fi
-    else
-        echo "Oh My Zsh未安装或路径不正确"
-    fi
-
-    #更新tldr
-    echo "----------------------------------------"
-    echo "正在更新tldr..."
-    output=$(tldr --update 2>&1)
-    exit_code=$?
-
-    if [ $exit_code -eq 0 ] && echo "${output}" | grep -iq "successfully"; then
-        echo "tldr已成功更新"
-    else
-        echo "tldr更新失败"
-        echo "错误信息: ${output}"
-    fi
 }
 
 main "${@}"
