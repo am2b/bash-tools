@@ -40,17 +40,20 @@ main() {
 
     brew update
 
-    #更新cask软件包
-    #管道符|仅捕获stdout内容
-    outdated_casks=$(brew outdated --cask --verbose | awk '{print $1}')
-    if [[ -n "${outdated_casks}" ]]; then
-        echo "----------------------------------------"
-        for app in ${outdated_casks}; do
-            brew upgrade --cask "${app}"
-        done
-    fi
-
+    #仅更新cask软件包
     echo "----------------------------------------"
+    brew upgrade --cask
+    echo "----------------------------------------"
+
+    #管道符|仅捕获stdout内容
+    #outdated_casks=$(brew outdated --cask --verbose | awk '{print $1}')
+    #if [[ -n "${outdated_casks}" ]]; then
+    #    echo "----------------------------------------"
+    #    for app in ${outdated_casks}; do
+    #        brew upgrade --cask "${app}"
+    #    done
+    #fi
+
     brew cleanup
 }
 
