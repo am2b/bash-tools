@@ -769,6 +769,11 @@ usage:<br>
 script.sh config.toml
 
 ## tools:
+### [add_x.sh](add_x.sh):<br>
+给文件添加x权限<br>
+usage:<br>
+script.sh file1 file2...
+
 ### [bak.sh](bak.sh):<br>
 create a file/dir.bak from file/dir,or create a file/dir from file/dir.bak<br>
 usage:<br>
