@@ -442,13 +442,14 @@ usage:<br>
 script.sh files... dirs...
 
 ### [pack_dir.sh](pack_dir.sh):<br>
-分别打包给定目录下的每个文件,包含隐藏文件,但是不包含.DS_Store,不递归子目录<br>
+分别加密打包给定目录下的每个文件,包含隐藏文件,但是不包含.DS_Store,不递归子目录<br>
 打包后的文件名格式:file.mkv -> file.7z,file.tar.gz -> file.7z,所以文件名中尽量不要包含无谓的'.'<br>
 打包结束后,打包后的文件夹会和原始的文件夹处于并列的位置<br>
 usage:<br>
 script.sh dir
 
 ### [pack_files.sh](pack_files.sh):<br>
+加密打包给定的文件<br>
 该脚本是对pack_dir.sh的补充,因为通过pack_dir.sh将给定目录下的文件分别单独打包后,以后可能又会给这个目录下新增文件,那么继续单独打包新增的文件就是pack_files.sh这个脚本的用处了<br>
 打包后的文件名格式:file.mkv -> file.7z,file.tar.gz -> file.7z,所以文件名中尽量不要包含无谓的'.'<br>
 打包后的文件会和原始的文件处于同一目录下<br>
@@ -1076,9 +1077,11 @@ usage:<br>
 script.sh url
 
 ### [youtube_downloader_from_urls_file.sh](youtube_downloader_from_urls_file.sh):<br>
-视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频(未登录)<br>
+视频下载器:参数文件中的每一行都是一个url,脚本会依次下载这些url所指定的视频<br>
+可以不登陆下载,也可以登陆后下载:-c<br>
 usage:<br>
-script.sh urls_file
+script.sh urls_file<br>
+script.sh -c urls_file
 
 ### [youtube_downloader_list_batch.sh](youtube_downloader_list_batch.sh):<br>
 视频下载器:<br>
