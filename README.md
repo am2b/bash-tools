@@ -780,6 +780,12 @@ usage:<br>
 bak.sh file/dir -> file/dir.bak<br>
 bak.sh file/dir.bak -> file/dir
 
+### [binsplit_assistant.sh](binsplit_assistant.sh):<br>
+在binsplit把多个文件分割完成后,执行该脚本从各个parts子目录里收取manifests文件和所有的文件片段<br>
+usage:<br>
+script.sh dir<br>
+dir:包含多个file1.parts,file2.parts的目录
+
 ### [cat_files.sh](cat_files.sh):<br>
 拼接文本文件<br>
 usage:<br>
