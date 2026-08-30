@@ -42,7 +42,7 @@ main() {
 
     #仅更新普通包
     echo "----------------------------------------"
-    brew upgrade --formula -y --yes
+    brew upgrade --formula --no-ask
 
     echo "----------------------------------------"
     brew cleanup

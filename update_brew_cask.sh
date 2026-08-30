@@ -42,7 +42,7 @@ main() {
 
     #仅更新cask软件包
     echo "----------------------------------------"
-    brew upgrade --cask
+    brew upgrade --cask --no-ask
     echo "----------------------------------------"
 
     #管道符|仅捕获stdout内容
