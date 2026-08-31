@@ -7,7 +7,8 @@
 #@无需提前切换到local_branch
 
 if [ "$#" -ne 2 ]; then
-    echo "usage: $0 <local_branch> <new_branch>"
+    echo "usage:"
+    echo "$(basename $0) <local_branch> <new_branch>"
     exit 1
 fi
 
