@@ -5,6 +5,8 @@
 #@usage:
 #@nohup script.sh > /tmp/pack_home_dots.log 2>&1 &
 
+readonly ICLOUD_PATH="${HOME}/Library/Mobile Documents/com~apple~CloudDocs"
+
 usage() {
     local script
     script=$(basename "$0")
@@ -16,13 +18,13 @@ usage() {
 process_opts() {
     while getopts ":h" opt; do
         case $opt in
-        h)
-            usage 0
-            ;;
-        *)
-            echo "error:unsupported option -$opt" >&2
-            usage
-            ;;
+            h)
+                usage 0
+                ;;
+            *)
+                echo "error:unsupported option -$opt" >&2
+                usage
+                ;;
         esac
     done
 }
@@ -103,7 +105,7 @@ main() {
 
     #密码
     local password
-    if ! password=$(security find-generic-password -s "7z" -a "save-home-dots" -w 2>/dev/null); then
+    if ! password=$(security find-generic-password -s "7z" -a "save-home-dots" -w 2> /dev/null); then
         echo "error: failed to retrieve password from keychain" >&2
         exit 1
     fi
@@ -117,7 +119,7 @@ main() {
         base_name=$(basename "${file}")
         TIMESTAMP=$(date +"%Y-%m-%d")
         pack_name="${base_name%%.*}-${TIMESTAMP}.7z"
-        if ! 7z a -p"${password}" -mhe=on -mx=0 "${pack_name}" "${base_name}" &>/dev/null; then
+        if ! 7z a -p"${password}" -mhe=on -mx=0 "${pack_name}" "${base_name}" &> /dev/null; then
             echo "打包失败:${pack_name}" >&2
             exit 1
         fi
@@ -129,8 +131,7 @@ main() {
     cd ~ || exit 1
 
     #移动${save_dir}至iCloud
-    local dest_dir
-    dest_dir="${ICLOUD_PATH}"/Home-dots
+    local -r dest_dir="${ICLOUD_PATH}"/Home-dots
     mkdir -p "${dest_dir}"
     mv "${save_dir}" "${dest_dir}"
 

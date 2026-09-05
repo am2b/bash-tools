@@ -9,7 +9,9 @@
 
 name_tar=""
 name_7z=""
-dest_dir="${ICLOUD_PATH}"/Origin
+
+readonly ICLOUD_PATH="${HOME}/Library/Mobile Documents/com~apple~CloudDocs"
+readonly dest_dir="${ICLOUD_PATH}"/Origin
 
 usage() {
     local script
