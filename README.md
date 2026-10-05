@@ -1,15 +1,4 @@
 ## convenient:
-### [clean_markdown_format_in_chatgpt.sh](clean_markdown_format_in_chatgpt.sh):<br>
-clean up the markdown format in chatgpt<br>
-usage:<br>
-script.sh file<br>
-pbpaste | script.sh | pbcopy
-
-### [clean_markdown_format_in_gemini.sh](clean_markdown_format_in_gemini.sh):<br>
-clean up the markdown format in google gemini<br>
-usage:<br>
-script.sh
-
 ### [easy_to_type_mode.sh](easy_to_type_mode.sh):<br>
 enter easy to type mode for typing like chinese<br>
 usage:<br>
@@ -1046,10 +1035,6 @@ script.sh
 更新通过homebrew安装的包,不包括cask软件包<br>
 usage:<br>
 script.sh
-
-### [zip_folder_exclude_git.sh](zip_folder_exclude_git.sh):<br>
-zip a folder but exclude .git and .DS_Store<br>
-usage:bash script_name.sh /path/to/directory
 
 ## transfer:
 ### [curl_download_https.sh](curl_download_https.sh):<br>
