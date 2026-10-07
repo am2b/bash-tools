@@ -6,6 +6,8 @@
 #@script.sh [+]/-天数
 #@script.sh [+]/-天数 基准日期(YYYY-MM-DD)
 
+set -euo pipefail
+
 usage() {
     local script
     script=$(basename "$0")
@@ -21,38 +23,19 @@ check_parameters() {
     fi
 }
 
-is_gnu_command() {
-    local cmd="$1"
-    local path
-
-    if ! path=$(command -v "$cmd"); then
-        echo "Command not found:$cmd" >&2
-        return 2
-    fi
-
-    if "$path" --version 2>/dev/null | grep -q "GNU"; then
-        echo "GNU"
-        return 0
-    fi
-
-    if command -v strings >/dev/null; then
-        if strings "$path" 2>/dev/null | grep -qi "GNU"; then
-            echo "GNU"
-            return 0
-        fi
-    fi
-
-    echo "BSD"
-    return 1
+is_gnu_date() {
+    #-d:能算出正确结果就是GNU,否则就是BSD
+    [[ $(date -d "2026-01-01 1 day" +%F 2> /dev/null) == "2026-01-02" ]]
 }
 
 calculate_date() {
     local days=$1
+    days=${days#+}
     #默认使用当天
     local base_date=${2:-$(date +%F)}
 
     #GNU date
-    if is_gnu_command date >/dev/null; then
+    if is_gnu_date date > /dev/null; then
         #-d:指定输入日期字符串
         #+%F:%Y-%m-%d
         date -d "$base_date $days days" +%F
@@ -70,13 +53,18 @@ calculate_date() {
 }
 
 main() {
-    if [[ $1 == "-h" ]]; then
+    check_parameters "${@}"
+
+    if [[ $1 == "-h" || $1 == "--help" ]]; then
         usage 0
     fi
 
-    check_parameters "${@}"
-
     if [[ $1 =~ ^[+-]?[0-9]+$ ]]; then
+        #基准日期格式校验:BSD的-f "%Y-%m-%d" 对非法输入只会报原始错误
+        if (($# == 2)) && [[ ! $2 =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+            echo "错误:基准日期必须为 YYYY-MM-DD 格式" >&2
+            exit 2
+        fi
         calculate_date "$1" "$2"
     else
         echo "错误:天数参数必须为整数(可带+-号)"
