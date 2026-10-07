@@ -405,12 +405,6 @@ script.sh
 usage:<br>
 script.sh files... dirs...
 
-### [mytgz.sh](mytgz.sh):<br>
-对tar,gzip打包操作的一个包装<br>
-注意:没有解包功能,解包命令:tar -xzvf pack.tar.gz或者x pack.tar.gz<br>
-usage:<br>
-script.sh files... dirs...
-
 ### [pack_dir.sh](pack_dir.sh):<br>
 分别加密打包给定目录下的每个文件,包含隐藏文件,但是不包含.DS_Store,不递归子目录<br>
 打包后的文件名格式:file.mkv -> file.7z,file.tar.gz -> file.7z,所以文件名中尽量不要包含无谓的'.'<br>
@@ -1006,10 +1000,6 @@ smart mv
 
 ### [smart_rm.sh](smart_rm.sh):<br>
 smart rm
-
-### [tar_gzip_folder_exclude_git.sh](tar_gzip_folder_exclude_git.sh):<br>
-tgz a folder but exclude .git and .DS_Store<br>
-usage:bash script_name.sh /path/to/directory
 
 ### [test_connect_to_google.sh](test_connect_to_google.sh):<br>
 在命令行测试,是否可以连接到google<br>
