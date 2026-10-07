@@ -786,12 +786,6 @@ clear pbcopy<br>
 usage:<br>
 script.sh
 
-### [clear_subdirectory.sh](clear_subdirectory.sh):<br>
-快速清空参数所给的子目录
-
-### [clear_tmp.sh](clear_tmp.sh):<br>
-clear $HOME/tmp
-
 ### [collect_files_in_subdirectories.sh](collect_files_in_subdirectories.sh):<br>
 移动参数目录下的子目录里面的所有文件到参数目录,然后删除空的子目录<br>
 usage:<br>
