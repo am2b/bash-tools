@@ -759,14 +759,6 @@ cd to marker,which located in ~/.marker_dirs<br>
 usage:<br>
 source script.sh marker
 
-### [chinese_characters_to_pinyin.sh](chinese_characters_to_pinyin.sh):<br>
-将汉字转换为拼音,或拼音的首字母<br>
-usage:<br>
-转换为拼音:<br>
-script.sh 汉字<br>
-转换为拼音的首字母:<br>
-script.sh -f 汉字
-
 ### [clear_clipboard.sh](clear_clipboard.sh):<br>
 clear pbcopy<br>
 usage:<br>
