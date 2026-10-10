@@ -15,9 +15,9 @@ usage() {
 
 #Linux用sha256sum,macOS用shasum -a 256
 sha256() {
-    if command -v sha256sum &>/dev/null; then
+    if command -v sha256sum &> /dev/null; then
         sha256sum "$1" | awk '{print $1}'
-    elif command -v shasum &>/dev/null; then
+    elif command -v shasum &> /dev/null; then
         shasum -a 256 "$1" | awk '{print $1}'
     else
         echo "error: 找不到 sha256sum 或 shasum 命令" >&2
@@ -28,8 +28,11 @@ sha256() {
 main() {
     while getopts ":h" opt; do
         case "$opt" in
-        h) usage 0 ;;
-        \?) echo "error: 未知选项 -$OPTARG" >&2; usage 1 ;;
+            h) usage 0 ;;
+            \?)
+                echo "error: 未知选项 -$OPTARG" >&2
+                usage 1
+                ;;
         esac
     done
     shift $((OPTIND - 1))
