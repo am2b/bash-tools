@@ -1,94 +1,95 @@
 #!/usr/bin/env bash
 
 #=gpg
-#@使用gpg对称加密,解密一个字符串
+#@使用gpg对称加密/解密字符串(密码从macOS钥匙串获取)
 #@usage:
-#@encrypt:
-#@script.sh -e string
-#@decrypt:
-#@script.sh -d string
+#@gpg_encrypt_decrypt_string.sh -e string
+#@gpg_encrypt_decrypt_string.sh -d -- '-----BEGIN PGP MESSAGE----- another line XXXXXXXXXX another line -----END PGP MESSAGE-----'
+
+set -euo pipefail
 
 usage() {
     local script
     script=$(basename "$0")
-    echo "usage:"
-    echo "encrypt:${script} -e string_to_encrypt"
-    echo "decrypt:${script} -d string_to_decrypt"
-    exit 1
-}
+    cat >&2 << EOF
+使用 GPG 对称加密/解密字符串。
 
-check_parameters() {
-    if (("$#" != 2)); then
-        usage
-    fi
+密码从 macOS 钥匙串读取(service: gpg-symmetric, account: \$MAIL_GMAIL_MAIN)。
 
-    if [[ -z "${2}" ]]; then
-        usage
-    fi
-}
+用法:
+  $script -e <字符串>     加密
+  $script -d <字符串>     解密
 
-process_opts() {
-    while getopts ":hed" opt; do
-        case $opt in
-        h)
-            usage
-            ;;
-        e)
-            ENCRYPT=true
-            ;;
-        d)
-            DECRYPT=true
-            ;;
-        *)
-            echo "error:unsupported option -$opt"
-            usage
-            ;;
-        esac
-    done
-}
-
-do_encrypt() {
-    #对称加密,使用GPG加密明文字符串,输出为ASCII编码(可打印的字符串)
-    ENCRYPTED_STRING=$(echo -n "$STRING" | gpg --batch --yes --passphrase "$KEYCHAIN_PASSWORD" --symmetric --armor)
-
-    if [[ $? -eq 0 ]]; then
-        echo "encrypted text:"
-        echo "${ENCRYPTED_STRING}"
-    else
-        echo "error:encryption failed"
-        exit 1
-    fi
-}
-
-do_decrypt() {
-    DECRYPTED_STRING=$(echo "$STRING" | gpg --quiet --batch --yes --passphrase "$KEYCHAIN_PASSWORD" --decrypt)
-
-    if [[ $? -eq 0 ]]; then
-        echo "decrypted text:"
-        echo "${DECRYPTED_STRING}"
-    else
-        echo "error:decryption failed"
-        exit 1
-    fi
+选项:
+  -h    显示此帮助信息
+EOF
+    exit "${1:-1}"
 }
 
 main() {
-    check_parameters "${@}"
-
-    process_opts "${@}"
-
+    local mode=""
+    while getopts ":hed" opt; do
+        case "$opt" in
+            h) usage 0 ;;
+            e) mode="encrypt" ;;
+            d) mode="decrypt" ;;
+            \?)
+                echo "error: unsupported option -$OPTARG" >&2
+                usage 1
+                ;;
+            :)
+                echo "error: option -$OPTARG requires an argument" >&2
+                usage 1
+                ;;
+        esac
+    done
     shift $((OPTIND - 1))
 
-    STRING="$1"
+    if [[ -z "$mode" ]]; then
+        echo "error: 必须指定 -e(加密) 或 -d(解密)" >&2
+        usage 1
+    fi
 
-    #从macOS钥匙串获取GPG对称加密的密码
-    KEYCHAIN_PASSWORD=$(security find-generic-password -s "gpg-symmetric" -a "${MAIL_GMAIL_MAIN}" -w)
+    if (($# != 1)); then
+        echo "error: 需要一个字符串参数" >&2
+        usage 1
+    fi
 
-    if [[ "$ENCRYPT" == true ]]; then
-        do_encrypt
-    elif [[ "$DECRYPT" == true ]]; then
-        do_decrypt
+    local string="$1"
+
+    # 从钥匙串获取密码
+    if ! command -v security &> /dev/null; then
+        echo "error: 此脚本依赖 macOS 钥匙串 (security 命令)" >&2
+        exit 1
+    fi
+
+    local passphrase
+    if ! passphrase=$(security find-generic-password -s "gpg-symmetric" -a "${MAIL_GMAIL_MAIN:?需要设置环境变量 MAIL_GMAIL_MAIN}" -w 2> /dev/null); then
+        echo "error: 无法从钥匙串获取密码" >&2
+        exit 1
+    fi
+    if [[ -z "$passphrase" ]]; then
+        echo "error: 钥匙串返回了空密码" >&2
+        exit 1
+    fi
+
+    if [[ "$mode" == "encrypt" ]]; then
+        local encrypted
+        if ! encrypted=$(printf '%s' "$string" | gpg --batch --yes --passphrase-fd 3 --symmetric --armor 3<<< "$passphrase" 2> /dev/null); then
+            echo "error: encryption failed" >&2
+            exit 1
+        fi
+        echo "encrypted text:"
+        echo "$encrypted"
+    else
+        local decrypted
+        if ! decrypted=$(printf '%s' "$string" | gpg --batch --yes --quiet --passphrase-fd 3 --decrypt 3<<< "$passphrase" 2> /dev/null); then
+            echo "error: decryption failed (密码错误或密文损坏?)" >&2
+            exit 1
+        fi
+        echo "decrypted text:"
+        echo "$decrypted"
     fi
 }
 
-main "${@}"
+main "$@"
