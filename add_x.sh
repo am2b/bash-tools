@@ -83,13 +83,14 @@ process_opts() {
 
 main() {
     local REQUIRED_TOOLS=()
-    check_dependent_tools "${REQUIRED_TOOLS[@]:-}"
+    check_dependent_tools "${REQUIRED_TOOLS[@]}"
 
     local REQUIRED_ENVS=()
-    check_envs "${REQUIRED_ENVS[@]:-}" || exit 1
+    check_envs "${REQUIRED_ENVS[@]}" || exit 1
 
     process_opts "$@"
     shift $((OPTIND - 1))
+
     check_parameters "$@"
 
     local exit_code=0
