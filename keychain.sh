@@ -16,7 +16,7 @@
 #@keychain.sh -g --[or ,] service_name account_name
 
 usage() {
-cat << EOF
+    cat << EOF
 usage:
 add:
 keychain.sh -a --[or ,] service_name account_name 'password'
@@ -97,7 +97,7 @@ parse_options() {
         parameters=$(echo "$parameters" | sed -E 's/ *, */ , /g; s/ *-- */ -- /g')
     fi
     #把字符串转换为普通数组
-    IFS=' ' read -r -a parameters <<<"$parameters"
+    IFS=' ' read -r -a parameters <<< "$parameters"
     set -- "${parameters[@]}"
 
     # 用于存储拆分后的选项
@@ -136,69 +136,69 @@ parse_options() {
     #每个选项负责吃掉自己的参数值,如果有的话
     while [[ "$1" != "" ]]; do
         case "$1" in
-        -- | ,)
-            shift
-            ((SHIFT_VALUE++))
-            break
-            ;;
-        -*)
-            #获取选项字母
-            #${1:1:1}表示对第一个参数$1执行字符串切片操作,从第二个字符开始(索引为1),取1个字符.因此,opt=${1:1:1}的作用是将$1的第二个字符赋值给变量opt
-            opt=${1:1:1}
-            #如果opt在option_string的描述里面
-            if [[ "$option_string" == *"$opt"* ]]; then
-                if [[ "$option_string" == *"$opt;"* ]]; then
-                    #处理多个参数的选项
-                    multiple_values=()
-                    shift
-                    ((SHIFT_VALUE++))
-                    while [[ "$1" != "" && "$1" != -* && "$1" != "--" && "$1" != "," ]]; do
-                        multiple_values+=("$1")
+            -- | ,)
+                shift
+                ((SHIFT_VALUE++))
+                break
+                ;;
+            -*)
+                #获取选项字母
+                #${1:1:1}表示对第一个参数$1执行字符串切片操作,从第二个字符开始(索引为1),取1个字符.因此,opt=${1:1:1}的作用是将$1的第二个字符赋值给变量opt
+                opt=${1:1:1}
+                #如果opt在option_string的描述里面
+                if [[ "$option_string" == *"$opt"* ]]; then
+                    if [[ "$option_string" == *"$opt;"* ]]; then
+                        #处理多个参数的选项
+                        multiple_values=()
                         shift
                         ((SHIFT_VALUE++))
-                    done
-                    if [[ ${#multiple_values[@]} -eq 0 ]]; then
-                        echo "error:option -$opt requires at least one value."
-                        exit 1
-                    fi
-                    OPTIONS["$opt"]="${multiple_values[*]}"
-                elif [[ "$option_string" == *"$opt:"* ]]; then
-                    #处理单个参数的选项
-                    shift
-                    ((SHIFT_VALUE++))
-                    if [[ "$1" != "" && "$1" != -* && "$1" != "--" && "$1" != "," ]]; then
-                        OPTIONS["$opt"]="$1"
+                        while [[ "$1" != "" && "$1" != -* && "$1" != "--" && "$1" != "," ]]; do
+                            multiple_values+=("$1")
+                            shift
+                            ((SHIFT_VALUE++))
+                        done
+                        if [[ ${#multiple_values[@]} -eq 0 ]]; then
+                            echo "error:option -$opt requires at least one value."
+                            exit 1
+                        fi
+                        OPTIONS["$opt"]="${multiple_values[*]}"
+                    elif [[ "$option_string" == *"$opt:"* ]]; then
+                        #处理单个参数的选项
                         shift
                         ((SHIFT_VALUE++))
-                        #如果给:多于1个值的话
                         if [[ "$1" != "" && "$1" != -* && "$1" != "--" && "$1" != "," ]]; then
-                            echo "error:option -$opt just requires one value."
+                            OPTIONS["$opt"]="$1"
+                            shift
+                            ((SHIFT_VALUE++))
+                            #如果给:多于1个值的话
+                            if [[ "$1" != "" && "$1" != -* && "$1" != "--" && "$1" != "," ]]; then
+                                echo "error:option -$opt just requires one value."
+                                exit 1
+                            fi
+                        else
+                            echo "error:option -$opt requires a value."
                             exit 1
                         fi
                     else
-                        echo "error:option -$opt requires a value."
-                        exit 1
+                        #处理布尔选项
+                        shift
+                        ((SHIFT_VALUE++))
+                        if [[ "$1" == "" || "$1" == -* || "$1" == "--" || "$1" == "," ]]; then
+                            OPTIONS["$opt"]=0
+                        else
+                            echo "error:option -$opt does not require a value."
+                            exit 1
+                        fi
                     fi
                 else
-                    #处理布尔选项
-                    shift
-                    ((SHIFT_VALUE++))
-                    if [[ "$1" == "" || "$1" == -* || "$1" == "--" || "$1" == "," ]]; then
-                        OPTIONS["$opt"]=0
-                    else
-                        echo "error:option -$opt does not require a value."
-                        exit 1
-                    fi
+                    echo "error:unrecognized option -$opt"
+                    exit 1
                 fi
-            else
-                echo "error:unrecognized option -$opt"
+                ;;
+            *)
+                echo "usage:parse_options option_string -options option_values --[or ,] position_values"
                 exit 1
-            fi
-            ;;
-        *)
-            echo "usage:parse_options option_string -options option_values --[or ,] position_values"
-            exit 1
-            ;;
+                ;;
         esac
     done
 }
@@ -223,7 +223,7 @@ PASSWORD="${3}"
 
 #检查是否有同名项
 function check_existing_item {
-    security find-generic-password -s "$SERVICE_NAME" -a "$ACCOUNT_NAME" &>/dev/null
+    security find-generic-password -s "$SERVICE_NAME" -a "$ACCOUNT_NAME" &> /dev/null
     #如果找到了就返回0,否则返回非0
     return $?
 }
