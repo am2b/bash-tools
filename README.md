@@ -217,6 +217,14 @@ script.sh "some_string"
 ### [git_reset_HEAD.sh](git_reset_HEAD.sh):<br>
 重置本地的HEAD到某个提交(回退到git commit之前,git add之后)
 
+## git-restore:
+### [git_restore_file_previous_version.sh](git_restore_file_previous_version.sh):<br>
+将某个文件恢复成其"上一个版本"(该文件最近两次改动中,较旧的那次提交里的内容)<br>
+usage:<br>
+script.sh <文件路径>        恢复文件内容<br>
+script.sh -n <文件路径>     dry run<br>
+script.sh -f <文件路径>     文件有未提交改动时也强制覆盖(默认拒绝并退出)
+
 ## git-revert:
 ### [git_revert.sh](git_revert.sh):<br>
 反转指定提交的更改(适用于本地和远程)<br>
@@ -308,15 +316,13 @@ usage:<br>
 encrypt:<br>
 script.sh -e file<br>
 decrypt:<br>
-script.sh -d file
+script.sh -d file.gpg
 
 ### [gpg_encrypt_decrypt_string.sh](gpg_encrypt_decrypt_string.sh):<br>
-使用gpg对称加密,解密一个字符串<br>
+使用gpg对称加密/解密字符串(密码从macOS钥匙串获取)<br>
 usage:<br>
-encrypt:<br>
-script.sh -e string<br>
-decrypt:<br>
-script.sh -d string
+gpg_encrypt_decrypt_string.sh -e string<br>
+gpg_encrypt_decrypt_string.sh -d -- '-----BEGIN PGP MESSAGE----- another line XXXXXXXXXX another line -----END PGP MESSAGE-----'
 
 ### [gpg_export_keys.sh](gpg_export_keys.sh):<br>
 export public key and private key<br>
@@ -726,9 +732,9 @@ script.sh config.toml
 
 ## tools:
 ### [add_x.sh](add_x.sh):<br>
-给文件添加x权限<br>
+给文件添加所有人可执行权限(chmod a+x)<br>
 usage:<br>
-script.sh file1 file2...
+add_x.sh [-h] file1 file2...
 
 ### [bak.sh](bak.sh):<br>
 create a file/dir.bak from file/dir,or create a file/dir from file/dir.bak<br>
@@ -746,8 +752,7 @@ dir:包含多个file1.parts,file2.parts的目录
 拼接文本文件<br>
 usage:<br>
 script.sh(默认当前目录)<br>
-script.sh dir<br>
-script.sh files
+script.sh [-o output] [dir | file1 file2 ...]
 
 ### [change_dir_like_cross.sh](change_dir_like_cross.sh):<br>
 横向:在兄弟目录之间跳转<br>
@@ -832,7 +837,9 @@ usage:<br>
 script.sh remote_path_to_dir_or_file
 
 ### [file_is_equal.sh](file_is_equal.sh):<br>
-通过计算两个文件的sha256来判断两个文件是否相同
+通过计算两个文件的sha256来判断两个文件是否相同<br>
+usage:<br>
+file_is_equal.sh file1 file2
 
 ### [find_files_in_a_dir.sh](find_files_in_a_dir.sh):<br>
 查找文件<br>
@@ -896,11 +903,6 @@ list non-hidden symbolic link:<br>
 script.sh --non-hidden [path]<br>
 list hidden symbolic link:<br>
 script.sh --hidden [path]
-
-### [mac_clean.sh](mac_clean.sh):<br>
-清理mac的系统数据<br>
-usage:<br>
-script.sh
 
 ### [mann.sh](mann.sh):<br>
 man command | col -bx > command.txt<br>
