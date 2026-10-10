@@ -292,15 +292,8 @@ TMP_PRIVATE=""
 # ----------------------------------------------------------------------------
 
 echo "GPG key backup completed successfully."
-echo
-echo "Fingerprint:"
-echo "  ${KEY_FINGERPRINT}"
-echo
 echo "Public key:"
 echo "  ${PUBLIC_KEY_FILE}"
 echo
 echo "Private key:"
 echo "  ${PRIVATE_KEY_FILE}"
-echo
-echo "Private-key permissions:"
-ls -l "${PRIVATE_KEY_FILE}"
