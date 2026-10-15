@@ -912,6 +912,9 @@ script.sh command
 ### [new_script.sh](new_script.sh):<br>
 create a new script
 
+### [portal.sh](portal.sh):<br>
+在当前目录与~/Downloads之间传递文件
+
 ### [print_env_path.sh](print_env_path.sh):<br>
 print $PATH
 
