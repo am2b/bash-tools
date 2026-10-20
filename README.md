@@ -818,6 +818,15 @@ usage:<br>
 script.sh [+]/-天数<br>
 script.sh [+]/-天数 基准日期(YYYY-MM-DD)
 
+### [delete_executables.sh](delete_executables.sh):<br>
+删除当前目录下的可执行文件(普通文件且拥有可执行权限(execute bit))<br>
+usage:<br>
+script.sh                仅当前目录(不递归),先预览再确认<br>
+script.sh --recursive    递归删除所有子目录下的可执行文件<br>
+script.sh --dry-run      仅预览,不实际删除<br>
+script.sh --yes          跳过确认,直接删除<br>
+script.sh --help         查看帮助
+
 ### [delete_old_files.sh](delete_old_files.sh):<br>
 keep only the latest few files and delete the older ones<br>
 usage:<br>
