@@ -144,7 +144,7 @@ main() {
     echo "源目录  : $SRC_DIR"
     echo "目标目录: $DST_DIR"
     echo "7z 程序 : $SEVEN_ZIP"
-    echo "CPU 核心: $(getconf _NPROCESSORS_ONLN 2> /dev/null || echo '未知')  线程策略: -mmt=on (全部核心)"
+    echo "CPU 核心: $(getconf _NPROCESSORS_ONLN 2> /dev/null || echo '未知')"
     echo "压缩包数: $TOTAL"
     echo "=================================================="
     echo
@@ -172,10 +172,10 @@ main() {
 
         mkdir -p "$out_dir"
 
-        # -mmt:利用多核CPU
+        # -mmt:利用多核CPU(7zz默认打开)
         # -y:‌对所有提示自动回答Yes(应该不存在解压时文件覆盖的情况,因为不会将完全同名的文件打包在同一个7z包里面)
         # -o和输出路径之间可以没有空格
-        if "$SEVEN_ZIP" x "$archive" -p"$PASSWORD" -mmt=on -y -o"$out_dir"; then
+        if "$SEVEN_ZIP" x "$archive" -p"$PASSWORD" -y -o"$out_dir"; then
             echo "[$idx/$TOTAL] 完成: $base"
             OK_COUNT=$((OK_COUNT + 1))
         else
