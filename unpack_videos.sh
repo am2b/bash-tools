@@ -85,7 +85,7 @@ main() {
     #解压
     find "${dir_from}" -maxdepth 1 -type f -name '*.7z' | while read -r archive; do
         echo "正在解压:${archive##*/}"
-        if ! 7z x "${archive}" -p"${password}" -o"${dir_to}" &>/dev/null; then
+        if ! 7zz x "${archive}" -p"${password}" -o"${dir_to}" &>/dev/null; then
             echo "❌解压失败:${archive##*/}"
             exit 1
         fi

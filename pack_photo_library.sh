@@ -47,6 +47,6 @@ password=$(security find-generic-password -s "Photos-Library" -a "backup" -w) ||
 }
 
 cd "${src_parent_dir}" || exit 1
-7z -xr!'.DS_Store' a -p"${password}" -mhe=on -mx=0 ~/Downloads/"${archive}" "${src_dir}" &>/dev/null
+7zz -xr!'.DS_Store' a -p"${password}" -mhe=on -mx=0 ~/Downloads/"${archive}" "${src_dir}" &>/dev/null
 
 osascript -e 'display notification "打包相册的任务已完成" with title "打包相册" sound name "Glass"'

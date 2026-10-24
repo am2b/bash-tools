@@ -173,7 +173,7 @@ main() {
         #'##'是"最长匹配",'#'是"最短匹配"
         #&>/dev/null:将标准输出(stdout)和标准错误(stderr)都重定向到/dev/null
         #&>/dev/null只是重定向输出,不会对命令的退出码(即$?)有影响
-        if ! 7z a -p"${password}" -mhe=on -mx=0 "${pack_name}" "${files[@]##*/}" &>/dev/null; then
+        if ! 7zz a -p"${password}" -mhe=on -mx=0 "${pack_name}" "${files[@]##*/}" &>/dev/null; then
             echo "打包失败:${pack_name}" >&2
             exit 1
         fi

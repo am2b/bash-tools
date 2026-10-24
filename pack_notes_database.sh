@@ -55,7 +55,7 @@ if [[ $? -ne 0 ]]; then
     exit 1
 fi
 
-7z -xr!'.DS_Store' a -p"${password}" -mhe=on -mx=0 "${archive_name_7z}" "${archive_name_tar}" &>/dev/null
+7zz -xr!'.DS_Store' a -p"${password}" -mhe=on -mx=0 "${archive_name_7z}" "${archive_name_tar}" &>/dev/null
 
 if [[ ! -f "${HOME}"/Downloads/"${archive_name_7z}" ]]; then
     mv "${archive_name_7z}" "${HOME}"/DownLoads

@@ -83,7 +83,7 @@ main() {
     local pack_name
     while IFS= read -r file; do
         pack_name=$(generate_packname "${file}")
-        if ! 7z a -p"${password}" -mhe=on -mx=0 "${pack_name}" "${file}" &>/dev/null; then
+        if ! 7zz a -p"${password}" -mhe=on -mx=0 "${pack_name}" "${file}" &>/dev/null; then
             echo "打包失败:${pack_name}" >&2
             exit 1
         fi

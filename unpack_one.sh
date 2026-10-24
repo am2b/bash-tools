@@ -96,7 +96,7 @@ get_password() {
 unpack_7z() {
     local pack="${1}"
 
-    7z x "${pack}" -p"${password}" -o"${output_dir}" 1> /dev/null
+    7zz x "${pack}" -p"${password}" -o"${output_dir}" 1> /dev/null
 }
 
 set_output_dir() {
@@ -114,7 +114,7 @@ set_output_dir() {
 }
 
 main() {
-    REQUIRED_TOOLS=(7z)
+    REQUIRED_TOOLS=(7zz)
     check_dependent_tools "${REQUIRED_TOOLS[@]}"
     REQUIRED_ENVS=(SAFE_ONE)
     check_envs "${REQUIRED_ENVS[@]}" || exit 1

@@ -303,7 +303,7 @@ function create_archive() {
     elif [[ "$ext" == "${ext_7z}" ]]; then
         #files encrypted using the .7z format are encrypted with AES-256 encryption by default
         #-mx=0 means copy mode (no compression)
-        7z -xr!'.DS_Store' -xr!'.git' a -p"${password}" -mhe=on -mx=0 "${archive_name}" "$@" &>/dev/null
+        7zz -xr!'.DS_Store' -xr!'.git' a -p"${password}" -mhe=on -mx=0 "${archive_name}" "$@" &>/dev/null
     elif [[ "$ext" == "${ext_tar_7z}" ]] || [[ "$ext" == "${ext_t7z}" ]]; then
         #remove suffix:.7z,.tar.7z,.t7z
         local archive_name_without_suffix
@@ -311,7 +311,7 @@ function create_archive() {
         local archive_tar_name
         archive_tar_name="${archive_name_without_suffix}".tar
         tar --exclude='.DS_Store' --exclude='.git' -c"${v}"f "$archive_tar_name" "$@"
-        7z a -p"${password}" -mhe=on -mx=0 "${archive_name}" "$archive_tar_name" &>/dev/null
+        7zz a -p"${password}" -mhe=on -mx=0 "${archive_name}" "$archive_tar_name" &>/dev/null
         #remove the tar file
         rm "$archive_tar_name"
     else
@@ -339,7 +339,7 @@ function list_archive() {
         elif [[ "$ext" == "${ext_zip}" ]]; then
             unzip -v "$archive_name"
         elif [[ "$ext" == "${ext_7z}" ]] || [[ "$ext" == "${ext_tar_7z}" ]] || [[ "$ext" == "${ext_t7z}" ]]; then
-            7z l -p"${password}" "$archive_name"
+            7zz l -p"${password}" "$archive_name"
         else
             usage && exit 1
         fi
@@ -387,9 +387,9 @@ function extract() {
     elif [[ "$ext" == "${ext_7z}" ]]; then
         local output
         if [[ -n "${dir}" ]]; then
-            output=$(7z x -p"${password}" -o"${dir}" "$archive_name" 2>&1)
+            output=$(7zz x -p"${password}" -o"${dir}" "$archive_name" 2>&1)
         else
-            output=$(7z x -p"${password}" "$archive_name" 2>&1)
+            output=$(7zz x -p"${password}" "$archive_name" 2>&1)
         fi
 
         if echo "$output" | grep -iq "wrong password"; then
@@ -399,7 +399,7 @@ function extract() {
         fi
     elif [[ "$ext" == "${ext_tar_7z}" ]] || [[ "$ext" == "${ext_t7z}" ]]; then
         local output
-        output=$(7z x -p"${password}" "$archive_name" 2>&1)
+        output=$(7zz x -p"${password}" "$archive_name" 2>&1)
         if echo "$output" | grep -iq "wrong password"; then
             #打印包含"wrong password"的行
             echo "$output" | grep -i "wrong password"

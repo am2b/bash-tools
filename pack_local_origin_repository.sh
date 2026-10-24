@@ -51,7 +51,7 @@ do_7z() {
         exit 1
     fi
 
-    7z a -p"${password}" -mhe=on -mx=0 "/tmp/${name_7z}" "/tmp/${name_tar}" &>/dev/null
+    7zz a -p"${password}" -mhe=on -mx=0 "/tmp/${name_7z}" "/tmp/${name_tar}" &>/dev/null
     rm "/tmp/${name_tar}"
 }
 

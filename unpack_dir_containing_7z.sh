@@ -85,7 +85,7 @@ process_opts() {
 }
 
 main() {
-    REQUIRED_TOOLS=(7z)
+    REQUIRED_TOOLS=(7zz)
     check_dependent_tools "${REQUIRED_TOOLS[@]}"
     REQUIRED_ENVS=()
     check_envs "${REQUIRED_ENVS[@]}" || exit 1

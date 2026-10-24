@@ -119,7 +119,7 @@ main() {
         base_name=$(basename "${file}")
         TIMESTAMP=$(date +"%Y-%m-%d")
         pack_name="${base_name%%.*}-${TIMESTAMP}.7z"
-        if ! 7z a -p"${password}" -mhe=on -mx=0 "${pack_name}" "${base_name}" &> /dev/null; then
+        if ! 7zz a -p"${password}" -mhe=on -mx=0 "${pack_name}" "${base_name}" &> /dev/null; then
             echo "打包失败:${pack_name}" >&2
             exit 1
         fi
