@@ -475,6 +475,14 @@ usage:<br>
 script.sh dir<br>
 run_in_background script.sh dir
 
+### [unpack_dir_containing_7z.sh](unpack_dir_containing_7z.sh):<br>
+批量解压目录下所有.7z压缩包(不递归)<br>
+每个压缩包解压到:a:目标目录/下(默认,不会保留压缩包里面的目录结构),b:目标目录/<压缩包同名文件夹>/下<br>
+usage:<br>
+script.sh <源目录> <目标目录> '密码'<br>
+-s:每个压缩包解压到:目标目录/<压缩包同名文件夹>/下<br>
+script.sh -s <源目录> <目标目录> '密码'
+
 ### [unpack_one.sh](unpack_one.sh):<br>
 解压一个包,或者目录下的所有包,这些包的密码都在保险箱one里面<br>
 默认解压到包所在的目录,可以通过选项-o指定输出目录<br>
